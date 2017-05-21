@@ -1,0 +1,9 @@
+/*
+Generic css classes.
+(C) Ad5001 2017
+*/
+
+.hidden {
+    display: none;
+    z-index: -10;
+}

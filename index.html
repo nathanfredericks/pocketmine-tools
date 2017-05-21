@@ -1,0 +1,47 @@
+<!--
+index.html by Ad5001
+(C) Ad5001 2017
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/tabs.css" />
+    <link rel="stylesheet" href="css/generic.css" />
+    <script src="js/main.js"></script>
+    <script src="js/tabs.js"></script>
+    <title>PMT - PocketMine Tools</title>
+</head>
+
+<body>
+    <ul id="tabSelector" class="hide hidden">
+        <li href="zip_to_phar"><img src="images/zip2phar.png">
+            <p>ZIP to Phar</p>
+        </li>
+        <li href="phar_to_zip"><img src="images/phar2zip.png">
+            <p>Phar to ZIP</p>
+        </li>
+        <li href="generate_plugin">Generate Plugin</li>
+    </ul>
+    <header type="pageheader">
+        <button class="showTabList"></button>
+        <p>ZIP to Phar</p>
+    </header>
+
+    <!-- Tabs list -->
+
+    <tab active="true" id="zip_to_phar">
+        <iframe src="pages/zip2phar/" frameborder=0></iframe>
+    </tab>
+
+    <tab active="false" id="phar_to_zip" class="slideLeft">
+        <iframe src="pages/phar2zip/" frameborder=0></iframe>
+    </tab>
+
+    <tab active="false" id="generate_plugin" class="slideLeft">
+        <!--<iframe src="pages/create.html" frameborder=0></iframe>-->
+    </tab>
+</body>
+
+</html>
