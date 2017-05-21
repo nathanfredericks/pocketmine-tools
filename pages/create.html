@@ -1,11 +1,11 @@
 <html><head>
     <title>ImagicalPlugCreator - Create plugins online</title>
-    <link rel="stylesheet" href="https://download.ad5001.eu/en/web/ImagicalPlugCreator/s.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css" rel="stylesheet">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js">
     </script>
+    <link rel="stylesheet" href="https://download.ad5001.eu/en/web/ImagicalPlugCreator/s.css">
     <link href="https://archive.org/download/material-design-style-css/styles.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
     <meta charset="utf-8">
@@ -35,22 +35,22 @@
 
         function taskp() {
             task++;
-            document.getElementById("tasknumber").innerHTML = "<h4>" + task + "</h4>";
+            document.getElementById("tasknumber").innerHTML = "<h6>" + task + "</h6>";
         }
 
         function taskm() {
             task--;
-            document.getElementById("tasknumber").innerHTML = "<h4>" + task + "</h4>";
+            document.getElementById("tasknumber").innerHTML = "<h6>" + task + "</h6>";
         }
 
         function dummyp() {
             dummy++;
-            document.getElementById("dummynumber").innerHTML = "<h4>" + dummy + "</h4>";
+            document.getElementById("dummynumber").innerHTML = "<h6>" + dummy + "</h6>";
         }
 
         function dummym() {
             dummy--;
-            document.getElementById("dummynumber").innerHTML = "<h4>" + dummy + "</h4>";
+            document.getElementById("dummynumber").innerHTML = "<h6>" + dummy + "</h6>";
         }
 
         function sub() {
@@ -92,7 +92,7 @@
                     <td style="float: left;"><img src="https://download.ad5001.eu/en/web/ImagicalPlugCreator/ImagicalPlugCreator.png" width="30">
                     </td>
                     <td>
-                        <h1>Plugin Creator - Create pocketmine plugins online</h1>
+                        <h3 style="display: inline">Plugin Creator - Create pocketmine plugins online</h3>
                     </td>
                 </tr>
             </tbody></table>
@@ -103,20 +103,20 @@
         <table>
             <tbody><tr>
                 <td>
-                    <h2>Creating base of </h2>
+                    <h4>Creating base of </h4>
                 </td>
                 <td>
-                    <h2>
+                    <h4>
                         <div id="PluginName">New plugin</div>
-                    </h2>
+                    </h4>
                 </td>
                 <td>
-                    <h2> by </h2>
+                    <h4> by </h4>
                 </td>
                 <td>
-                    <h2>
+                    <h4>
                         <div id="Author">Author</div>
-                    </h2>
+                    </h4>
                 </td>
             </tr>
         </tbody></table>
@@ -126,7 +126,7 @@
             <table>
                 <tbody><tr>
                     <td>
-                        <h3 class="label">Plugin name: </h3>
+                        <h5 class="label">Plugin name:</h5>
                     </td>
                     <td></td>
                     <td></td>
@@ -134,7 +134,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <h3 class="label">Plugin author: </h3>
+                        <h5 class="label">Plugin author:</h5>
                     </td>
                     <td></td>
                     <td></td>
@@ -142,7 +142,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <h3 class="label">Config: </h3>
+                        <h5 class="label">Config:</h5>
                     </td>
                     <td></td>
                     <td></td>
@@ -150,31 +150,31 @@
                 </tr>
                 <tr>
                     <td>
-                        <h3 class="label">Tasks number: </h3>
+                        <h5 class="label">Tasks number:</h5>
                     </td>
                     <td><button onclick="taskp()">+</button></td>
                     <td>
                         <div id="tasknumber">
-                            <h4>0</h4>
+                            <h6>0</h6>
                         </div>
                     </td>
                     <td><button onclick="taskm()">-</button></td>
                 </tr>
                 <tr>
                     <td>
-                        <h3 class="label">Dummy files number: </h3>
+                        <h5 class="label">Dummy files number:</h5>
                     </td>
                     <td><button onclick="dummyp()">+</button></td>
                     <td>
                         <div id="dummynumber">
-                            <h4>0</h4>
+                            <h6>0</h6>
                         </div>
                     </td>
                     <td><button onclick="dummym()">-</button></td>
                 </tr>
                 <tr>
                     <td>
-                        <h3 class="label">Events: </h3>
+                        <h5 class="label">Events:</h5>
                     </td>
                     <td></td>
                     <td></td>
