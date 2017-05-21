@@ -1,0 +1,7 @@
+[submodule "pages/zip2phar"]
+	path = pages/zip2phar
+	url = git://github.com/pmt-mcpe-fun/zip2phar.git
+
+[submodule "pages/phar2zip"]
+	path = pages/phar2zip
+	url = git://github.com/pmt-mcpe-fun/phar2zip.git
