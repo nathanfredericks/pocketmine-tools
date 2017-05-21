@@ -1,0 +1,194 @@
+<html><head>
+    <title>ImagicalPlugCreator - Create plugins online</title>
+    <link rel="stylesheet" href="https://download.ad5001.eu/en/web/ImagicalPlugCreator/s.css">
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        var cfg = 0;
+        var task = 0;
+        var dummy = 0;
+        var pluginName = "New plugin";
+        var author = "Author";
+
+        function refreshName(name) {
+            if (name == "") {
+                var name = "New plugin";
+            }
+            document.getElementById("PluginName").innerHTML = name;
+            pluginName = name;
+        }
+
+        function refreshAuthor(name) {
+            if (name == "") {
+                var name = "Author";
+            }
+            document.getElementById("Author").innerHTML = name;
+            author = name;
+        }
+
+        function taskp() {
+            task++;
+            document.getElementById("tasknumber").innerHTML = "<h4>" + task + "</h4>";
+        }
+
+        function taskm() {
+            task--;
+            document.getElementById("tasknumber").innerHTML = "<h4>" + task + "</h4>";
+        }
+
+        function dummyp() {
+            dummy++;
+            document.getElementById("dummynumber").innerHTML = "<h4>" + dummy + "</h4>";
+        }
+
+        function dummym() {
+            dummy--;
+            document.getElementById("dummynumber").innerHTML = "<h4>" + dummy + "</h4>";
+        }
+
+        function sub() {
+            $("#box").animate({
+                opacity: "hide"
+            });
+            $("#submit").animate({
+                opacity: "show"
+            });
+            if (document.getElementById('cfg').checked == true) {
+                cfg = "true";
+            } else {
+                cfg = "false";
+            }
+            if (document.getElementById('events').checked == true) {
+                ev = "true";
+            } else {
+                ev = "false";
+            }
+            document.getElementById("get").src = "https://download.ad5001.eu/en/web/ImagicalPlugCreator/run.php?name=" + escape(pluginName) + "&cfg=" + escape(cfg) + "&author=" + escape(author) + "&tasks=" + escape(task) + "&dummys=" + escape(dummy) + "&events=" + escape(ev);
+        }
+
+        function back() {
+            $("#submit").animate({
+                opacity: "hide"
+            });
+            $("#box").animate({
+                opacity: "show"
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <nav>
+        <center>
+            <table>
+                <tbody><tr>
+                    <td style="float: left;"><img src="https://download.ad5001.eu/en/web/ImagicalPlugCreator/ImagicalPlugCreator.png" width="30">
+                    </td>
+                    <td>
+                        <h1>Plugin Creator - Create pocketmine plugins online</h1>
+                    </td>
+                </tr>
+            </tbody></table>
+        </center>
+    </nav>
+    <hr>
+    <center>
+        <table>
+            <tbody><tr>
+                <td>
+                    <h2>Creating base of </h2>
+                </td>
+                <td>
+                    <h2>
+                        <div id="PluginName">New plugin</div>
+                    </h2>
+                </td>
+                <td>
+                    <h2> by </h2>
+                </td>
+                <td>
+                    <h2>
+                        <div id="Author">Author</div>
+                    </h2>
+                </td>
+            </tr>
+        </tbody></table>
+    </center>
+    <center>
+        <div class="box" id="box" style="opacity: 1;">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <h3 class="label">Plugin name: </h3>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td><input name="name" id="name" onkeyup="refreshName(this.value)" value="" type="text"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 class="label">Plugin author: </h3>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td><input name="author" id="author" onkeyup="refreshAuthor(this.value)" value="" type="text"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 class="label">Config: </h3>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td><input id="cfg" name="cfg" type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 class="label">Tasks number: </h3>
+                    </td>
+                    <td><button onclick="taskp()">+</button></td>
+                    <td>
+                        <div id="tasknumber">
+                            <h4>0</h4>
+                        </div>
+                    </td>
+                    <td><button onclick="taskm()">-</button></td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 class="label">Dummy files number: </h3>
+                    </td>
+                    <td><button onclick="dummyp()">+</button></td>
+                    <td>
+                        <div id="dummynumber">
+                            <h4>0</h4>
+                        </div>
+                    </td>
+                    <td><button onclick="dummym()">-</button></td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 class="label">Events: </h3>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td><input id="events" name="events" type="checkbox"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><button onclick="sub();">Create plugin</button></td>
+                </tr>
+            </tbody></table>
+        </div>
+        <div id="submit" class="box" style="opacity: 1;display: none;">
+            <iframe src="" id="get" name="phprequest" width="90%" height="60%" frameborder="0"></iframe>
+            <p onclick="back();" style="width: 20%">Back to creator</p>
+        </div>
+    </center>
+
+
+
+</body></html>
