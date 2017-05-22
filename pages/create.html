@@ -19,7 +19,7 @@
 
         function refreshName(name) {
             if (name == "") {
-                var name = "New plugin";
+                var name = "NewPlugin";
             }
             document.getElementById("PluginName").innerHTML = name;
             pluginName = name;
@@ -116,7 +116,7 @@
                     </td>
                     <td></td>
                     <td></td>
-                    <td><input name="name" id="name" onkeyup="refreshName(this.value)" value="" type="text"></td>
+                    <td><input name="name" id="name" onkeyup="refreshName(this.value)" value="" pattern="[\w\d_]+" type="text"></td>
                 </tr>
                 <tr>
                     <td>
@@ -124,7 +124,7 @@
                     </td>
                     <td></td>
                     <td></td>
-                    <td><input name="author" id="author" onkeyup="refreshAuthor(this.value)" value="" type="text"></td>
+                    <td><input name="author" id="author" onkeyup="refreshAuthor(this.value)" value="" pattern="[\w\d_]+" type="text"></td>
                 </tr>
                 <tr>
                     <td>
