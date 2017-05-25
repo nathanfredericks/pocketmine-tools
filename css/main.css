@@ -8,6 +8,7 @@ iframe {
     height: 85vh;
     overflow:hidden;
 }
+/** Form based elements **/
 .mdl-button--file input {
   cursor: pointer;
   height: 100%;
@@ -24,4 +25,7 @@ iframe {
 }
 .mdl-textfield--file .mdl-button--file {
   right: 0;
+}
+label {
+  color: rgba(0,0,0,.75);
 }

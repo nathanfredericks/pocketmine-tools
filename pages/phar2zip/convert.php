@@ -81,7 +81,7 @@ try {
     }
     $zip->close();
     chmod($ROOT_DIR . "/data/phars/$zipFileName.zip", 0777);
-} catch(RuntimeException $e) {
+} catch(Exception $e) {
     $error = $e->getMessage();
 }
 if(isset($fName)) exec("rm -rf $ROOT_DIR/data/tmp/$fName");
