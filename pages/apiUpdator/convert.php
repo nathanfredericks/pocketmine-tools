@@ -130,7 +130,7 @@ try {
 </head>
 
 <body>
-    <h2><?php echo !isset($error) ? "Download phar with API changed" : "Could not build phar: $error"; ?></h2>
+    <h2><?php echo !isset($error) ? "<h3>Download phar with API changed</h3>" : "Could not build phar: $error"; ?>
         <?php if(!isset($error)) echo '<a href="download.php?n=' . $fName . '"><button class="mdl-button mdl-js-button mdl-js-ripple-effect">Download</button></a>'; ?>
         <a href="index.html"><button class="mdl-button mdl-js-button mdl-js-ripple-effect">Go back</button></a>
     </p>
