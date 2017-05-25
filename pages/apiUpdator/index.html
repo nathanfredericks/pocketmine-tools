@@ -22,12 +22,12 @@
 </head>
 
 <body>
-    <h4>What's an API changing?</h4>
+    <h4>What is API changing?</h4>
     <p>
         On PocketMine, API changes marks a new era on plugin API of pocketmine where some plugin would basicly break<br>
         But most plugin would just work fine on your server. Thought they may be less stable<br>
         We provide some incompatibility changes with the new apis to try making your plugin working.<br>
-        Thought note that neither us, the plugin author, or the PocketMine team will held any damage done to your server or your machine using this convertor.
+        Thought note that neither us, the plugin author, or the PocketMine team will held any damage done to your server or your machine using this converter.
     </p>
     <h4>How do I force API change?</h4>
     <ul>
@@ -40,12 +40,10 @@
         <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
         <!-- API Version -->
         <div class="mdl-textfield mdl-js-textfield">
-            <label>API version wanted: <input type="text" name="API_version" value="3.0.0" pattern="\d+\.\d+.\d+" class="mdl-textfield__input" style="color: rgba(0,0,0,.5);"></label>
+            <label>API version wanted: <input type="text" name="API_version" value="3.0.0-ALPHA5" pattern="\d+\.\d+.\d+" class="mdl-textfield__input" style="color: rgba(0,0,0,.5);"></label>
         </div><br>
         <!--Compatibility options-->
         <ul>
-            <label><input type="checkbox" name="TagReplace" class="mdl-checkbox__input" style="color: rgba(0,0,0,.5);"> Replace all pocketmine\nbt\tag\*** by pocketmine\nbt\tag\***Tag (API 1.0.0 to 2.0.0)</label><br>
-            <!-- TODO: CHANGES for 3.0.0 (hasn't been much since) 2.0.0 in terms of API change -->
         </ul><br>
         <!--Phar & sumbit-->
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
