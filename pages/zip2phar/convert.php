@@ -104,7 +104,7 @@ try {
     $phar->setStub("<?php echo 'Phar compiled on https://pmt.mcpe.fun.'; __HALT_COMPILER();");
     $phar->setMetadata($plData);
     $phar->buildFromDirectory($ROOT_DIR . "/data/tmp/$fName");
-} catch(RuntimeException $e) {
+} catch(Exception $e) {
     $errors[$e->getMessage()] = CRITICAL;
 }
 
