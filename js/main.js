@@ -1,20 +1,14 @@
-$(document).ready(
-    function(){
-        $('input:file').change(
-            function(){
-                if ($(this).val()) {
-                    $('input:submit').attr('disabled',false);
-                    // or, as has been pointed out elsewhere:
-                    // $('input:submit').removeAttr('disabled'); 
-                } 
-            }
-        );
-        // Preparing mobile UI.
-        $("iframe#content").load(
-            function(){
-                if(window.innerWidth < 800) { // Mobile, needs centering
-                    but = document.getElementById("UploadButton").style.margin = "0 auto";
+window.onload = function() {
+    console.log("Loaded !");
+        // Setting tab based elements
+        document.querySelectorAll("a.mdl-navigation__link").forEach(function(elem){
+            elem.addEventListener("click",
+                function(){
+                    document.querySelectorAll("a.mdl-navigation__link").forEach(function(el) {
+                        el.setAttribute("data-active-tab", "false");
+                    });
+                    elem.setAttribute("data-active-tab", "true");
                 }
-            }
-        )
-    });
+            );
+        });
+    };
