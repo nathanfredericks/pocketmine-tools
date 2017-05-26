@@ -76,22 +76,28 @@ try {
         if (!$file->isDir()) {
             $path = $file->getRealPath();
             if(pathinfo($path, PATHINFO_EXTENSION) == "php") {
-                $contents = file_get_contents($path);
-                foreach([
-        			"ByteArray" => "ByteArrayTag",
-        			"Byte" => "ByteTag",
-        			"Compound" => "CompoundTag",
-        			"Double" => "DoubleTag",
-        			"End" => "EndTag",
-        			"Float" => "FloatTag",
-        			"IntArray" => "IntArrayTag",
-        			"Int" => "IntTag",
-        			"Enum" => "ListTag",
-        			"Long" => "LongTag",
-        			"Short" => "ShortTag",
-        			"String" => "StringTag",
-        		] as $oldTag => $newTag) {
-                    $contents = preg_replace("/pocketmine\\nbt\\tag\\$oldTag(;|\()/mi", "pocketmine\\nbt\\tag\\$newTag$1/", $contents);
+                if(isset($_POST["TagReplace"])) {
+                    $contents = file_get_contents($path);
+                    foreach([
+        		    	"ByteArray" => "ByteArrayTag",
+        		    	"Byte" => "ByteTag",
+        		    	"Compound" => "CompoundTag",
+        		    	"Double" => "DoubleTag",
+        		    	"End" => "EndTag",
+        		    	"Float" => "FloatTag",
+        		    	"IntArray" => "IntArrayTag",
+        		    	"Int" => "IntTag",
+        		    	"Enum" => "ListTag",
+        		    	"Long" => "LongTag",
+        		    	"Short" => "ShortTag",
+        		    	"String" => "StringTag",
+        		    ] as $oldTag => $newTag) {
+                        $contents = preg_replace("/pocketmine\\nbt\\tag\\$oldTag(;|\()/mi", "pocketmine\\nbt\\tag\\$newTag$1/", $contents);
+                    }
+                }
+                if(isset($_POST["ProtocolReplace"])) {
+                    $contents = file_get_contents($path);
+                    $contents = preg_replace("/pocketmine\\network\\protocol\\(.+?)(;|\()/mi", "pocketmine\\network\\mcpe\\protocol\\$1$2/", $contents);
                 }
             }
         }
