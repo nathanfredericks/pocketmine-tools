@@ -8,7 +8,7 @@ window.onload = function() {
         document.querySelectorAll('input[type="file"]').forEach(function(elem) {
             elem.addEventListener("change",
                 function(){
-                    if (this.value) {
+                    if (this.value.length > 0) {
                         document.querySelectorAll('input[type="submit"]').forEach(function(el) {
                             el.setAttribute('disabled',false);
                         });
