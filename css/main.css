@@ -34,3 +34,9 @@ iframe {
 label {
 	color: rgba(0,0,0,.75);
 }
+/** Mobile UI **/
+@media screen and (max-width:500px) {
+	#UploadButton {
+		margin: auto;
+	}
+}
