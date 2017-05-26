@@ -42,7 +42,7 @@
             <input class="mdl-textfield__input" id="TEXT_ID" placeholder="No phar file chosen..." readonly type="text" />
 
             <div class="mdl-button mdl-button--icon mdl-button--file">
-                <input name="upfile" onchange="document.getElementById('TEXT_ID').value=this.files[0].name;" type="file" accept=".phar" id="FileUploadControl">
+                <input name="upfile" onchange="document.getElementById('TEXT_ID').value=this.files[0].name;" type="file" accept=".phar" id="FileUploadControl" hidden>
                 <i class="material-icons">attach_file</i>
             </div>
         </div>
