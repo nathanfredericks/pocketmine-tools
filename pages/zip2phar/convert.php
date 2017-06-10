@@ -163,7 +163,7 @@ function checkDir($dir) {
 </head>
 
 <body>
-    <h2><?php echo in_array(CRITICAL, $errors) ? "Could not build your phar archive" : "Succefully built phar archive"; ?></h2>
+    <h2><?php echo in_array(CRITICAL, $errors) ? "<h3>Could not build phar:</h3>" : "<h3>Successfully Created!</h3><br><p>Your file was successfully converted. You should now be able to use your plugin in \"PocketMine-MP\"<br><strong>Corrupted Plugin? Send the file over twitter and we will track down the issue!</strong></p>"; ?></h2>
     <p>Errors found (<?php echo count($errors) ?>):<br>
         <?php
         foreach($errors as $errmsg => $type) {
