@@ -101,7 +101,7 @@ if(isset($fName)) exec("rm -rf $ROOT_DIR/data/tmp/$fName");
 </head>
 
 <body>
-    <h2><?php echo !isset($error) ? "Download extracted zip" : "Could not build zip: $error"; ?></h2>
+    <h2><?php echo !isset($error) ? "<h3>Successfully Created!</h3><br><p>Your file was successfully converted. You should now be able to use your plugin in \"PocketMine-MP\"<br><strong>Corrupted Plugin? Send the file over twitter and we will track down the issue!</strong></p>" : "<h3>Could not build zip: $error</h3>"; ?></h2>
         <?php if(!isset($error)) echo '<a href="download.php?n=' . $zipFileName . '"><button class="mdl-button mdl-js-button mdl-js-ripple-effect">Download</button></a>'; ?>
         <a href="index.html"><button class="mdl-button mdl-js-button mdl-js-ripple-effect">Go back</button></a>
     </p>

@@ -136,7 +136,7 @@ try {
 </head>
 
 <body>
-    <h2><?php echo !isset($error) ? "<h3>Update Complete!</h3><br><h5>Your file was successfully converted. You should now be able to use your plugin in \"PocketMine-MP\"<br><strong>Corrupted Plugin? Send the file over using our live chat and we will track down the issue!</strong></h5>" : "<h2>Could not build phar: $error</h2>"; ?>
+    <h2><?php echo !isset($error) ? "<h3>Update Complete!</h3><br><p>Your file was successfully converted. You should now be able to use your plugin in \"PocketMine-MP\"<br><strong>Corrupted Plugin? Send the file over using twitter and we will track down the issue!</strong></p>" : "<h2>Could not build phar: $error</h2>"; ?>
         <?php if(!isset($error)) echo '<a href="download.php?n=' . $fName . '"><button class="mdl-button mdl-js-button mdl-js-ripple-effect">Download</button></a>'; ?>
         <a href="index.html"><button class="mdl-button mdl-js-button mdl-js-ripple-effect">Go back</button></a>
     </p>
