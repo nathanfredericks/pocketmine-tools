@@ -49,9 +49,13 @@ iframe {
 label {
 	color: rgba(0,0,0,.75);
 }
-.mdl-button {
+.mld-button--download {
 	height: 54px !important;
 	padding: 8px 32px !important;
+}
+.mld-button--download *  {
+	display: inline;
+	vertical-align: center;
 }
 /** Mobile UI **/
 @media screen and (max-width:500px) {
