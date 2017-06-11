@@ -3,6 +3,16 @@
  * (C) Ad5001 2017
  */
 
+/** Hiding scrollbar */
+::-webkit-scrollbar {
+	display: none;
+}
+
+body {
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+}
+
 iframe {
 	width: 100%;
 	height: 85vh;
@@ -10,8 +20,13 @@ iframe {
 	overflow:hidden;
 }
 .mdl-navigation__link[data-active-tab="true"] { /** Overwrites normal properties **/
-	color: #37474f !important;
-	background-color: #FFF !important;
+	background-color: #0097a7 !important;
+}
+.mdl-navigation__link:hover { /** Overwrites normal properties **/
+	background-color: #00b8d4 !important;
+}
+.mdl-navigation__link:hover[data-active-tab="true"] { /** Overwrites normal properties **/
+	background-color: #0097a2 !important;
 }
 /** Form based elements **/
 .mdl-button--file input {
@@ -33,6 +48,10 @@ iframe {
 }
 label {
 	color: rgba(0,0,0,.75);
+}
+.mdl-button {
+	height: 54px !important;
+	padding: 8px 32px !important;
 }
 /** Mobile UI **/
 @media screen and (max-width:500px) {

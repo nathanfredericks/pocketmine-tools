@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css" rel="stylesheet">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link href="https://archive.org/download/material-design-style-css/styles.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <title>PMT - PocketMine Tools</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/js/page.js"></script>
+</head>
+
+<body>
+    <h4>Download</h4>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--cyan mdl-color-text--white mld-button--download">Hey</button>
+    <h4>Desktop apps</h4>
+    <p>The PHAR file is a bunch of PHP code compiled, this allows you to execute code simply and a fast and in a compact way.
+        <br>This will save so much time in the long run.</p>
+    <h4>How do I compile?</h4>
+    <ul>
+        <li>Write your plugin, of course 😄</li>
+        <li>Put your files in the correct structure (according to namespaces, etc.)</li>
+        <li>Create a ZIP file and throw your structure into it. You can put it anywhere inside the ZIP file, but only the folder
+            with plugin.yml (and subfolders) will be included.</li>
+        <li>Upload that file below...</li>
+    </ul>
+    <form enctype="multipart/form-data" method="POST" action="convert.php">
+        <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
+            <input class="mdl-textfield__input" id="TEXT_ID" placeholder="No zip file chosen..." readonly type="text">
+
+            <div class="mdl-button mdl-button--icon mdl-button--file">
+                <input name="upfile" onchange="document.getElementById('TEXT_ID').value=this.files[0].name;" type="file" accept="application/zip" id="FileUploadControl"> 
+                <i class="material-icons">attach_file</i>
+            </div>
+        </div>
+        <input class="mdl-button mdl-js-button mdl-js-ripple-effect" type="submit" value="Create PHAR" id="UploadButton" disabled><br>
+    </form>
+</body>
+
+</html>
