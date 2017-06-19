@@ -28,10 +28,10 @@
         <li>Put the file somewhere you can find it, then click on the paperclip and select "Convert"</li>
     </ul>
     <form enctype="multipart/form-data" method="POST" action="convert.php">
-        <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+        <input type="hidden" name="MAX_FILE_SIZE" value="50000000" />
         <!-- API Version -->
         <div class="mdl-textfield mdl-js-textfield">
-            <label>API version wanted: <input type="text" name="API_version" pattern="\d+\.\d+.\d+(-ALPHA\d+)?" class="mdl-textfield__input" style="color: rgba(0,0,0,.5);"></label>
+            <label>API version wanted: <input type="text" name="API_version" class="mdl-textfield__input" style="color: rgba(0,0,0,.5);"></label>
         </div><br>
         <!--Compatibility options-->
         <ul>
@@ -47,7 +47,7 @@
                 <i class="material-icons">attach_file</i>
             </div>
         </div>
-        <input class="mdl-button mdl-js-button mdl-js-ripple-effect" type="submit" value="Change API" id="UploadButton" disabled><br>
+        <input class="mdl-button mdl-js-button mdl-js-ripple-effect" type="submit" value="Change API" id="UploadButton"><br>
     </form>
 </body>
 
