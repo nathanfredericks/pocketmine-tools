@@ -31,7 +31,7 @@
         <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
         <!-- API Version -->
         <div class="mdl-textfield mdl-js-textfield">
-            <label>API version wanted: <input type="text" name="API_version" pattern="\d+\.\d+.\d+(\-ALPHA\d+)?" class="mdl-textfield__input" style="color: rgba(0,0,0,.5);"></label>
+            <label>API version wanted: <input type="text" name="API_version" pattern="\d+\.\d+.\d+(-ALPHA\d+)?" class="mdl-textfield__input" style="color: rgba(0,0,0,.5);"></label>
         </div><br>
         <!--Compatibility options-->
         <ul>
@@ -43,7 +43,7 @@
             <input class="mdl-textfield__input" id="TEXT_ID" placeholder="No phar file chosen..." readonly type="text" />
 
             <div class="mdl-button mdl-button--icon mdl-button--file">
-                <input name="upfile" onchange="document.getElementById('TEXT_ID').value=this.files[0].name;" type="file" accept=".phar" id="FileUploadControl" hidden>
+                <input name="upfile" onchange="document.getElementById('TEXT_ID').value=this.files[0].name;" type="file" accept=".phar" id="FileUploadControl">
                 <i class="material-icons">attach_file</i>
             </div>
         </div>
