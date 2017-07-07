@@ -1,3 +1,4 @@
 <?php
-echo system("git fetch") . "<br>";
-echo system("git merge origin/master") . "<br>";
+`git pull`;
+`git fetch`;
+`git merge origin/master`;
