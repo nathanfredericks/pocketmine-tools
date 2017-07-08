@@ -1,2 +1,4 @@
+php-pear
 libyaml-dev
-php-*
+php-yaml
+php-zip
