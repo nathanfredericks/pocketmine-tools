@@ -6,7 +6,11 @@
         {
             "name": "Nathaniel",
             "email": "fna371858@gmail.com"
-        }
+        },
+        {
+            "name": "Ad5001",
+            "email": "mail@ad5001.eu"
+        },
     ],
     "minimum-stability": "stable",
     "require": {}
