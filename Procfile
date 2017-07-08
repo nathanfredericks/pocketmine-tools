@@ -1,4 +1,5 @@
 web: echo Running Setup Commands...
 web: echo Complete...
-web: heroku-php-apache2
 heroku: apt-get install php-yaml
+web: apt-get install php-yaml
+web: heroku-php-apache2
