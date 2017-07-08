@@ -1,1 +1,13 @@
-{}
+{
+    "name": "nfgamermc/web-app",
+    "description": "Make PocketMine easily.",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Nathaniel",
+            "email": "fna371858@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
