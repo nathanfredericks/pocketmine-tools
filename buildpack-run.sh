@@ -1,1 +1,1 @@
-pecl install yaml-2.0.0
+php/bin/pear install yaml-2.0.0
