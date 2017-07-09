@@ -105,5 +105,11 @@ if(isset($fName)) exec("rm -rf $ROOT_DIR/data/tmp/$fName");
         <?php if(!isset($error)) echo '<a href="download.php?n=' . $zipFileName . '"><button class="mdl-button mdl-js-button mdl-js-ripple-effect">Download</button></a>'; ?>
         <a href="index.html"><button class="mdl-button mdl-js-button mdl-js-ripple-effect">Go back</button></a>
     </p>
+   <div id="google_translate_element"></div><script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT, autoDisplay: false}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        
 </body>
 </html>
