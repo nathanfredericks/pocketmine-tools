@@ -1,1 +1,1 @@
-php/support/build/extentions/pecl install yaml-2.0.0
+support/build/extentions/pecl install yaml-2.0.0
