@@ -1,1 +1,1 @@
-support/build/extentions/pecl install yaml-2.0.0
+vendor/support/build/extentions/pecl install yaml-2.0.0
