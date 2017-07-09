@@ -57,7 +57,7 @@ try {
     }
     $phar = new Phar("$ROOT_DIR/data/tmp/$fName.phar");
     $phar->extractTo("$ROOT_DIR/data/tmp/$fName");
-    $plData = @yaml_parse_file("$ROOT_DIR/data/tmp/$fName/plugin.yml");
+    $plData = @yaml_parse(file_get_contents("$ROOT_DIR/data/tmp/$fName/plugin.yml"));
     if($plData == false) $plData = ["name" => "Unknown", "author" => "Unknown", "api" => "3.0.0", "version" => 1.0];
     unlink("$ROOT_DIR/data/tmp/$fName.phar");
 

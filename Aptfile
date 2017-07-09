@@ -1,0 +1,7 @@
+gcc
+make
+autoconf
+libc-dev
+pkg-config
+libyaml-dev
+php-*

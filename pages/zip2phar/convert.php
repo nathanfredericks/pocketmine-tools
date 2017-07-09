@@ -74,7 +74,7 @@ try {
             throw new RuntimeException("Could not find plugin.yml.");
         }
     }
-    if(($plData = yaml_parse_file($ROOT_DIR . "/data/tmp/$fName/plugin.yml")) == false || !isset($plData["main"], $plData["name"], $plData["version"], $plData["author"], $plData["api"])) {
+    if(($plData = yaml_parse(file_get_contents($ROOT_DIR . "/data/tmp/$fName/plugin.yml"))) == false || !isset($plData["main"], $plData["name"], $plData["version"], $plData["author"], $plData["api"])) {
         throw new RuntimeException("Invalid plugin.yml provided.");
     }
     if(!file_exists($ROOT_DIR . "/data/tmp/$fName/src/" . str_ireplace("\\", DIRECTORY_SEPARATOR, $plData["main"] . ".php"))) {

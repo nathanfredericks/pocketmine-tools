@@ -1,0 +1,20 @@
+{
+    "name": "nfgamermc/web-app",
+    "description": "Make PocketMine easily.",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Nathaniel",
+            "email": "fna371858@gmail.com"
+        },
+        {
+            "name": "Ad5001",
+            "email": "mail@ad5001.eu"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.0",
+        "steevanb/php-yaml": "^1.0"
+    }
+}
