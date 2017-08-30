@@ -76,8 +76,8 @@ try {
         if (!$file->isDir()) {
             $path = $file->getRealPath();
             if(pathinfo($path, PATHINFO_EXTENSION) == "php") {
-                if(isset($_POST["TagReplace"])) {
-                    $contents = file_get_contents($path);
+                $contents = file_get_contents($pat);
+                if(isset($_POST["NBTTagReplace"])) {
                     foreach([
         		    	"ByteArray" => "ByteArrayTag",
         		    	"Byte" => "ByteTag",
@@ -96,9 +96,20 @@ try {
                     }
                 }
                 if(isset($_POST["ProtocolReplace"])) {
-                    $contents = file_get_contents($path);
                     $contents = preg_replace("/pocketmine\\network\\protocol\\(.+?)(;|\()/mi", "pocketmine\\network\\mcpe\\protocol\\$1$2/", $contents);
                 }
+                if(isset($_POST["StrictTypesReplace"])){
+                    $contents = preg_replace( // Long regexp incomming! Commands changing
+                        "/public\s+function\s+onCommand\s*\(\s*((([\w]|\\)*CommandSender)\s+)?\$([\w]+)\s*,\s*((([\w]|\\)*Command)\s+)?\$([\w]+)\s*,\s*(string\s+)?\$([\w]+)\s*,\s*(array\s+)?\$([\w]+)\s*\)\s*(:\s*bool\s*)?{/mi", 
+                        "public function onCommand($2 $$$4, $6 $$$8, string $$$10, array $$$12): bool {", 
+                    $contents);
+                    $contents = preg_replace( // Another long regexp incomming! onRun
+                        "/public\s+function\s+onRun\s*\(\s*(int\s+)?\$([\w]+)\s*\)\s*(:\s*\w+\s*)?{/mi", 
+                        "public function onRun(int $$$2) {", 
+                    $contents);
+
+                }
+                file_put_contents($path, $contents);
             }
         }
     }
