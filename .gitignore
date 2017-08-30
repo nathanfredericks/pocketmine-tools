@@ -1,2 +1,7 @@
 .c9/*
 .vscode/*
+data/tmp/*.zip
+data/tmp/*.phar
+data/phars/*.zip
+data/phars/*.phar
+download/*

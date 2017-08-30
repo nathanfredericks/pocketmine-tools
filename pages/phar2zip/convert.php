@@ -6,10 +6,8 @@ global $ROOT_DIR;
 $ROOT_DIR = implode(DIRECTORY_SEPARATOR, array_slice(explode(DIRECTORY_SEPARATOR, __DIR__), 0, count(explode(DIRECTORY_SEPARATOR, __DIR__)) - 2));
 
 try {
-   
     // Undefined | Multiple Files | $_FILES Corruption Attack
-    if (
-        !isset($_FILES['upfile']['error']) ||
+    if (!isset($_FILES['upfile']['error']) ||
         is_array($_FILES['upfile']['error'])
     ) {
         throw new RuntimeException('Invalid parameters.');
@@ -56,35 +54,31 @@ try {
         throw new RuntimeException('Failed to move uploaded file.');
     }
     $phar = new Phar("$ROOT_DIR/data/tmp/$fName.phar");
-    $phar->extractTo("$ROOT_DIR/data/tmp/$fName");
-    $plData = @yaml_parse_file("$ROOT_DIR/data/tmp/$fName/plugin.yml");
-    if($plData == false) $plData = ["name" => "Unknown", "author" => "Unknown", "api" => "3.0.0", "version" => 1.0];
-    unlink("$ROOT_DIR/data/tmp/$fName.phar");
+    $plData = yaml_parse(file_get_contents($phar["plugin.yml"]));
+    if ($plData == false) {
+        $plData = ["name" => "Unknown", "author" => "Unknown", "api" => "3.0.0", "version" => 1.0];
+    }
 
     // Building zip
     global $zipFileName;
-    $zipFileName = "zip_" . $plData["name"] . "_" . sha1(sha1_file($ROOT_DIR . "/data/tmp/$fName") . sha1(time()));
-    $zip = new ZipArchive();
-    if(file_exists($ROOT_DIR . "/data/phars/$zipFileName.zip")) unlink($ROOT_DIR . "/data/phars/$zipFileName.zip"); // Should only rarely happend
-    $zip->open($ROOT_DIR . "/data/phars/$zipFileName.zip", ZIPARCHIVE::CREATE);
-    $files = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator("$ROOT_DIR/data/tmp/$fName"),
-        RecursiveIteratorIterator::LEAVES_ONLY
-    );
-    // Adding files
-    foreach ($files as $name => $file) {
-        if (!$file->isDir()) {
-            $filePath = $file->getRealPath();
-            $relativePath = substr($filePath, strlen("$ROOT_DIR/data/tmp/$fName") + 1);
-            $zip->addFile($filePath, $relativePath);
-        }
+    $zipFileName = "zip_" . 
+    $plData["name"] . "_" . 
+    sha1(sha1_file($ROOT_DIR . "/data/tmp/$fName.phar") . 
+    sha1(time()));
+    if (file_exists($ROOT_DIR . "/data/phars/$zipFileName.zip")) {
+        unlink($ROOT_DIR . "/data/phars/$zipFileName.zip"); // Should only rarely happend
     }
-    $zip->close();
+    $zip = $phar->convertToData(Phar::ZIP);
+    copy($ROOT_DIR . "/data/tmp/$fName.zip", $ROOT_DIR . "/data/phars/$zipFileName.zip");
+    unlink($ROOT_DIR . "/data/tmp/$fName.phar");
+    unlink($ROOT_DIR . "/data/tmp/$fName.zip");
     chmod($ROOT_DIR . "/data/phars/$zipFileName.zip", 0777);
-} catch(Exception $e) {
+} catch (Exception $e) {
     $error = $e->getMessage();
 }
-if(isset($fName)) exec("rm -rf $ROOT_DIR/data/tmp/$fName");
+if (isset($fName)) {
+    exec("rm -rf $ROOT_DIR/data/tmp/$fName");
+}
 ?>
 
 <html>
@@ -102,7 +96,9 @@ if(isset($fName)) exec("rm -rf $ROOT_DIR/data/tmp/$fName");
 
 <body>
     <h2><?php echo !isset($error) ? "<h3>Successfully Created!</h3><br><p>Your file was successfully converted. You should now be able to use your plugin in \"PocketMine-MP\"<br><strong>Corrupted Plugin? Send the file over twitter and we will track down the issue!</strong></p>" : "<h3>Could not build zip: $error</h3>"; ?></h2>
-        <?php if(!isset($error)) echo '<a href="download.php?n=' . $zipFileName . '"><button class="mdl-button mdl-js-button mdl-js-ripple-effect">Download</button></a>'; ?>
+        <?php if (!isset($error)) {
+            echo '<a href="download.php?n=' . $zipFileName . '"><button class="mdl-button mdl-js-button mdl-js-ripple-effect">Download</button></a>';
+} ?>
         <a href="index.html"><button class="mdl-button mdl-js-button mdl-js-ripple-effect">Go back</button></a>
     </p>
    <div id="google_translate_element"></div><script type="text/javascript">

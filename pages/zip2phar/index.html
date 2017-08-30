@@ -20,8 +20,7 @@
     <ul>
         <li>Write your plugin, of course 😄</li>
         <li>Put your files in the correct structure (according to namespaces, etc.)</li>
-        <li>Create a ZIP file and throw your structure into it. You can put it anywhere inside the ZIP file, but only the folder
-            with plugin.yml (and subfolders) will be included.</li>
+        <li>Create a ZIP file and throw your structure into it. You can put it anywhere inside the ZIP file, but only the folder with plugin.yml (and subfolders) will be included.</li>
         <li>Upload that file below...</li>
     </ul>
     <form enctype="multipart/form-data" method="POST" action="convert.php">
@@ -29,19 +28,25 @@
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
             <input class="mdl-textfield__input" id="TEXT_ID" placeholder="No zip file chosen..." readonly type="text">
 
-            <div class="mdl-button mdl-button--icon mdl-button--file">
-                <input name="upfile" onchange="document.getElementById('TEXT_ID').value=this.files[0].name;" type="file" accept="application/zip" id="FileUploadControl"> 
+            <div class="mdl-button mdl-button--icon mdl-button--file" onclick="document.getElementById('FileUploadControl').click();">
+                <input name="upfile" onchange="document.getElementById('TEXT_ID').value=this.files[0].name;" type="file" accept="application/zip" id="FileUploadControl">
                 <i class="material-icons">attach_file</i>
             </div>
         </div>
         <input class="mdl-button mdl-js-button mdl-js-ripple-effect" type="submit" value="Create PHAR" id="UploadButton" disabled><br>
     </form>
-    <div id="google_translate_element"></div><script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT, autoDisplay: false}, 'google_translate_element');
-}
-</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-        
+    <div id="google_translate_element"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 
 </html>

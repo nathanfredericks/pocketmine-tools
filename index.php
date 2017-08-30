@@ -64,8 +64,11 @@
 				"presentation">settings</i>API Updater</a>
 				<!-- Desktop app download -->
 				<a target="content" class="mdl-navigation__link mdl-color-text--white"
-				 href="pages/desktop.html"><i class="mdl-color-text--white material-icons" role=
-				"presentation">computer</i>Desktop apps (alpha)</a>
+				href="pages/desktop.html"><i class="mdl-color-text--white material-icons" role=
+			   "presentation">computer</i>Desktop apps (alpha)</a>
+				<a target="content" class="mdl-navigation__link mdl-color-text--white"
+				 href="pages/PSM.html"><i class="mdl-color-text--white material-icons" role=
+				"presentation">new_releases</i>[NEW] PSM</a>
 
 				<div class="mdl-layout-spacer"></div>
 				<a class="mdl-navigation__link mdl-color-text--white" href="https://en.ad5001.eu"><i class="mdl-color-text--white material-icons" role="presentation">description</i>

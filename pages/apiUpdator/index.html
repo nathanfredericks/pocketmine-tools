@@ -16,45 +16,50 @@
 <body>
     <h4>What is API changing?</h4>
     <p>
-        On PocketMine, API changes marks a new era on plugin API of pocketmine where some plugin would basicly break<br>
-        But most plugin would just work fine on your server. Thought they may be less stable<br>
-        We provide some incompatibility changes with the new apis to try making your plugin working.<br>
-        Thought note that neither us, the plugin author, or the PocketMine team will be responsible for any damage done to your server or your machine using this converter.
-    <h4>How do I force API change?</h4>
-    <ul>
-        <li>Download your incompatible plugin in phar form, of course.</li>
-        <li>Make sure everything is the way you want it.</li>
-        <li>Select every needed options for plugin API changing (e.g. namspace changing, methods changing...)</li>
-        <li>Put the file somewhere you can find it, then click on the paperclip and select "Convert"</li>
-    </ul>
-    <form enctype="multipart/form-data" method="POST" action="convert.php">
-        <input type="hidden" name="MAX_FILE_SIZE" value="50000000" />
-        <!-- API Version -->
-        <div class="mdl-textfield mdl-js-textfield">
-            <label>API version wanted: <input type="text" name="API_version" class="mdl-textfield__input" style="color: rgba(0,0,0,.5);"></label>
-        </div><br>
-        <!--Compatibility options-->
+        On PocketMine, API changes marks a new era on plugin API of pocketmine where some plugin would basicly break<br> But most plugin would just work fine on your server. Thought they may be less stable<br> We provide some incompatibility changes with
+        the new apis to try making your plugin working.<br> Thought note that neither us, the plugin author, or the PocketMine team will be responsible for any damage done to your server or your machine using this converter.
+        <h4>How do I force API change?</h4>
         <ul>
-            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1"><input id="checkbox-1" type="checkbox" name="TagReplace" class="mdl-checkbox__input" style="color: rgba(0,0,0,.5);"> Replace all pocketmine\nbt\tag\*** by pocketmine\nbt\tag\***Tag (API 1.0.0 to 2.0.0)</label><br>
-            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2"><input id="checkbox-2" type="checkbox" name="ProtocolReplace" class="mdl-checkbox__input" style="color: rgba(0,0,0,.5);"> Replace all pocketmine\network\protocol\*** by pocketmine\network\mcpe\protocol\*** (API 2.0.0 to 3.0.0)</label><br>
-         </ul><br>
-        <!--Phar & sumbit-->
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
-            <input class="mdl-textfield__input" id="TEXT_ID" placeholder="No phar file chosen..." readonly type="text" />
+            <li>Download your incompatible plugin in phar form, of course.</li>
+            <li>Make sure everything is the way you want it.</li>
+            <li>Select every needed options for plugin API changing (e.g. namspace changing, methods changing...)</li>
+            <li>Put the file somewhere you can find it, then click on the paperclip and select "Convert"</li>
+        </ul>
+        <form enctype="multipart/form-data" method="POST" action="convert.php">
+            <input type="hidden" name="MAX_FILE_SIZE" value="50000000" />
+            <!-- API Version -->
+            <div class="mdl-textfield mdl-js-textfield">
+                <label>API version wanted: <input type="text" name="API_version" class="mdl-textfield__input" style="color: rgba(0,0,0,.5);"></label>
+            </div><br>
+            <!--Compatibility options-->
+            <ul>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1"><input id="checkbox-1" type="checkbox" name="NBTTagReplace" class="mdl-checkbox__input" style="color: rgba(0,0,0,.5);"> Replace all pocketmine\nbt\tag\*** by pocketmine\nbt\tag\***Tag (API 1.0.0 to 2.0.0)</label><br>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2"><input id="checkbox-2" type="checkbox" name="ProtocolReplace" class="mdl-checkbox__input" style="color: rgba(0,0,0,.5);"> Replace all pocketmine\network\protocol\*** by pocketmine\network\mcpe\protocol\*** (API 2.0.0 to 3.0.0)</label><br>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-3"><input id="checkbox-3" type="checkbox" name="StrictTypesReplace" class="mdl-checkbox__input" style="color: rgba(0,0,0,.5);"> Add strict types to plugins (API 3.0.0-ALPHA6 to 3.0.0-ALPHA7)</label><br>
+            </ul><br>
+            <!--Phar & sumbit-->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
+                <input class="mdl-textfield__input" id="TEXT_ID" placeholder="No phar file chosen..." readonly type="text" />
 
-            <div class="mdl-button mdl-button--icon mdl-button--file">
-                <input name="upfile" onchange="document.getElementById('TEXT_ID').value=this.files[0].name;" type="file" accept=".phar" id="FileUploadControl">
-                <i class="material-icons">attach_file</i>
+                <div class="mdl-button mdl-button--icon mdl-button--file">
+                    <input name="upfile" onchange="document.getElementById('TEXT_ID').value=this.files[0].name;" type="file" accept=".phar" id="FileUploadControl">
+                    <i class="material-icons">attach_file</i>
+                </div>
             </div>
-        </div>
-        <input class="mdl-button mdl-js-button mdl-js-ripple-effect" type="submit" value="Change API" id="UploadButton"><br>
-    </form>
-    <div id="google_translate_element"></div><script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT, autoDisplay: false}, 'google_translate_element');
-}
-</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-        
+            <input class="mdl-button mdl-js-button mdl-js-ripple-effect" type="submit" value="Change API" id="UploadButton"><br>
+        </form>
+        <div id="google_translate_element"></div>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT,
+                    autoDisplay: false
+                }, 'google_translate_element');
+            }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 
 </html>
