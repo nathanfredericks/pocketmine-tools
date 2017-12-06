@@ -1,7 +1,7 @@
 <?php
 
 global $ROOT_DIR;
-$ROOT_DIR = implode(DIRECTORY_SEPARATOR, array_slice(explode(DIRECTORY_SEPARATOR, __DIR__), 0, count(explode(DIRECTORY_SEPARATOR, __DIR__)) - 2));
+$ROOT_DIR = "/tmp";
 
 if(!isset($_GET["n"]) || !file_exists($ROOT_DIR . "/data/phars/" . $_GET["n"] . ".zip")) {
     header("Location: index.html");

@@ -6,7 +6,7 @@ const WARNING = "WARNING";
 const ERROR = "ERROR";
 const CRITICAL = "CRITICAL";
 global $ROOT_DIR;
-$ROOT_DIR = implode(DIRECTORY_SEPARATOR, array_slice(explode(DIRECTORY_SEPARATOR, __DIR__), 0, count(explode(DIRECTORY_SEPARATOR, __DIR__)) - 2));
+$ROOT_DIR = "/tmp";
 
 try {
    
