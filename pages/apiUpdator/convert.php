@@ -5,7 +5,7 @@ ini_set("display_errors", -1);
 global $ROOT_DIR;
 global $plData;
 global $fName;
-$ROOT_DIR = implode(DIRECTORY_SEPARATOR, array_slice(explode(DIRECTORY_SEPARATOR, __DIR__), 0, count(explode(DIRECTORY_SEPARATOR, __DIR__)) - 2));
+$ROOT_DIR = "/tmp";
 
 try {
    
