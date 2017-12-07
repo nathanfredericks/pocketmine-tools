@@ -53,10 +53,14 @@ try {
     )) {
         throw new RuntimeException('Failed to move uploaded file.');
     }
-    $phar = new Phar("$ROOT_DIR/data/tmp/$fName.phar");
+    $phar = new Phar("$ROOT_DIR/data/tmp/$fName.phar", 0);
     $plData = yaml_parse(file_get_contents($phar["plugin.yml"]));
     if ($plData == false) {
         $plData = ["name" => "Unknown", "author" => "Unknown", "api" => "3.0.0", "version" => 1.0];
+    }
+    $preg = preg_match("/^[\w\d_.-]+$/im", $plData["name"]);
+    if(!$preg || $preg == 0) { // Phar attack.
+        $plData["name"] = "Unknown";
     }
 
     // Building zip

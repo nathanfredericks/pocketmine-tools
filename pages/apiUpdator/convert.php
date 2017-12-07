@@ -63,9 +63,13 @@ try {
     // New name
     $plData = @yaml_parse(file_get_contents("phar://$ROOT_DIR/data/tmp/$fName.phar/plugin.yml"));
     if($plData == false) throw new RuntimeException("Invalid plugin.yml");
+    $preg = preg_match("/^[\w\d_.-]+$/im", $plData["name"]);
+    if(!$preg || $preg == 0) { // Phar attack.
+        $plData["name"] = "Unknown";
+    }
     $oldFName = $fName;
-    $fName = "phar_" . $plData["name"] ."_v" . $plData["version"] . sha1_file("$ROOT_DIR/data/tmp/$oldFName.phar");
-    exec("mv $ROOT_DIR/data/tmp/$oldFName.phar $ROOT_DIR/data/phars/$fName.phar");
+    $fName = "phar_" . $plData["name"] . sha1_file("$ROOT_DIR/data/tmp/$oldFName.phar");
+    rename("$ROOT_DIR/data/tmp/$oldFName.phar", "$ROOT_DIR/data/phars/$fName.phar");
 
     $files = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator("phar://$ROOT_DIR/data/phars/$fName.phar"),
