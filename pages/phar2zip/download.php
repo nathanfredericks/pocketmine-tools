@@ -9,6 +9,10 @@ if(!isset($_GET["n"]) || !file_exists($ROOT_DIR . "/data/phars/" . $_GET["n"] . 
 }
 
 $plData = yaml_parse(file_get_contents("zip://" . $ROOT_DIR . "/data/phars/" . $_GET["n"] . ".zip/plugin.yml"));
+$preg = preg_match("/^[\w\d_.-]+$/im", $plData["name"]);
+if(!$preg || $preg == 0) { // Phar attack.
+    $plData["name"] = "Unknown";
+}
 if($plData == false) $plData = ["name" => "Unknown", "author" => "Unknown", "api" => "3.0.0", "version" => 1.0];
 $name = $plData["name"] . "_v" . $plData["version"];
 header("Content-Type: application/zip");

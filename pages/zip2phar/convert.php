@@ -7,6 +7,7 @@ const ERROR = "ERROR";
 const CRITICAL = "CRITICAL";
 global $ROOT_DIR;
 $ROOT_DIR = "/tmp";
+setlocale(LC_CTYPE, "en_US.UTF-8");
 
 try {
    
@@ -84,6 +85,10 @@ try {
     // Basic data provided. Now checking errors
     global $errors;
     $errors = [];
+    $preg = preg_match("/^[\w\d_.-]+$/im", $plData["name"]);
+    if(!$preg || $preg == 0) { // Phar attack.
+        $plData["name"] = "Unknown";
+    }
 
     $newApi = false;
     foreach(is_string($plData["api"]) ? [$plData["api"]] : $plData["api"] as $api) {
@@ -115,7 +120,7 @@ function checkDir($dir) {
         if(is_file($dir . DIRECTORY_SEPARATOR . $f)) {
             switch(pathinfo($dir . DIRECTORY_SEPARATOR . $f, PATHINFO_EXTENSION)) {
                 case "php":
-                $res = proc_open("php -l " . $dir . DIRECTORY_SEPARATOR . $f, [1 => ["pipe", "w"], 2 => ["pipe", "w"]], $pipes);
+                $res = proc_open("php -l " . escapeshellarg($dir . DIRECTORY_SEPARATOR . $f), [1 => ["pipe", "w"], 2 => ["pipe", "w"]], $pipes);
                 if(is_resource($res)) {
                     $stdout = stream_get_contents($pipes[1]);
                     $stderr = stream_get_contents($pipes[2]);
