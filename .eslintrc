@@ -1,4 +1,8 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb"
+  "extends": "airbnb",
+  "rules": {
+    "object-curly-newline": 0,
+    "react/jsx-one-expression-per-line": 0
+  }
 }
