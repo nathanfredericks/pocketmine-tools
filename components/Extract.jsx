@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import * as PHAR from 'phar';
 import { saveAs } from 'file-saver';
+import * as gtag from '../utils/gtag';
 
 export default class extends Component {
   state = {
@@ -19,6 +20,12 @@ export default class extends Component {
     event.preventDefault();
 
     const { files } = this.state;
+
+    gtag.event({
+      action: 'extract',
+      category: 'Plugin',
+      label: files[0].name,
+    });
 
     const reader = new FileReader();
 

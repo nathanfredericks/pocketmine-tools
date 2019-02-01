@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import Link from 'next/link';
+import Router from 'next/router';
+import * as gtag from '../utils/gtag';
+
+Router.events.on('routeChangeComplete', (url) => gtag.pageview(url));
 
 const Layout = ({ title, children }) => (
   <>
