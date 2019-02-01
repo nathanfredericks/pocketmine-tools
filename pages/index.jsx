@@ -1,14 +1,15 @@
 import React from 'react';
 import { Tab, Row, Col, ListGroup } from 'react-bootstrap';
 import Layout from '../components/Layout';
+import Extract from '../components/Extract';
 
 export default () => (
   <Layout>
-    <Tab.Container defaultActiveKey="#create">
+    <Tab.Container defaultActiveKey="#extract">
       <Row>
         <Col md={3} className="mb-4">
           <ListGroup>
-            <ListGroup.Item action defaultValue href="#create">
+            <ListGroup.Item action href="#create">
               Create <code>.phar</code>
             </ListGroup.Item>
             <ListGroup.Item action href="#extract">
@@ -25,7 +26,9 @@ export default () => (
         <Col md={9}>
           <Tab.Content>
             <Tab.Pane eventKey="#create">Create</Tab.Pane>
-            <Tab.Pane eventKey="#extract">Extract</Tab.Pane>
+            <Tab.Pane eventKey="#extract">
+              <Extract />
+            </Tab.Pane>
             <Tab.Pane eventKey="#view-crashdump">View Crashdump</Tab.Pane>
           </Tab.Content>
         </Col>
