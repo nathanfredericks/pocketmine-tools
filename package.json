@@ -1,0 +1,37 @@
+{
+  "name": "pocketmine-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "homepage": "https://pmt.mcpe.fun",
+  "bugs": {
+    "url": "https://github.com/pocketmine-tools/pocketmine-tools/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pocketmine-tools/pocketmine-tools.git"
+  },
+  "license": "MIT",
+  "author": "Nathaniel Fredericks <me@nathfreder.tech> (https://nathfreder.tech)",
+  "main": "pages/index.js",
+  "scripts": {
+    "build": "next build",
+    "dev": "next",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^7.0.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.0",
+    "eslint-plugin-react": "^7.12.4",
+    "prettier": "^1.16.3"
+  }
+}
