@@ -2,6 +2,7 @@ import React from 'react';
 import { Tab, Row, Col, ListGroup } from 'react-bootstrap';
 import Layout from '../components/Layout';
 import Extract from '../components/Extract';
+import Create from '../components/Create';
 
 export default () => (
   <Layout>
@@ -25,11 +26,13 @@ export default () => (
         </Col>
         <Col md={9}>
           <Tab.Content>
-            <Tab.Pane eventKey="#create">Create</Tab.Pane>
+            <Tab.Pane eventKey="#create">
+              <Create />
+            </Tab.Pane>
             <Tab.Pane eventKey="#extract">
               <Extract />
             </Tab.Pane>
-            <Tab.Pane eventKey="#view-crashdump">View Crashdump</Tab.Pane>
+            <Tab.Pane eventKey="#view-crashdump">Edit Crashdump</Tab.Pane>
           </Tab.Content>
         </Col>
       </Row>
