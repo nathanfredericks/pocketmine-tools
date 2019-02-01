@@ -1,26 +1,12 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+import { Container, Navbar, Nav } from 'react-bootstrap';
 import Link from 'next/link';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  Container,
-} from 'reactstrap';
 
-class Layout extends Component {
-  state = {
-    isNavOpen: false,
-  };
-
+class Layout extends PureComponent {
   render = () => {
     const { title, children } = this.props;
-    const { isNavOpen } = this.state;
 
     return (
       <>
@@ -32,24 +18,20 @@ class Layout extends Component {
             content="initial-scale=1.0, width=device-width"
           />
         </Head>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">
-            PocketMine Tools
-          </NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={isNavOpen} navbar>
-            <Nav navbar>
-              <NavItem>
-                <Link href="/">
-                  <NavLink>Home</NavLink>
-                </Link>
-              </NavItem>
+        <Navbar bg="light" expand="lg">
+          <Link href="/">
+            <Navbar.Brand>PocketMine Tools</Navbar.Brand>
+          </Link>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Link href="/">
+                <Nav.Link>Home</Nav.Link>
+              </Link>
             </Nav>
-          </Collapse>
+          </Navbar.Collapse>
         </Navbar>
-        <Container className="mt-3">
-          {children}
-        </Container>
+        <Container className="mt-3">{children}</Container>
       </>
     );
   };
