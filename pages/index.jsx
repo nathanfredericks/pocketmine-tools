@@ -6,7 +6,7 @@ import Create from '../components/Create';
 
 export default () => (
   <Layout>
-    <Tab.Container defaultActiveKey="#extract">
+    <Tab.Container defaultActiveKey="#create">
       <Row>
         <Col md={3} className="mb-4">
           <ListGroup>
