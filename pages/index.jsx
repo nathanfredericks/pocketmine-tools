@@ -16,9 +16,6 @@ export default () => (
             <ListGroup.Item action href="#extract">
               Extract <code>.phar</code>
             </ListGroup.Item>
-            <ListGroup.Item action href="#view-crashdump">
-              Edit Crashdump
-            </ListGroup.Item>
             {/* <ListGroup.Item action disabled href="#plugin-creator">
               Plugin Creator
             </ListGroup.Item> */}
@@ -32,7 +29,6 @@ export default () => (
             <Tab.Pane eventKey="#extract">
               <Extract />
             </Tab.Pane>
-            <Tab.Pane eventKey="#view-crashdump">Edit Crashdump</Tab.Pane>
           </Tab.Content>
         </Col>
       </Row>
