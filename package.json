@@ -18,6 +18,7 @@
     "build": "next build",
     "dev": "next",
     "start": "next start",
+    "now-build": "npm run build && npm run export -- -o dist",
     "export": "next export"
   },
   "dependencies": {
