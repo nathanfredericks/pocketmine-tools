@@ -16,9 +16,15 @@ export default () => (
             <ListGroup.Item action href="#extract">
               Extract <code>.phar</code>
             </ListGroup.Item>
-            {/* <ListGroup.Item action disabled href="#plugin-creator">
-              Plugin Creator
-            </ListGroup.Item> */}
+            <ListGroup.Item action disabled>
+              API Updater
+            </ListGroup.Item>
+            <ListGroup.Item action disabled>
+              Crashdump Parser
+            </ListGroup.Item>
+            <ListGroup.Item action disabled>
+              Plugin Generator
+            </ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={9}>
