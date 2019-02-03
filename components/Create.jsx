@@ -77,6 +77,9 @@ export default class extends Component {
               defaultValue="<?php __HALT_COMPILER();"
               onChange={this.handleStubChange}
             />
+            <Form.Text className="text-muted">
+              Don&#39;t change this unless you know what you&#39;re doing.
+            </Form.Text>
           </Form.Group>
           <Button variant="secondary" type="submit" disabled={files.length < 1}>
             Create
