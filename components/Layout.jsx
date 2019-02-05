@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Container, Navbar, Nav, Alert } from 'react-bootstrap';
 import Link from 'next/link';
 
 const Layout = ({ title, children }) => (
@@ -25,7 +25,12 @@ const Layout = ({ title, children }) => (
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-    <Container className="mt-4">{children}</Container>
+    <Container className="mt-4">
+      <Alert dismissible variant="info" className="mb-4">
+        PocketMine Tools is joining BoxOfDevs. <a href="https://nathfreder.tech/pocketmine-tools-is-joining-boxofdevs/">Read more</a>.
+      </Alert>
+      {children}
+    </Container>
   </>
 );
 
