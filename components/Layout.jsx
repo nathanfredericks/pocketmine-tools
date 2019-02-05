@@ -21,7 +21,7 @@ const Layout = ({ title, children }) => (
           <Link href="/">
             <Nav.Link active>Home</Nav.Link>
           </Link>
-          <Nav.Link href="https://discord.gg/WPkSKYh">Discord</Nav.Link>
+          <Nav.Link href="https://discord.gg/qGDemhY">Discord</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
