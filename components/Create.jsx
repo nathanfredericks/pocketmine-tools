@@ -85,7 +85,7 @@ export default class extends Component {
               onChange={this.handleStubChange}
             />
             <Form.Text className="text-muted">
-              I hope you know what you&#39;re doing.
+              Don&#39;t change this unless you know what you&#39;re doing.
             </Form.Text>
           </Form.Group>
           <Button variant="secondary" type="submit" disabled={files.length < 1}>
