@@ -3,10 +3,11 @@ import { Tab, Row, Col, ListGroup } from 'react-bootstrap';
 import Layout from '../components/Layout';
 import Extract from '../components/Extract';
 import Create from '../components/Create';
+import Update from '../components/Update';
 
 export default () => (
   <Layout>
-    <Tab.Container defaultActiveKey="#create">
+    <Tab.Container defaultActiveKey="#update">
       <Row>
         <Col md={3} className="mb-4">
           <ListGroup>
@@ -16,7 +17,7 @@ export default () => (
             <ListGroup.Item action href="#extract">
               Extract <code>.phar</code>
             </ListGroup.Item>
-            <ListGroup.Item action disabled>
+            <ListGroup.Item action href="#update">
               API Updater
             </ListGroup.Item>
             <ListGroup.Item action disabled>
@@ -34,6 +35,9 @@ export default () => (
             </Tab.Pane>
             <Tab.Pane eventKey="#extract">
               <Extract />
+            </Tab.Pane>
+            <Tab.Pane eventKey="#update">
+              <Update />
             </Tab.Pane>
           </Tab.Content>
         </Col>
