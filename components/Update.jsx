@@ -5,6 +5,9 @@ import * as PHAR from 'phar';
 // import { saveAs } from 'file-saver';
 import * as gtag from '../utils/gtag';
 
+const getFileExtension = (name) => // eslint-disable-next-line implicit-arrow-linebreak
+  name.slice((Math.max(0, name.lastIndexOf('.')) || Infinity) + 1);
+
 export default class extends Component {
   state = {
     files: [],
@@ -39,9 +42,7 @@ export default class extends Component {
       phar.loadPharData(new Uint8Array(reader.result));
 
       phar.getFiles().forEach(({ name, contents }) => {
-        if (
-          name.slice((Math.max(0, name.lastIndexOf('.')) || Infinity) + 1) === 'php'
-        ) {
+        if (getFileExtension(name) === 'php') {
           if (replaceNbtTags) {
             const nbtTags = {
               ByteArray: 'ByteArrayTag',
@@ -58,12 +59,12 @@ export default class extends Component {
               String: 'StringTag',
             };
 
-            Object.keys(nbtTags).forEach((key) => {
+            Object.keys(nbtTags).forEach((nbtTag) => {
               const findRegex = new RegExp(
-                `pocketmine\\nbt\\tag\\${key};|()/mi`,
+                `pocketmine\\nbt\\tag\\${nbtTag};|()/mi`,
               );
               const replaceRegex = new RegExp(
-                `"pocketmine\\nbt\\tag\\${nbtTags[key]}$1/`,
+                `"pocketmine\\nbt\\tag\\${nbtTags[nbtTag]}$1/`,
               );
 
               contents = contents.replace(findRegex, replaceRegex);
@@ -84,15 +85,17 @@ export default class extends Component {
               /public function onCommand($2 $$$4, $6 $$$8, string $$$10, array $$$12): bool {/,
             );
 
-            contents = contents.replace(/public\s+function\s+onRun\s*\(\s*(int\s+)?\$([\w]+)\s*\)\s*(:\s*\w+\s*)?{/mi, /public function onRun(int $$$2) {/);
+            // onRun strict types
+            contents = contents.replace(
+              /public\s+function\s+onRun\s*\(\s*(int\s+)?\$([\w]+)\s*\)\s*(:\s*\w+\s*)?{/im,
+              /public function onRun(int $$$2) {/,
+            );
           }
 
           phar.removeFile(name);
           phar.addFile(new PHAR.File(name, contents));
         }
       });
-
-      console.log(phar.getFiles());
     };
 
     reader.readAsArrayBuffer(files[0]);
