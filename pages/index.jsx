@@ -3,11 +3,11 @@ import { Tab, Row, Col, ListGroup } from 'react-bootstrap';
 import Layout from '../components/Layout';
 import Extract from '../components/Extract';
 import Create from '../components/Create';
-import Update from '../components/Update';
+import Inject from '../components/Inject';
 
 export default () => (
   <Layout>
-    <Tab.Container defaultActiveKey="#update">
+    <Tab.Container defaultActiveKey="#inject">
       <Row>
         <Col md={3} className="mb-4">
           <ListGroup>
@@ -17,8 +17,8 @@ export default () => (
             <ListGroup.Item action href="#extract">
               Extract <code>.phar</code>
             </ListGroup.Item>
-            <ListGroup.Item action href="#update">
-              API Updater
+            <ListGroup.Item action href="#inject">
+              API Injector
             </ListGroup.Item>
             <ListGroup.Item action disabled>
               Crashdump Parser
@@ -36,8 +36,8 @@ export default () => (
             <Tab.Pane eventKey="#extract">
               <Extract />
             </Tab.Pane>
-            <Tab.Pane eventKey="#update">
-              <Update />
+            <Tab.Pane eventKey="#inject">
+              <Inject />
             </Tab.Pane>
           </Tab.Content>
         </Col>
