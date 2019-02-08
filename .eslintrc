@@ -5,5 +5,8 @@
     "object-curly-newline": 0,
     "react/jsx-one-expression-per-line": 0,
     "arrow-parens": 0
+  },
+  "env": {
+    "browser": true
   }
 }
