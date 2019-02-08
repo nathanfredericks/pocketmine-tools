@@ -2,11 +2,13 @@
 import React, { Component } from 'react';
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import * as PHAR from 'phar';
+import yaml from 'yaml-js';
 // import { saveAs } from 'file-saver';
 import * as gtag from '../utils/gtag';
 
-const getFileExtension = (name) => // eslint-disable-next-line implicit-arrow-linebreak
-  name.slice((Math.max(0, name.lastIndexOf('.')) || Infinity) + 1);
+const getFileExtension = (
+  name, // eslint-disable-next-line implicit-arrow-linebreak
+) => name.slice((Math.max(0, name.lastIndexOf('.')) || Infinity) + 1);
 
 export default class extends Component {
   state = {
@@ -96,6 +98,13 @@ export default class extends Component {
           phar.addFile(new PHAR.File(name, contents));
         }
       });
+
+      const pluginYml = yaml.load(phar.getFile('plugin.yml').contents);
+
+      pluginYml.api = '0.0.0';
+
+      phar.removeFile('plugin.yml');
+      phar.addFile(new PHAR.File('plugin.yml', yaml.dump(pluginYml)));
     };
 
     reader.readAsArrayBuffer(files[0]);
