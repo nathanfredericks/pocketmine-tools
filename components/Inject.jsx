@@ -72,7 +72,7 @@ export default class extends Component {
                 `pocketmine\\nbt\\tag\\${nbtTag};|()/mi`,
               );
               const replaceRegex = new RegExp(
-                `"pocketmine\\nbt\\tag\\${nbtTags[nbtTag]}$1/`,
+                `pocketmine\\nbt\\tag\\${nbtTags[nbtTag]}$1/`,
               );
 
               contents = contents.replace(findRegex, replaceRegex);
@@ -89,16 +89,14 @@ export default class extends Component {
           if (replaceStrictTypes) {
             // Command strict types
             contents = contents.replace(
-              /public\s+function\s+onCommand\s*\(\s*((([\w]|\\)*CommandSender)\s+)?\$([\w]+)\s*,\s*((([\w]|\\)*Command)\s+)?\$([\w]+)\s*,\s*(string\s+)?\$([\w]+)\s*,\s*(array\s+)?\$([\w]+)\s*\)\s*(:\s*bool\s*)?{/im,
-              new RegExp(
-                'public function onCommand($2 $$$4, $6 $$$8, string $$$10, array $$$12): bool {',
-              ),
+              /public\s+function\s+onCommand\s*\(\s*((([\w]|\\)*CommandSender)\s+)?\$([\w]+)\s*,\s*((([\w]|\\)*Command)\s+)?\$([\w]+)\s*,\s*(string\s+)?\$([\w]+)\s*,\s*(array\s+)?\$([\w]+)\s*\)\s*(:\s*bool\s*)?{/mi,
+              'public function onCommand($2 $$$4, $6 $$$8, string $$$10, array $$$12): bool {',
             );
 
             // onRun strict types
             contents = contents.replace(
               /public\s+function\s+onRun\s*\(\s*(int\s+)?\$([\w]+)\s*\)\s*(:\s*\w+\s*)?{/im,
-              new RegExp('public function onRun(int $$$2) {'),
+              'public function onRun(int $$$2) {',
             );
           }
 
