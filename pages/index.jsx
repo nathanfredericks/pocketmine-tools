@@ -7,7 +7,7 @@ import Inject from '../components/Inject';
 
 export default () => (
   <Layout>
-    <Tab.Container defaultActiveKey="#inject">
+    <Tab.Container defaultActiveKey="#create">
       <Row>
         <Col md={3} className="mb-4">
           <ListGroup>
