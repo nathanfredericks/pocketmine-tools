@@ -1,11 +1,12 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable implicit-arrow-linebreak */
 import React, { Component } from 'react';
-import { Form, InputGroup, Button, Badge } from 'react-bootstrap';
+import { Form, InputGroup, Button, Badge, Modal } from 'react-bootstrap';
 import * as PHAR from 'phar';
 import yaml from 'yaml-js';
 import { saveAs } from 'file-saver';
 import * as gtag from '../utils/gtag';
+import { throws } from 'assert';
 
 const getFileExtension = (name) =>
   name.slice((Math.max(0, name.lastIndexOf('.')) || Infinity) + 1);
@@ -17,6 +18,10 @@ export default class extends Component {
     replaceNbtTags: true,
     protocolReplace: true,
     replaceStrictTypes: true,
+    warningModal: false,
+    warningRead: false,
+    warningThreeWords: false,
+    originalPluginYml: {},
   };
 
   handleChange = (event) => {
@@ -34,6 +39,7 @@ export default class extends Component {
       replaceNbtTags,
       protocolReplace,
       replaceStrictTypes,
+      // warningRead,
     } = this.state;
 
     gtag.event({
@@ -89,7 +95,7 @@ export default class extends Component {
           if (replaceStrictTypes) {
             // Command strict types
             contents = contents.replace(
-              /public\s+function\s+onCommand\s*\(\s*((([\w]|\\)*CommandSender)\s+)?\$([\w]+)\s*,\s*((([\w]|\\)*Command)\s+)?\$([\w]+)\s*,\s*(string\s+)?\$([\w]+)\s*,\s*(array\s+)?\$([\w]+)\s*\)\s*(:\s*bool\s*)?{/mi,
+              /public\s+function\s+onCommand\s*\(\s*((([\w]|\\)*CommandSender)\s+)?\$([\w]+)\s*,\s*((([\w]|\\)*Command)\s+)?\$([\w]+)\s*,\s*(string\s+)?\$([\w]+)\s*,\s*(array\s+)?\$([\w]+)\s*\)\s*(:\s*bool\s*)?{/im,
               'public function onCommand($2 $$$4, $6 $$$8, string $$$10, array $$$12): bool {',
             );
 
@@ -107,6 +113,10 @@ export default class extends Component {
 
       const pluginYml = yaml.load(phar.getFile('plugin.yml').contents);
 
+      this.setState({
+        originalPluginYml: pluginYml,
+      });
+
       pluginYml.api = apiVersion;
 
       phar.removeFile('plugin.yml');
@@ -121,6 +131,12 @@ export default class extends Component {
           .slice(0, -1)
           .join('.')}-${apiVersion}.phar`,
       );
+
+      this.setState({
+        warningModal: false,
+        warningRead: false,
+        warningThreeWords: false,
+      });
     };
 
     reader.readAsArrayBuffer(files[0]);
@@ -133,11 +149,14 @@ export default class extends Component {
       replaceNbtTags,
       protocolReplace,
       replaceStrictTypes,
+      warningModal,
+      originalPluginYml,
+      warningThreeWords,
     } = this.state;
 
     return (
       <>
-        <Form onSubmit={this.handleSubmit}>
+        <Form>
           <Form.Label>Plugin</Form.Label>
           <InputGroup className="mb-3">
             <div className="custom-file">
@@ -213,12 +232,64 @@ export default class extends Component {
           </div>
           <Button
             variant="secondary"
-            type="submit"
+            // type="submit"
+            onClick={() =>
+              this.setState({
+                warningModal: true,
+              })
+            }
             disabled={files.length < 1 || apiVersion.length < 1}
           >
             Inject
           </Button>
         </Form>
+        <Modal
+          show={warningModal}
+          onHide={() => this.setState({ warningModal: false })}
+          size="lg"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>This is dangerous</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ol>
+              <li>
+                This tool only forces the plugin to say that it supports API
+                version {apiVersion}, and optionally, blindly replaces some
+                specific backwards-incompatible changes in the{' '}
+                <code>.phar</code>. It will not fix the actual incompatibility
+                issues.
+              </li>
+              <li>
+                If errors happen after loading the downloaded plugin, uninstall
+                it immediately and contact
+                the plugin developer for support.
+              </li>
+              <li>
+                Click{' '}
+                <em onClick={() => this.setState({ warningThreeWords: true })}>
+                  these three words
+                </em>{' '}
+                if you have read the above.
+              </li>
+            </ol>
+          </Modal.Body>
+          <Modal.Footer>
+            {/* <Button
+              variant="secondary"
+              onClick={() => this.setState({ warningModal: false })}
+            >
+              Close
+            </Button> */}
+            <Button
+              variant="primary"
+              onClick={this.handleSubmit}
+              disabled={!warningThreeWords}
+            >
+              Inject
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </>
     );
   };
