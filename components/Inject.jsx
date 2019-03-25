@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable implicit-arrow-linebreak */
 import React, { Component } from 'react';
-import { Form, InputGroup, Button, Badge, Modal } from 'react-bootstrap';
+import { Form, InputGroup, Button, Badge, Modal, Alert } from 'react-bootstrap';
 import * as PHAR from 'phar';
 import yaml from 'yaml-js';
 import { saveAs } from 'file-saver';
@@ -156,6 +156,7 @@ export default class extends Component {
 
     return (
       <>
+      <Alert variant="warning">API Injector will be deprecated upon release of PocketMine-MP v4.0.0</Alert>
         <Form>
           <Form.Label>Plugin</Form.Label>
           <InputGroup className="mb-3">
