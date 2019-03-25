@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Container, Navbar, Nav, Badge } from 'react-bootstrap';
 import Link from 'next/link';
 import Router from 'next/router';
 import * as gtag from '../utils/gtag';
@@ -25,7 +25,7 @@ const Layout = ({ title, children }) => (
           <Link href="/">
             <Nav.Link active>Home</Nav.Link>
           </Link>
-          <Nav.Link href="https://discord.gg/qGDemhY">Discord</Nav.Link>
+          <Nav.Link href="https://discord.gg/qPqrKAF">Discord <Badge variant="info">New</Badge></Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
