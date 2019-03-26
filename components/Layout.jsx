@@ -13,8 +13,24 @@ const Layout = ({ title, children }) => (
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
+      <meta
+        name="description"
+        content="Create and extract PocketMine plugins online."
+      />
+      <meta
+        name="keywords"
+        content="PocketMine,PocketMine Tools,PMT,pmt.mcpe.fun"
+      />
+      <meta name="author" content="Nathaniel Fredericks" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
+    {true ? (
+      <Alert variant="danger" className="mb-0">
+        PocketMine Tools is moving to{' '}
+        <a href="https://pmt.nathfreder.dev">pmt.nathfreder.dev</a>. Please
+        update yogur bookmarks.
+      </Alert>
+    ) : null}
     <Navbar bg="light" expand="lg">
       <Link href="/">
         <Navbar.Brand>PocketMine Tools</Navbar.Brand>
@@ -25,7 +41,9 @@ const Layout = ({ title, children }) => (
           <Link href="/">
             <Nav.Link active>Home</Nav.Link>
           </Link>
-          <Nav.Link href="https://discord.gg/qPqrKAF">Discord <Badge variant="info">New</Badge></Nav.Link>
+          <Nav.Link href="https://discord.gg/qPqrKAF">
+            Discord <Badge variant="info">New</Badge>
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
