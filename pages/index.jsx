@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import Extract from '../components/Extract';
 import Create from '../components/Create';
 import Inject from '../components/Inject';
+import PoggitSearch from '../components/PoggitSearch';
 
 export default () => (
   <Layout>
@@ -20,7 +21,7 @@ export default () => (
             <ListGroup.Item action href="#inject">
               API Injector
             </ListGroup.Item>
-            <ListGroup.Item action href="https://poggit-search.nathfreder.dev"  target="_blank">
+            <ListGroup.Item action href="#poggit-search">
               Poggit Search <Badge variant="warning">New</Badge>
             </ListGroup.Item>
             <ListGroup.Item action disabled>
@@ -38,6 +39,9 @@ export default () => (
             </Tab.Pane>
             <Tab.Pane eventKey="#inject">
               <Inject />
+            </Tab.Pane>
+            <Tab.Pane eventKey="#poggit-search">
+              <PoggitSearch />
             </Tab.Pane>
           </Tab.Content>
         </Col>

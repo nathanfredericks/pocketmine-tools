@@ -155,7 +155,9 @@ export default class extends Component {
 
     return (
       <>
-        <Alert variant="danger">API Injector will be deprecated upon release of PocketMine-MP v4.0</Alert>
+        <Alert variant="danger">
+          API Injector will be deprecated upon release of PocketMine-MP v4.0
+        </Alert>
         <Form>
           <Form.Label>Plugin</Form.Label>
           <InputGroup className="mb-3">
@@ -262,8 +264,7 @@ export default class extends Component {
               </li>
               <li>
                 If errors happen after loading the downloaded plugin, uninstall
-                it immediately and contact
-                the plugin developer for support.
+                it immediately and contact the plugin developer for support.
               </li>
               <li>
                 Click{' '}
