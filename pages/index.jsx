@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab, Row, Col, ListGroup } from 'react-bootstrap';
+import { Tab, Row, Col, ListGroup, Badge } from 'react-bootstrap';
 import Layout from '../components/Layout';
 import Extract from '../components/Extract';
 import Create from '../components/Create';
@@ -20,11 +20,11 @@ export default () => (
             <ListGroup.Item action href="#inject">
               API Injector
             </ListGroup.Item>
-            <ListGroup.Item action disabled>
-              Crashdump Parser
+            <ListGroup.Item action href="https://poggit-search.nathfreder.dev"  target="_blank">
+              Poggit Search <Badge variant="warning">New</Badge>
             </ListGroup.Item>
             <ListGroup.Item action disabled>
-              Plugin Generator
+              Crashdump Parser
             </ListGroup.Item>
           </ListGroup>
         </Col>

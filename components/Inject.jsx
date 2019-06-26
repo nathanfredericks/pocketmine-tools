@@ -6,7 +6,6 @@ import * as PHAR from 'phar';
 import yaml from 'yaml-js';
 import { saveAs } from 'file-saver';
 import * as gtag from '../utils/gtag';
-import { throws } from 'assert';
 
 const getFileExtension = (name) =>
   name.slice((Math.max(0, name.lastIndexOf('.')) || Infinity) + 1);
@@ -150,13 +149,13 @@ export default class extends Component {
       protocolReplace,
       replaceStrictTypes,
       warningModal,
-      originalPluginYml,
+      // originalPluginYml,
       warningThreeWords,
     } = this.state;
 
     return (
       <>
-      <Alert variant="warning">API Injector will be deprecated upon release of PocketMine-MP v4.0.0</Alert>
+        <Alert variant="danger">API Injector will be deprecated upon release of PocketMine-MP v4.0</Alert>
         <Form>
           <Form.Label>Plugin</Form.Label>
           <InputGroup className="mb-3">
