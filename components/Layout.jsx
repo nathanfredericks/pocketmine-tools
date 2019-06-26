@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import { Container, Navbar, Nav, Badge } from 'react-bootstrap';
+import { Container, Navbar, Nav, Button } from 'react-bootstrap';
 import Link from 'next/link';
 import Router from 'next/router';
 import * as gtag from '../utils/gtag';
@@ -24,13 +24,6 @@ const Layout = ({ title, children }) => (
       <meta name="author" content="Nathaniel Fredericks" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    {true ? (
-      <Alert variant="danger" className="mb-0">
-        PocketMine Tools is moving to{' '}
-        <a href="https://pmt.nathfreder.dev">pmt.nathfreder.dev</a>. Please
-        update yogur bookmarks.
-      </Alert>
-    ) : null}
     <Navbar bg="light" expand="lg">
       <Link href="/">
         <Navbar.Brand>PocketMine Tools</Navbar.Brand>
@@ -41,9 +34,14 @@ const Layout = ({ title, children }) => (
           <Link href="/">
             <Nav.Link active>Home</Nav.Link>
           </Link>
-          <Nav.Link href="https://discord.gg/qPqrKAF">
-            Discord <Badge variant="info">New</Badge>
+          <Nav.Link href="https://discord.gg/qPqrKAF" target="_blank">
+            Discord
           </Nav.Link>
+        </Nav>
+        <Nav className="ml-auto">
+          <Button variant="outline-primary" href="https://paypal.me/nathfreder"  target="_blank">
+            Donate via PayPal
+          </Button>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
