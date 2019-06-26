@@ -68,7 +68,6 @@ const Hit = ({ hit }) => {
       return (
         <Card className="w-100 mb-2">
           <Card.Body>
-            <img src={hit.logo_url} />
             <a href={`https://poggit.pmmp.io/p/${hit.project_name}`}>
               <Card.Title>
        
