@@ -10,8 +10,15 @@ import {
 } from 'react-instantsearch-dom';
 import './PoggitSearch.scss';
 import SemverJS from '@brunorb/semverjs';
+import * as gtag from '../utils/gtag';
 
 export default class extends Component {
+  componentDidMount = () => {
+    gtag.event({
+      action: 'search',
+    });
+  }
+
   render = () => {
     const searchClient = algoliasearch(
       'XI77W278IB',
@@ -61,8 +68,10 @@ const Hit = ({ hit }) => {
       return (
         <Card className="w-100 mb-2">
           <Card.Body>
+            <img src={hit.logo_url} />
             <a href={`https://poggit.pmmp.io/p/${hit.project_name}`}>
               <Card.Title>
+       
                 <Highlight attribute="name" tagName="mark" hit={hit} />
                 <Badge variant="light">{hit.api[0].from}</Badge>
               </Card.Title>
