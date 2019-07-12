@@ -11,7 +11,7 @@ export default class extends Component {
         <Card style={{ width: '18rem' }} className="mt-4">
             <Card.Body>
                 <Card.Title>Tinh Truong <Badge variant="light">$3</Badge></Card.Title>
-                <Card.Link href="https://twitter.con/onetinhcan">Twitter</Card.Link>
+                <Card.Link href="https://twitter.com/onetinhcan">Twitter</Card.Link>
                 {/* <Card.Link href="#">Website</Card.Link> */}
             </Card.Body>
         </Card>
