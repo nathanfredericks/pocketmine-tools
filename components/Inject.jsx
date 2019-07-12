@@ -17,6 +17,7 @@ export default class extends Component {
     replaceNbtTags: true,
     protocolReplace: true,
     replaceStrictTypes: true,
+    fixEntityActorNames: true,
     warningModal: false,
     warningRead: false,
     warningThreeWords: false,
@@ -105,6 +106,23 @@ export default class extends Component {
             );
           }
 
+          if (fixEntityActorNames) {
+            contents = contents.replace('EntityEventPacket', 'ActorEventPacket');
+            contents = contents.replace('EntityFallPacket', 'ActorFallPacket');
+            contents = contents.replace('EntityPickRequestPacket', 'ActorPickRequestPacket');
+            contents = contents.replace('AddEntityPacket', 'AddActorPacket');
+            contents = contents.replace('AddItemEntityPacket', 'AddItemActorPacket');
+            contents = contents.replace('AvailableEntityIdentifiersPacket', 'AvailableActorIdentifiersPacket');
+            contents = contents.replace('BlockEntityDataPacket', 'BlockActorDataPacket');
+            contents = contents.replace('MoveEntityAbsolutePacket', 'MoveActorAbsolutePacket');
+            contents = contents.replace('MoveEntityDeltaPacket', 'MoveActorDeltaPacket');
+            contents = contents.replace('RemoveEntityPacket', 'RemoveActorPacket');
+            contents = contents.replace('SetEntityDataPacket', 'SetActorDataPacket');
+            contents = contents.replace('SetEntityLinkPacket', 'SetActorLinkPacket');
+            contents = contents.replace('SetEntityMotionPacket', 'SetActorMotionPacket');
+            contents = contents.replace('TakeItemEntityPacket', 'TakeItemActorPacket');
+          }
+
           phar.removeFile(name);
           phar.addFile(new PHAR.File(name, contents));
         }
@@ -148,6 +166,7 @@ export default class extends Component {
       replaceNbtTags,
       protocolReplace,
       replaceStrictTypes,
+      fixEntityActorNames,
       warningModal,
       // originalPluginYml,
       warningThreeWords,
@@ -229,6 +248,20 @@ export default class extends Component {
               />
               <label className="custom-control-label" htmlFor="replaceNbtTags">
                 Replace NBT tags <Badge variant="light">1.0.0 to 2.0.0</Badge>
+              </label>
+            </div>
+            <div className="custom-control custom-switch">
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id="fixEntityActorNames"
+                checked={fixEntityActorNames}
+                onChange={(event) =>
+                  this.setState({ fixEntityActorNames: event.target.checked })
+                }
+              />
+              <label className="custom-control-label" htmlFor="fixEntityActorNames">
+                Change <code>Entity</code> to <code>Actor</code> <Badge variant="light">3.8.7 to 3.9.0</Badge> <Badge variant="warning">New</Badge>
               </label>
             </div>
           </div>
