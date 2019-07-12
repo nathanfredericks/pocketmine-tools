@@ -5,6 +5,7 @@ import Extract from '../components/Extract';
 import Create from '../components/Create';
 import Inject from '../components/Inject';
 import PoggitSearch from '../components/PoggitSearch';
+import Donators from '../components/Donators';
 
 export default () => (
   <Layout>
@@ -28,6 +29,12 @@ export default () => (
               Crashdump Parser
             </ListGroup.Item>
           </ListGroup>
+          <br />
+          <ListGroup>
+            <ListGroup.Item action href="#donators">
+              Donators
+            </ListGroup.Item>
+          </ListGroup>
         </Col>
         <Col md={9}>
           <Tab.Content>
@@ -42,6 +49,9 @@ export default () => (
             </Tab.Pane>
             <Tab.Pane eventKey="#poggit-search">
               <PoggitSearch />
+            </Tab.Pane>
+            <Tab.Pane eventKey="#donators">
+              <Donators />
             </Tab.Pane>
           </Tab.Content>
         </Col>
