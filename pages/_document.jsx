@@ -1,8 +1,6 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 
-import { GA_TRACKING_ID } from '../utils/gtag';
-
 export default class extends Document {
   static getInitialProps({ renderPage }) {
     const { html, head, errorHtml, chunks } = renderPage();
@@ -14,16 +12,19 @@ export default class extends Document {
     <html lang="en">
       <Head>
         <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-        />
-        <script
           dangerouslySetInnerHTML={{
             __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_TRACKING_ID}');
+(function(f, a, t, h, o, m){
+  a[h]=a[h]||function(){
+    (a[h].q=a[h].q||[]).push(arguments)
+  };
+  o=f.createElement('script'),
+  m=f.getElementsByTagName('script')[0];
+  o.async=1; o.src=t; o.id='fathom-script';
+  m.parentNode.insertBefore(o,m)
+})(document, window, '//fathom.nathfreder.dev/tracker.js', 'fathom');
+fathom('set', 'siteId', 'OCHDV');
+fathom('trackPageview');
             `,
           }}
         />

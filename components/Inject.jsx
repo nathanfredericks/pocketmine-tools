@@ -5,7 +5,6 @@ import { Form, InputGroup, Button, Badge, Modal, Alert } from 'react-bootstrap';
 import * as PHAR from 'phar';
 import yaml from 'yaml-js';
 import { saveAs } from 'file-saver';
-import * as gtag from '../utils/gtag';
 
 const getFileExtension = (name) =>
   name.slice((Math.max(0, name.lastIndexOf('.')) || Infinity) + 1);
@@ -41,12 +40,6 @@ export default class extends Component {
       replaceStrictTypes,
       // warningRead,
     } = this.state;
-
-    gtag.event({
-      action: 'inject',
-      category: 'Plugin',
-      label: files[0].name,
-    });
 
     const reader = new FileReader();
 
