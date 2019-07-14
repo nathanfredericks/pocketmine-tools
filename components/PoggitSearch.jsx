@@ -10,15 +10,8 @@ import {
 } from 'react-instantsearch-dom';
 import './PoggitSearch.scss';
 import SemverJS from '@brunorb/semverjs';
-import * as gtag from '../utils/gtag';
 
 export default class extends Component {
-  componentDidMount = () => {
-    gtag.event({
-      action: 'search',
-    });
-  }
-
   render = () => {
     const searchClient = algoliasearch(
       'XI77W278IB',
