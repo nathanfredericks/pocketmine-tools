@@ -22,7 +22,10 @@ export default () => (
               API Injector
             </ListGroup.Item>
             <ListGroup.Item action href="#poggit-search">
-              Poggit Search <Badge variant="warning">New</Badge>
+              Poggit Search
+            </ListGroup.Item>
+            <ListGroup.Item action href="#motd-generator">
+              MOTD Generator <Badge variant="warning">New</Badge>
             </ListGroup.Item>
             <ListGroup.Item action disabled>
               Crashdump Parser
@@ -42,6 +45,9 @@ export default () => (
             </Tab.Pane>
             <Tab.Pane eventKey="#poggit-search">
               <PoggitSearch />
+            </Tab.Pane>
+            <Tab.Pane eventKey="#motd-generator">
+              <iframe width="100%" height="500px" frameBorder="0" src="https://motd-generator.nathfreder.dev/" title="MOTD Generator" />
             </Tab.Pane>
           </Tab.Content>
         </Col>
