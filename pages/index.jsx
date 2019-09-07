@@ -25,7 +25,7 @@ export default () => (
               Poggit Search
             </ListGroup.Item>
             <ListGroup.Item action href="#motd-generator">
-              MOTD Generator <Badge variant="warning">New</Badge>
+              MOTD Generator
             </ListGroup.Item>
             <ListGroup.Item action disabled>
               Crashdump Parser
