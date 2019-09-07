@@ -5,6 +5,7 @@ import Extract from '../components/Extract';
 import Create from '../components/Create';
 import Inject from '../components/Inject';
 import PoggitSearch from '../components/PoggitSearch';
+import CrashdumpParser from '../components/CrashdumpParser';
 
 export default () => (
   <Layout>
@@ -27,7 +28,7 @@ export default () => (
             <ListGroup.Item action href="#motd-generator">
               MOTD Generator
             </ListGroup.Item>
-            <ListGroup.Item action disabled>
+            <ListGroup.Item action href="#crashdump-parser">
               Crashdump Parser
             </ListGroup.Item>
           </ListGroup>
@@ -48,6 +49,9 @@ export default () => (
             </Tab.Pane>
             <Tab.Pane eventKey="#motd-generator">
               <iframe width="100%" height="500px" frameBorder="0" src="https://motd-generator.nathfreder.dev/" title="MOTD Generator" />
+            </Tab.Pane>
+            <Tab.Pane eventKey="#crashdump-parser">
+              <CrashdumpParser />
             </Tab.Pane>
           </Tab.Content>
         </Col>
