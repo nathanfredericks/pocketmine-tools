@@ -35,15 +35,6 @@ const Layout = ({ title, children }) => (
             Discord
           </Nav.Link>
         </Nav>
-        <Nav className="ml-auto">
-          <Button
-            variant="outline-primary"
-            href="https://paypal.me/nathfreder"
-            target="_blank"
-          >
-            Donate via PayPal
-          </Button>
-        </Nav>
       </Navbar.Collapse>
     </Navbar>
     <Container className="mt-4">{children}</Container>
