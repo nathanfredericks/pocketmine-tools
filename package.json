@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@brunorb/semverjs": "^1.0.4",
+    "@prettier/plugin-php": "^0.11.2",
     "@zeit/next-sass": "^1.0.1",
     "algoliasearch": "^3.35.1",
     "bootstrap": "4.4",
@@ -46,6 +47,6 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
-    "prettier": "^1.18.2"
+    "prettier": "^1.19.1"
   }
 }
