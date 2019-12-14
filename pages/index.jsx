@@ -6,6 +6,7 @@ import Create from '../components/Create';
 import Inject from '../components/Inject';
 import PoggitSearch from '../components/PoggitSearch';
 import CrashdumpParser from '../components/CrashdumpParser';
+import PMFDecoder from '../components/PMFDecoder';
 
 export default class extends Component {
   state = {
@@ -50,6 +51,9 @@ export default class extends Component {
               <ListGroup.Item action href="#crashdump-parser">
                 Crashdump Parser
               </ListGroup.Item>
+              <ListGroup.Item action href="#pmf-decoder">
+                <code>.pmf</code> Decoder
+              </ListGroup.Item>
             </ListGroup>
           </Col>
           <Col md={9}>
@@ -71,6 +75,9 @@ export default class extends Component {
               </Tab.Pane>
               <Tab.Pane eventKey="#crashdump-parser">
                 <CrashdumpParser />
+              </Tab.Pane>
+              <Tab.Pane eventKey="#pmf-decoder">
+                <PMFDecoder />
               </Tab.Pane>
             </Tab.Content>
           </Col>
