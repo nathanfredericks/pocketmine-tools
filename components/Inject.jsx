@@ -167,7 +167,7 @@ export default class extends Component {
 
     return (
       <>
-        <Alert variant="danger">
+        <Alert variant="info">
           API Injector will be deprecated upon release of PocketMine-MP v4.0
         </Alert>
         <Form>
