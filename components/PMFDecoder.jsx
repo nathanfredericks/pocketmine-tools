@@ -1,14 +1,16 @@
 /* global FileReader, Blob */
 import React, { Component } from 'react';
 import { Form, InputGroup, Button, Alert } from 'react-bootstrap';
-import * as PHAR from 'phar';
+import prettier from 'prettier/standalone';
+import PhpPlugin from '@prettier/plugin-php/standalone';
 import { saveAs } from 'file-saver';
 
 export default class extends Component {
   state = {
     files: [],
     loading: false,
-    error: null
+    error: null,
+    beautifyCode: true
   };
 
   handleFileChange = (event) => {
@@ -26,7 +28,7 @@ export default class extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { files } = this.state;
+    const { files, beautifyCode } = this.state;
     this.setState({
       loading: true,
       error: false
@@ -51,8 +53,18 @@ export default class extends Component {
     }
 
     const json = await response.json()
+    let plugin = { ...json }
+    plugin.code = `<?php ${plugin.code}`
+    
+    if (beautifyCode) {
+      plugin.code = prettier.format(plugin.code, {
+        plugins: [PhpPlugin],
+        parser: 'php'
+      })
+    }
+
     saveAs(
-      new Blob([`<?php ${json.code}`]),
+      new Blob([plugin.code]),
       `${files[0].name
         .split('.')
         .slice(0, -1)
@@ -61,7 +73,7 @@ export default class extends Component {
   };
 
   render = () => {
-    const { files, loading, error } = this.state;
+    const { files, loading, error, beautifyCode, includeMetadata } = this.state;
 
     return (
       <>
@@ -82,6 +94,25 @@ export default class extends Component {
               </Form.Label>
             </div>
           </InputGroup>
+          <div className="mb-3">
+            <div className="custom-control custom-switch">
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id="beautifyCode"
+                checked={beautifyCode}
+                onChange={(event) =>
+                  this.setState({ beautifyCode: event.target.checked })
+                }
+              />
+              <label
+                className="custom-control-label"
+                htmlFor="beautifyCode"
+              >
+                Beautify code
+              </label>
+            </div>
+          </div>
           <Button variant="secondary" type="submit" disabled={files.length < 1} disabled={loading}>
             {loading ? <span className="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"></span> : null}
             Decode
