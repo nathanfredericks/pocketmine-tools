@@ -7,6 +7,8 @@ import { saveAs } from 'file-saver';
 export default class extends Component {
   state = {
     files: [],
+    loading: false,
+    error: null
   };
 
   handleFileChange = (event) => {
@@ -24,7 +26,11 @@ export default class extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { files, stub } = this.state;
+    const { files } = this.state;
+    this.setState({
+      loading: true,
+      error: false
+    })
 
     const formData = new FormData();
     formData.append('fileToUpload', files[0]);
@@ -34,28 +40,32 @@ export default class extends Component {
         body: formData
     });
 
+    this.setState({
+      loading: false
+    })
+
     if (response.headers.get('Content-Type') !== 'application/json') {
-      alert(await response.text())
-    } else {
-      const json = await response.json()
-      saveAs(
-        new Blob([json.code], {
-          type: 'text/x-php',
-        }),
-        `${files[0].name
-          .split('.')
-          .slice(0, -1)
-          .join('.')}.php`,
-      );
+      return this.setState({
+        error: await response.text()
+      })
     }
+
+    const json = await response.json()
+    saveAs(
+      new Blob([`<?php ${json.code}`]),
+      `${files[0].name
+        .split('.')
+        .slice(0, -1)
+        .join('.')}.php`,
+    );
   };
 
   render = () => {
-    const { files } = this.state;
+    const { files, loading, error } = this.state;
 
     return (
       <>
-        <Alert variant="warning">Your plugin will sent to https://pmf-decoder.azurewebsites.net and stored temporarily.</Alert>
+        {error ? <Alert variant="danger">{error}</Alert> : null}
         <Form onSubmit={this.handleSubmit}>
           <Form.Label>Plugin</Form.Label>
           <InputGroup className="mb-3">
@@ -72,9 +82,11 @@ export default class extends Component {
               </Form.Label>
             </div>
           </InputGroup>
-          <Button variant="secondary" type="submit" disabled={files.length < 1}>
+          <Button variant="secondary" type="submit" disabled={files.length < 1} disabled={loading}>
+            {loading ? <span className="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"></span> : null}
             Decode
           </Button>
+          <small className="text-muted"><br />Your plugin will be uploaded to <a>https://pmf-decoder.azurewebsites.net</a> and stored temporarily.</small>
         </Form>
       </>
     );
