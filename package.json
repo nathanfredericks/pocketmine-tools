@@ -25,7 +25,7 @@
     "@brunorb/semverjs": "^1.0.4",
     "@zeit/next-sass": "^1.0.1",
     "algoliasearch": "^3.35.1",
-    "bootstrap": "^4.3.1",
+    "bootstrap": "4.4",
     "file-saver": "^2.0.2",
     "next": "^9.1.2",
     "node-sass": "^4.13.0",
