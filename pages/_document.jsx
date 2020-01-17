@@ -33,7 +33,7 @@ export default class extends Document {
         <Main />
         <NextScript />
          <script async defer src="https://cdn.simpleanalytics.io/hello.js"></script>
-         <noscript><img src="https://api.simpleanalytics.io/hello.gif" alt=""></noscript> 
+         <noscript><img src="https://api.simpleanalytics.io/hello.gif" alt=""/></noscript> 
       </body>
     </html>
   );
