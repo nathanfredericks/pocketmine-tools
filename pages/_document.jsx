@@ -10,12 +10,8 @@ export default class extends Document {
 
   render = () => (
     <html lang="en">
-      <body>
-        <Main />
-        <NextScript />
-        <noscript><img src="https://api.simpleanalytics.io/hello.gif" alt=""/></noscript> 
+      <Head>
         <script data-skip-dnt="true" async defer src="https://cdn.simpleanalytics.io/hello.js"></script>
-        <script src="https://app.codefund.io/properties/601/funder.js" async="async"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -33,6 +29,15 @@ export default class extends Document {
             `,
           }}
         />
+        <script
+          src="https://app.codefund.io/properties/601/funder.js"
+          async="async"
+        ></script>
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+        <noscript><img src="https://api.simpleanalytics.io/hello.gif" alt=""/></noscript> 
       </body>
     </html>
   );
