@@ -19,6 +19,8 @@ const Layout = ({ title, children }) => (
         content="PocketMine,PocketMine Tools,PMT,pmt.mcpe.fun"
       />
       <meta name="author" content="Nathaniel Fredericks" />
+      <meta name="theme-color" content="#eeeeee" />
+      <meta property="og:image" content="/static/logo.png" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <Navbar bg="light" expand="lg">
