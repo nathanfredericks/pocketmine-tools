@@ -54,6 +54,7 @@ export default class extends Component {
               <ListGroup.Item action href="#pmf-decoder">
                 <code>.pmf</code> Decoder
               </ListGroup.Item>
+              <div id="codefund"></div>
             </ListGroup>
           </Col>
           <Col md={9}>
@@ -79,7 +80,6 @@ export default class extends Component {
               <Tab.Pane eventKey="#pmf-decoder">
                 <PMFDecoder />
               </Tab.Pane>
-              <div id="codefund"></div>
             </Tab.Content>
           </Col>
         </Row>
