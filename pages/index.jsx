@@ -79,13 +79,8 @@ export default class extends Component {
               <Tab.Pane eventKey="#pmf-decoder">
                 <PMFDecoder />
               </Tab.Pane>
+              <div id="codefund"></div>
             </Tab.Content>
-            
-            <div id="codefund"></div>
-            <script
-              src="https://app.codefund.io/properties/601/funder.js"
-              async="async"
-            ></script>
           </Col>
         </Row>
       </Tab.Container>
