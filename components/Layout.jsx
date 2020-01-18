@@ -25,13 +25,23 @@ const Layout = ({ title, children }) => (
     </Head>
     <Navbar bg="light" expand="lg">
       <Link href="/">
-        <Navbar.Brand>PocketMine Tools</Navbar.Brand>
+        <Navbar.Brand>
+        <img
+        alt=""
+        src="/static/logo.png"
+        width="30"
+        height="30"
+        className="d-inline-block align-top"
+      />{' '}
+        PocketMine Tools
+
+        </Navbar.Brand>
       </Link>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
+      <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
         <Nav className="mr-auto">
           <Link href="/">
-            <Nav.Link active>Home</Nav.Link>
+            <Nav.Link href="https://github.com/pmt-mcpe-fun/website">Github</Nav.Link>
           </Link>
           <Nav.Link href="https://discord.gg/qPqrKAF" target="_blank">
             Discord
