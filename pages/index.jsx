@@ -57,7 +57,7 @@ export default class extends Component {
               <div className="mt-3" id="codefund"></div>
             </ListGroup>
           </Col>
-          <Col md={9}>
+          <Col md={9} className="mb-3">
             <Tab.Content>
               <Tab.Pane eventKey="#create">
                 <Create />
