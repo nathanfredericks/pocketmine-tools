@@ -30,6 +30,13 @@ export default class extends Document {
           }}
         />
         <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.$crisp=[];window.CRISP_WEBSITE_ID="96b59b3c-f459-4317-a7f3-fcb7f2399a33";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
+            `,
+          }}
+        />
+        <script
           src="https://app.codefund.io/properties/601/funder.js"
           async="async"
         ></script>
