@@ -12,7 +12,7 @@ const Layout = ({ title, children }) => (
       <meta charSet="utf-8" />
       <meta
         name="description"
-        content="Create and extract PocketMine plugins online."
+        content="Create and extract PocketMine plugins online"
       />
       <meta
         name="keywords"
@@ -26,23 +26,16 @@ const Layout = ({ title, children }) => (
     <Navbar bg="light" expand="lg">
       <Link href="/">
         <Navbar.Brand>
-        <img
-        alt=""
-        src="/static/logo.png"
-        width="30"
-        height="30"
-        className="d-inline-block align-top"
-      />{' '}
-        PocketMine Tools
-
+          <img alt="" src="/static/logo.png" width="30" height="30" className="d-inline-block align-top" />{' '}
+          PocketMine Tools
         </Navbar.Brand>
       </Link>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
         <Nav className="mr-auto">
-          <Link href="/">
-            <Nav.Link href="https://github.com/pmt-mcpe-fun/website">Github</Nav.Link>
-          </Link>
+          <Nav.Link href="https://github.com/pmt-mcpe-fun/website" target="_blank">
+            GitHub
+          </Nav.Link>
           <Nav.Link href="https://discord.gg/qPqrKAF" target="_blank">
             Discord
           </Nav.Link>
