@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const Layout = ({ title, children }) => {
-  const router = useRouter()
-  const isActive = (routes) => routes.includes(router.pathname) ? true : false
+  const router = useRouter();
+  const isActive = (routes) => (!!routes.includes(router.pathname));
 
   return (
     <>
@@ -81,7 +81,7 @@ const Layout = ({ title, children }) => {
       </Container>
     </>
   );
-}
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

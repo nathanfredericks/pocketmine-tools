@@ -44,7 +44,7 @@ export default class extends Component {
           .join('.')}.zip`,
       );
 
-      sa('extract_phar')
+      sa('extract_phar');
     };
 
     reader.readAsArrayBuffer(files[0]);

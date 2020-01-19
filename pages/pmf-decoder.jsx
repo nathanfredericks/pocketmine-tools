@@ -11,7 +11,7 @@ export default class extends Component {
     files: [],
     loading: false,
     error: null,
-    beautifyCode: true
+    beautifyCode: true,
   };
 
   handleFileChange = (event) => {
@@ -32,36 +32,36 @@ export default class extends Component {
     const { files, beautifyCode } = this.state;
     this.setState({
       loading: true,
-      error: false
-    })
+      error: false,
+    });
 
     const formData = new FormData();
     formData.append('fileToUpload', files[0]);
-  
+
     const response = await fetch('https://pmf-decoder.azurewebsites.net/', {
-        method: 'POST',
-        body: formData
+      method: 'POST',
+      body: formData,
     });
 
     this.setState({
-      loading: false
-    })
+      loading: false,
+    });
 
     if (response.headers.get('Content-Type') !== 'application/json') {
       return this.setState({
-        error: await response.text()
-      })
+        error: await response.text(),
+      });
     }
 
-    const json = await response.json()
-    let plugin = { ...json }
-    plugin.code = `<?php ${plugin.code}`
-    
+    const json = await response.json();
+    const plugin = { ...json };
+    plugin.code = `<?php ${plugin.code}`;
+
     if (beautifyCode) {
       plugin.code = prettier.format(plugin.code, {
         plugins: [PhpPlugin],
-        parser: 'php'
-      })
+        parser: 'php',
+      });
     }
 
     saveAs(
@@ -72,7 +72,7 @@ export default class extends Component {
         .join('.')}.php`,
     );
 
-    sa('decode_pmf')
+    sa('decode_pmf');
   };
 
   render = () => {
@@ -104,9 +104,7 @@ export default class extends Component {
                 className="custom-control-input"
                 id="beautifyCode"
                 checked={beautifyCode}
-                onChange={(event) =>
-                  this.setState({ beautifyCode: event.target.checked })
-                }
+                onChange={(event) => this.setState({ beautifyCode: event.target.checked })}
               />
               <label
                 className="custom-control-label"
@@ -117,7 +115,7 @@ export default class extends Component {
             </div>
           </div>
           <Button variant="secondary" type="submit" disabled={files.length < 1} disabled={loading}>
-            {loading ? <span className="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"></span> : null}
+            {loading ? <span className="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true" /> : null}
             Decode
           </Button>
           <small className="text-muted"><br />Your plugin will be uploaded to <a>https://pmf-decoder.azurewebsites.net</a> and stored temporarily.</small>
