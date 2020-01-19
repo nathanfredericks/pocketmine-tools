@@ -1,34 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Navbar, Nav, Tab, Row, Col, ListGroup } from 'react-bootstrap';
+import {
+  Container,
+  Navbar,
+  Nav,
+  Tab,
+  Row,
+  Col,
+  ListGroup,
+} from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const Layout = ({ title, children }) => {
   const router = useRouter();
-  const isActive = (routes) => (!!routes.includes(router.pathname));
+  const isActive = (routes) => !!routes.includes(router.pathname);
 
   return (
     <>
-      <Navbar bg="light" expand="lg">
-        <Link href="/">
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Container>
           <Navbar.Brand>
-            <img alt="" src="/static/logo.png" width="30" height="30" className="d-inline-block align-top" />{' '}
+            <img
+              alt=""
+              src="/static/logo.png"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}
             PocketMine Tools
           </Navbar.Brand>
-        </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-          <Nav className="mr-auto">
-            <Nav.Link href="https://github.com/pmt-mcpe-fun/website" target="_blank">
-              GitHub
-            </Nav.Link>
-            <Nav.Link href="https://discord.gg/qPqrKAF" target="_blank">
-              Discord
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
+          <Navbar.Toggle />
+          <Navbar.Collapse className="justify-content-end">
+            <Nav>
+              <Nav.Link href="https://discord.gg/qPqrKAF" target="_blank">
+                Discord
+              </Nav.Link>
+
+              <Nav.Link
+                href="https://github.com/pmt-mcpe-fun/website"
+                target="_blank"
+              >
+                GitHub
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
       </Navbar>
+
       <Container className="mt-4">
         <Tab.Container>
           <Row>
@@ -72,9 +91,7 @@ const Layout = ({ title, children }) => {
               </ListGroup>
             </Col>
             <Col md={9} className="mb-3">
-              <Tab.Content>
-                {children}
-              </Tab.Content>
+              <Tab.Content>{children}</Tab.Content>
             </Col>
           </Row>
         </Tab.Container>
