@@ -150,7 +150,7 @@ export default class extends Component {
         warningThreeWords: false,
       });
 
-      sa('inject')
+      sa('inject');
     };
 
     reader.readAsArrayBuffer(files[0]);
@@ -195,8 +195,7 @@ export default class extends Component {
               type="text"
               value={apiVersion}
               onChange={(event) =>
-                this.setState({ apiVersion: event.target.value })
-              }
+                this.setState({ apiVersion: event.target.value })}
             />
           </Form.Group>
           <div className="mb-3">
@@ -207,8 +206,7 @@ export default class extends Component {
                 id="replaceStrictTypes"
                 checked={replaceStrictTypes}
                 onChange={(event) =>
-                  this.setState({ replaceStrictTypes: event.target.checked })
-                }
+                  this.setState({ replaceStrictTypes: event.target.checked })}
               />
               <label
                 className="custom-control-label"
@@ -225,8 +223,7 @@ export default class extends Component {
                 id="protocolReplace"
                 checked={protocolReplace}
                 onChange={(event) =>
-                  this.setState({ protocolReplace: event.target.checked })
-                }
+                  this.setState({ protocolReplace: event.target.checked })}
               />
               <label className="custom-control-label" htmlFor="protocolReplace">
                 Replace protocol{' '}
@@ -240,8 +237,7 @@ export default class extends Component {
                 id="replaceNbtTags"
                 checked={replaceNbtTags}
                 onChange={(event) =>
-                  this.setState({ replaceNbtTags: event.target.checked })
-                }
+                  this.setState({ replaceNbtTags: event.target.checked })}
               />
               <label className="custom-control-label" htmlFor="replaceNbtTags">
                 Replace NBT tags <Badge variant="light">1.0.0 to 2.0.0</Badge>
@@ -254,8 +250,7 @@ export default class extends Component {
                 id="fixEntityActorNames"
                 checked={fixEntityActorNames}
                 onChange={(event) =>
-                  this.setState({ fixEntityActorNames: event.target.checked })
-                }
+                  this.setState({ fixEntityActorNames: event.target.checked })}
               />
               <label className="custom-control-label" htmlFor="fixEntityActorNames">
                 Change <code>Entity</code> to <code>Actor</code> <Badge variant="light">3.8.7 to 3.9.0</Badge> <Badge variant="warning">New</Badge>
@@ -268,8 +263,7 @@ export default class extends Component {
             onClick={() =>
               this.setState({
                 warningModal: true,
-              })
-            }
+              })}
             disabled={files.length < 1 || apiVersion.length < 1}
           >
             Inject

@@ -3,6 +3,6 @@ import Create from './create';
 
 export default class extends Component {
   render = () => (
-    <Create/>
+    <Create />
   );
 }

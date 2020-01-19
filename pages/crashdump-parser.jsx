@@ -15,29 +15,29 @@ export default class extends Component {
     let crashdump = event.target.value;
     crashdump = crashdump.replace(
       '----------------------REPORT THE DATA BELOW THIS LINE-----------------------',
-      ''
+      '',
     );
     crashdump = crashdump.replace('===BEGIN CRASH DUMP===', '');
     crashdump = crashdump.replace('===END CRASH DUMP===', '');
-    
+
     try {
       const decodedBase64 = atob(crashdump);
       const inflatedZlib = pako.inflate(decodedBase64);
       const decodedCrashdump = new encoding.TextDecoder('utf-8').decode(inflatedZlib);
       let parsedJson = JSON.parse(decodedCrashdump);
-      parsedJson = JSON.stringify(parsedJson, null, 2)
+      parsedJson = JSON.stringify(parsedJson, null, 2);
 
-      sa('parse_crashdump')
+      sa('parse_crashdump');
       return this.setState({
         parsedJson,
-      }); 
+      });
     } catch {}
   };
 
   saveCrashdump = () => {
-    const blob = new Blob([this.state.parsedJson], {type: 'application/json;charset=utf-8'});
+    const blob = new Blob([this.state.parsedJson], { type: 'application/json;charset=utf-8' });
     saveAs(blob, 'crashdump.json');
-    sa('save_crashdump')
+    sa('save_crashdump');
   }
 
   render = () => {
@@ -57,7 +57,7 @@ export default class extends Component {
             </Form.Group>
             <Button variant="secondary" onClick={this.saveCrashdump}>Download</Button>
           </>
-         ) : null} 
+        ) : null}
       </Layout>
     );
   };

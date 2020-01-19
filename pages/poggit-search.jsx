@@ -6,7 +6,7 @@ import {
   Hits,
   Highlight,
   connectSearchBox,
-  connectStateResults
+  connectStateResults,
 } from 'react-instantsearch-dom';
 import './poggit-search.scss';
 import SemverJS from '@brunorb/semverjs';
@@ -26,7 +26,7 @@ export default class extends Component {
           searchClient={searchClient}
         >
           <CustomSearchBox />
-          <Content></Content>
+          <Content />
           <Hits hitComponent={Hit} />
         </InstantSearch>
       </Layout>
@@ -47,12 +47,13 @@ const SearchBox = ({ currentRefinement, refine }) => (
 const CustomSearchBox = connectSearchBox(SearchBox);
 
 const Content = connectStateResults(
-  ({ searchState, searchResults }) =>
-    searchResults && searchResults.nbHits !== 0
-      ? null
-      : <div>
+  ({ searchState, searchResults }) => (searchResults && searchResults.nbHits !== 0
+    ? null
+    : (
+      <div>
           No plugins were found matching <em>{searchState.query}</em>
-        </div>
+      </div>
+    )),
 );
 
 
@@ -64,7 +65,7 @@ const Hit = ({ hit }) => {
           <Card.Body>
             <a href={`https://poggit.pmmp.io/p/${hit.project_name}`}>
               <Card.Title>
-       
+
                 <Highlight attribute="name" tagName="mark" hit={hit} />
                 <Badge variant="light">{hit.api[0].from}</Badge>
               </Card.Title>
@@ -75,10 +76,8 @@ const Hit = ({ hit }) => {
           </Card.Body>
         </Card>
       );
-    } else {
-      return null;
     }
-  } else {
     return null;
   }
+  return null;
 };
