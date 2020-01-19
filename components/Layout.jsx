@@ -17,8 +17,8 @@ const Layout = ({ title, children }) => {
             PocketMine Tools
           </Navbar.Brand>
         </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className="justify-content-end" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className="mr-auto">
             <Nav.Link href="https://github.com/pmt-mcpe-fun/website" target="_blank">
               GitHub
@@ -33,16 +33,6 @@ const Layout = ({ title, children }) => {
         <Tab.Container>
           <Row>
             <Col md={3} className="mb-4">
-
-      <Nav variant="pills" className="flex-column">
-        <Nav.Item>
-          <Nav.Link href="/create">Tab 1</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/extract">Tab 2</Nav.Link>
-        </Nav.Item>
-      </Nav>
-
               <ListGroup>
                 <Link href="/create">
                   <ListGroup.Item active={isActive(['/', '/create'])}>
