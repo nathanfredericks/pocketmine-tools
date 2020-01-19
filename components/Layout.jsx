@@ -65,7 +65,7 @@ const Layout = ({ title, children }) => {
                   </ListGroup.Item>
                 </Link>
                 <Link href="/pmf-decoder">
-                  <ListGroup.Item active={isActive(['/pmt-decoder'])}>
+                  <ListGroup.Item active={isActive(['/pmf-decoder'])}>
                     <code>.pmf</code> Decoder
                   </ListGroup.Item>
                 </Link>
