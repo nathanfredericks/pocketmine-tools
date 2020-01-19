@@ -1,9 +1,10 @@
-/* global FileReader, Blob */
+/* global FileReader, Blob, sa */
 import React, { Component } from 'react';
 import { Form, InputGroup, Button, Alert } from 'react-bootstrap';
 import prettier from 'prettier/standalone';
 import PhpPlugin from '@prettier/plugin-php/standalone';
 import { saveAs } from 'file-saver';
+import Layout from '../components/Layout';
 
 export default class extends Component {
   state = {
@@ -70,13 +71,15 @@ export default class extends Component {
         .slice(0, -1)
         .join('.')}.php`,
     );
+
+    sa('decode_pmf')
   };
 
   render = () => {
     const { files, loading, error, beautifyCode, includeMetadata } = this.state;
 
     return (
-      <>
+      <Layout>
         {error ? <Alert variant="danger">{error}</Alert> : null}
         <Form onSubmit={this.handleSubmit}>
           <Form.Label>Plugin</Form.Label>
@@ -119,7 +122,7 @@ export default class extends Component {
           </Button>
           <small className="text-muted"><br />Your plugin will be uploaded to <a>https://pmf-decoder.azurewebsites.net</a> and stored temporarily.</small>
         </Form>
-      </>
+      </Layout>
     );
   };
 }

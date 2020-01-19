@@ -1,8 +1,10 @@
+/* global sa */
 import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import pako from 'pako';
 import encoding from 'text-encoding';
 import { saveAs } from 'file-saver';
+import Layout from '../components/Layout';
 
 export default class extends Component {
   state = {
@@ -25,6 +27,7 @@ export default class extends Component {
       let parsedJson = JSON.parse(decodedCrashdump);
       parsedJson = JSON.stringify(parsedJson, null, 2)
 
+      sa('parse_crashdump')
       return this.setState({
         parsedJson,
       }); 
@@ -34,13 +37,14 @@ export default class extends Component {
   saveCrashdump = () => {
     const blob = new Blob([this.state.parsedJson], {type: 'application/json;charset=utf-8'});
     saveAs(blob, 'crashdump.json');
+    sa('save_crashdump')
   }
 
   render = () => {
     const { parsedJson } = this.state;
 
     return (
-      <>
+      <Layout>
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Label>Crashdump</Form.Label>
           <Form.Control as="textarea" rows="3" onChange={this.handleChange} />
@@ -54,7 +58,7 @@ export default class extends Component {
             <Button variant="secondary" onClick={this.saveCrashdump}>Download</Button>
           </>
          ) : null} 
-      </>
+      </Layout>
     );
   };
 }
