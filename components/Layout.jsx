@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Head from 'next/head';
 import { Container, Navbar, Nav, Tab, Row, Col, ListGroup } from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import 'bootstrap/scss/bootstrap.scss';
 
 const Layout = ({ title, children }) => {
   const router = useRouter()
@@ -12,22 +10,6 @@ const Layout = ({ title, children }) => {
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta charSet="utf-8" />
-        <meta
-          name="description"
-          content="Create and extract PocketMine plugins online"
-        />
-        <meta
-          name="keywords"
-          content="PocketMine,PocketMine Tools,PMT,pmt.mcpe.fun"
-        />
-        <meta name="author" content="Nathaniel Fredericks" />
-        <meta name="theme-color" content="#eeeeee" />
-        <meta property="og:image" content="/static/logo.png" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
       <Navbar bg="light" expand="lg">
         <Link href="/">
           <Navbar.Brand>
@@ -104,10 +86,6 @@ const Layout = ({ title, children }) => {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string,
-};
-
-Layout.defaultProps = {
-  title: 'PocketMine Tools',
 };
 
 export default Layout;
