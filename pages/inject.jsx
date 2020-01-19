@@ -1,3 +1,4 @@
+/* global sa */
 /* eslint-disable no-param-reassign */
 /* eslint-disable implicit-arrow-linebreak */
 import React, { Component } from 'react';
@@ -5,6 +6,7 @@ import { Form, InputGroup, Button, Badge, Modal, Alert } from 'react-bootstrap';
 import * as PHAR from 'phar';
 import yaml from 'yaml-js';
 import { saveAs } from 'file-saver';
+import Layout from '../components/Layout';
 
 const getFileExtension = (name) =>
   name.slice((Math.max(0, name.lastIndexOf('.')) || Infinity) + 1);
@@ -147,6 +149,8 @@ export default class extends Component {
         warningRead: false,
         warningThreeWords: false,
       });
+
+      sa('inject')
     };
 
     reader.readAsArrayBuffer(files[0]);
@@ -166,7 +170,7 @@ export default class extends Component {
     } = this.state;
 
     return (
-      <>
+      <Layout>
         <Alert variant="info">
           API Injector will be deprecated upon release of PocketMine-MP v4.0
         </Alert>
@@ -317,7 +321,7 @@ export default class extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-      </>
+      </Layout>
     );
   };
 }

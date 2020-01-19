@@ -8,8 +8,9 @@ import {
   connectSearchBox,
   connectStateResults
 } from 'react-instantsearch-dom';
-import './PoggitSearch.scss';
+import './poggit-search.scss';
 import SemverJS from '@brunorb/semverjs';
+import Layout from '../components/Layout';
 
 export default class extends Component {
   render = () => {
@@ -19,7 +20,7 @@ export default class extends Component {
     );
 
     return (
-      <>
+      <Layout>
         <InstantSearch
           indexName="prod_POGGIT_SEARCH"
           searchClient={searchClient}
@@ -28,7 +29,7 @@ export default class extends Component {
           <Content></Content>
           <Hits hitComponent={Hit} />
         </InstantSearch>
-      </>
+      </Layout>
     );
   };
 }
