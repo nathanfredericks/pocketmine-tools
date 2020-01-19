@@ -1,15 +1,30 @@
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 export default class extends Document {
-  static getInitialProps({ renderPage }) {
-    const { html, head, errorHtml, chunks } = renderPage();
-
-    return { html, head, errorHtml, chunks };
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx)
+    return { ...initialProps }
   }
 
   render = () => (
-    <html lang="en">
+    <Html>
+      <Head>
+        <title>PocketMine Tools</title>
+        <meta charSet="utf-8" />
+        <meta
+          name="description"
+          content="Create and extract PocketMine plugins online"
+        />
+        <meta
+          name="keywords"
+          content="PocketMine,PocketMine Tools,PMT,pmt.mcpe.fun"
+        />
+        <meta name="author" content="Nathaniel Fredericks" />
+        <meta name="theme-color" content="#eeeeee" />
+        <meta property="og:image" content="/static/logo.png" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <body>
         <Main />
         <NextScript />
@@ -35,6 +50,6 @@ export default class extends Document {
         <script data-skip-dnt="true" async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
         <noscript><img src="https://api.simpleanalytics.io/hello.gif" alt=""/></noscript> 
       </body>
-    </html>
+    </Html>
   );
 }
