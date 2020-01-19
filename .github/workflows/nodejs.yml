@@ -20,6 +20,8 @@ jobs:
         yarn build
         yarn export
         touch ./out/.nojekyll
+        touch ./out/CNAME
+        echo 'pmt.nathfreder.dev' > ./out/CNAME
     - name: deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v2
       env:
