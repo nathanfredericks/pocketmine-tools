@@ -18,6 +18,20 @@ const Layout = ({ title, children }) => {
 
   return (
     <>
+      <style type="text/css">
+        {`
+      .list-group-item {
+         position: relative;
+         display: block;
+         padding: .75rem 1.25rem;
+         border: 1px solid;
+         border-color: black;
+         border-radius: 20px;
+         margin: 5px;
+      } 
+     `}
+      </style>
+
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
           <Navbar.Brand>
@@ -99,7 +113,6 @@ const Layout = ({ title, children }) => {
     </>
   );
 };
-
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string,
