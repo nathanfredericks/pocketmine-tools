@@ -52,7 +52,7 @@ const Layout = ({ title, children }) => {
         <Tab.Container>
           <Row>
             <Col md={3} className="mb-4">
-              <ListGroup>
+              <ListGroup className="mb-2">
                 <Link href="/create">
                   <ListGroup.Item active={isActive(['/', '/create'])}>
                     <code>.phar</code> to <code>.zip</code>
