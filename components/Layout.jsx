@@ -63,6 +63,8 @@ const Layout = ({ title, children }) => {
                     <code>.zip</code> to <code>.phar</code>
                   </ListGroup.Item>
                 </Link>
+              </ListGroup>
+              <ListGroup>
                 <Link href="/inject">
                   <ListGroup.Item active={isActive(['/inject'])}>
                     API Updater
