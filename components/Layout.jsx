@@ -55,17 +55,17 @@ const Layout = ({ title, children }) => {
               <ListGroup>
                 <Link href="/create">
                   <ListGroup.Item active={isActive(['/', '/create'])}>
-                    Create <code>.phar</code>
+                    <code>.phar</code> to <code>.zip</code>
                   </ListGroup.Item>
                 </Link>
                 <Link href="/extract">
                   <ListGroup.Item active={isActive(['/extract'])}>
-                    Extract <code>.phar</code>
+                    <code>.zip</code> to <code>.phar</code>
                   </ListGroup.Item>
                 </Link>
                 <Link href="/inject">
                   <ListGroup.Item active={isActive(['/inject'])}>
-                    API Injector
+                    API Updater
                   </ListGroup.Item>
                 </Link>
                 <Link href="/poggit-search">
