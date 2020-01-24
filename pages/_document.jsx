@@ -10,7 +10,6 @@ export default class extends Document {
   render = () => (
     <Html>
       <Head>
-        <title>PocketMine Tools</title>
         <meta charSet="utf-8" />
         <meta
           name="description"
