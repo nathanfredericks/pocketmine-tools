@@ -26,8 +26,8 @@ const Layout = ({ title, children }) => {
               src="/static/logo.png"
               width="30"
               height="30"
-              className="d-inline-block align-top"
-            />{' '}
+              className="d-inline-block align-top rounded-circle mr-2"
+            />
             PocketMine Tools
           </Navbar.Brand>
           <Navbar.Toggle />
