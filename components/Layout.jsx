@@ -25,13 +25,13 @@ const Layout = ({ title, children }) => {
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
           <Navbar.Brand>
-            <img
+            {/* <img
               alt=""
               src="/static/logo.png"
               width="30"
               height="30"
               className="d-inline-block align-top rounded-circle mr-2"
-            />
+            /> */}
             PocketMine Tools
           </Navbar.Brand>
           <Navbar.Toggle />
