@@ -63,8 +63,6 @@ const Layout = ({ title, children }) => {
                     Extract <code>.phar</code>
                   </ListGroup.Item>
                 </Link>
-              </ListGroup>
-              <ListGroup>
                 <Link href="/inject">
                   <ListGroup.Item active={isActive(['/inject'])}>
                     API Injector
