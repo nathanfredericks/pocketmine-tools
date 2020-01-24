@@ -119,7 +119,7 @@ const Layout = ({ title, children }) => {
         <Modal.Header closeButton>
           <Modal.Title>Contact</Modal.Title>
         </Modal.Header>
-        <Form action="https://formsubmit.co/nathfreder@protonmail.com" method="POST" encType="multipart/form-data">
+        <Form action="https://formsubmit.co/8fb72175bd4d7c2d84762340807fc697" method="POST" encType="multipart/form-data">
           <Modal.Body>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
