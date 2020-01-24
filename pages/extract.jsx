@@ -54,7 +54,7 @@ export default class extends Component {
     const { files } = this.state;
 
     return (
-      <Layout>
+      <Layout title="Extract .phar">
         <Form onSubmit={this.handleSubmit}>
           <Form.Label>Plugin</Form.Label>
           <InputGroup className="mb-3">

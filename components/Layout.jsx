@@ -11,6 +11,7 @@ import {
 } from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const Layout = ({ title, children }) => {
   const router = useRouter();
@@ -18,6 +19,9 @@ const Layout = ({ title, children }) => {
 
   return (
     <>
+      <Head>
+        <title>{title ? `${title} | ` : null}PocketMine Tools</title>
+      </Head>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
           <Navbar.Brand>

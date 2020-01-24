@@ -79,7 +79,7 @@ export default class extends Component {
     const { files, loading, error, beautifyCode, includeMetadata } = this.state;
 
     return (
-      <Layout>
+      <Layout title="PMF Decoder">
         {error ? <Alert variant="danger">{error}</Alert> : null}
         <Form onSubmit={this.handleSubmit}>
           <Form.Label>Plugin</Form.Label>

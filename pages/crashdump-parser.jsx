@@ -44,7 +44,7 @@ export default class extends Component {
     const { parsedJson } = this.state;
 
     return (
-      <Layout>
+      <Layout title="Crashdump Parser">
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Label>Crashdump</Form.Label>
           <Form.Control as="textarea" rows="3" onChange={this.handleChange} />

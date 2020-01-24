@@ -20,7 +20,7 @@ export default class extends Component {
     );
 
     return (
-      <Layout>
+      <Layout title="Poggit Search">
         <InstantSearch
           indexName="prod_POGGIT_SEARCH"
           searchClient={searchClient}
