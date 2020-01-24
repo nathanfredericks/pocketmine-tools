@@ -65,8 +65,8 @@ export default class extends Component {
                 accept=".phar"
                 onChange={this.handleChange}
               />
-              <Form.Label className="custom-file-label">
-                {files[0] ? files[0].name : 'No phar selected.'}
+              <Form.Label className="custom-file-label" style={{ color: files[0] ? null : '#747c84' }}>
+                {files[0] ? files[0].name : 'No phar selected'}
               </Form.Label>
             </div>
           </InputGroup>

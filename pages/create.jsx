@@ -68,8 +68,8 @@ export default class extends Component {
                 accept=".zip"
                 onChange={this.handleFileChange}
               />
-              <Form.Label className="custom-file-label">
-                {files[0] ? files[0].name : 'No zip selected.'}
+              <Form.Label className="custom-file-label" style={{ color: files[0] ? null : '#747c84' }}>
+                {files[0] ? files[0].name : 'No zip selected'}
               </Form.Label>
             </div>
           </InputGroup>
