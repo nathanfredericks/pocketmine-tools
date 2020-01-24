@@ -125,21 +125,6 @@ const Layout = ({ title, children }) => {
               <Form.Label>Email address</Form.Label>
               <Form.Control type="email" name="email" placeholder="Your email" />
             </Form.Group>
-            <Form.Label>Attachment</Form.Label>
-            <InputGroup className="mb-3">
-              <div className="custom-file">
-                <Form.Control
-                  type="file"
-                  name="attachment"
-                  className="custom-file-input"
-                  accept=".zip,.phar"
-                  onChange={handleFileChange}
-                />
-                <Form.Label className="custom-file-label" style={{ color: files[0] ? null : '#747c84' }}>
-                  {files[0] ? files[0].name : 'No file selected'}
-                </Form.Label>
-              </div>
-            </InputGroup>
             <Form.Group controlId="exampleForm.ControlTextarea1">
               <Form.Label>Message</Form.Label>
               <Form.Control as="textarea" rows="3" name="message" />
