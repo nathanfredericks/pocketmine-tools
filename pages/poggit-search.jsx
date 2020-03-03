@@ -67,7 +67,7 @@ const Hit = ({ hit }) => {
               <Card.Title>
 
                 <Highlight attribute="name" tagName="mark" hit={hit} />
-                <Badge variant="light">{hit.api[0].from}</Badge>
+                <Badge variant="light">{hit.api[0].from}-{hit.api[0].to}</Badge>
               </Card.Title>
             </a>
             <Card.Text>
