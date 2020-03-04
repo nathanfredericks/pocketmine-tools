@@ -34,8 +34,8 @@ export default class extends Document {
             `,
           }}
         />
-        <script data-skip-dnt="true" async defer src="https://scripts.simpleanalyticscdn.com/latest.js" />
-        <noscript><img src="https://api.simpleanalytics.io/hello.gif" alt="" /></noscript>
+        <script data-skip-dnt="true" async defer src="https://api.pmt.nathfreder.dev/latest.js" />
+        <noscript><img src="https://api.pmt.nathfreder.dev/image.gif" alt="" /></noscript>
       </body>
     </Html>
   );
