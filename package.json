@@ -30,6 +30,7 @@
     "bootstrap": "4.4",
     "bootstrap-icons": "^1.0.0-alpha2",
     "file-saver": "^2.0.2",
+    "jszip": "^3.2.2",
     "next": "^9.3.0",
     "node-sass": "^4.13.0",
     "pako": "^1.0.10",
