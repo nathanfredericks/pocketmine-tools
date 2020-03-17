@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import * as PHAR from 'phar';
+import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import Layout from '../components/Layout';
 
@@ -31,8 +32,18 @@ export default class extends Component {
     const reader = new FileReader();
 
     reader.onload = async () => {
+      const zip = await JSZip.loadAsync(new Uint8Array(reader.result))
+      const originalName = files[0].name
+        .split('.')
+        .slice(0, -1)
+        .join('.')
+      
+      if (zip.files[`${originalName}/`] && zip.files[`${originalName}/`].dir) {
+        zip.root = zip.files[`${originalName}/`].name
+      }
+
       const phar = await PHAR.ZipConverter.toPhar(
-        new Uint8Array(reader.result),
+        await zip.generateAsync({ type: 'uint8array' }),
       );
 
       phar.setStub(stub);
@@ -47,7 +58,7 @@ export default class extends Component {
           .join('.')}.phar`,
       );
 
-      sa('create_phar');
+      // sa('create_phar');
     };
 
     reader.readAsArrayBuffer(files[0]);
