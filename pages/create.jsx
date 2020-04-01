@@ -48,13 +48,6 @@ export default class extends Component {
 
       phar.setStub(stub);
 
-      if (!window.localStorage.aprilFools2020) {
-        window.localStorage.aprilFools2020 = true
-
-        const audio = new Audio('https://s3.nathfreder.dev/Rick+Astley+-+Never+Gonna+Give+You+Up+(Video)-dQw4w9WgXcQ.mp3');
-        audio.play();
-      }
-
       saveAs(
         new Blob([phar.savePharData()], {
           type: 'application/octet-stream',

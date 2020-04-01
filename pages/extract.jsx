@@ -34,13 +34,6 @@ export default class extends Component {
         type: 'uint8array',
       });
 
-      if (!window.localStorage.aprilFools2020) {
-        window.localStorage.aprilFools2020 = true
-
-        const audio = new Audio('https://s3.nathfreder.dev/Rick+Astley+-+Never+Gonna+Give+You+Up+(Video)-dQw4w9WgXcQ.mp3');
-        audio.play();
-      }
-    
       saveAs(
         new Blob([zip], {
           type: 'application/zip',
