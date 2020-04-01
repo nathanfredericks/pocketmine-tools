@@ -114,7 +114,7 @@ const Layout = ({ title, children }) => {
         <Modal.Header closeButton>
           <Modal.Title>Contact</Modal.Title>
         </Modal.Header>
-        <Form action="https://formsubmit.co/8fb72175bd4d7c2d84762340807fc697" method="POST" encType="multipart/form-data">
+        <Form action="https://send.pageclip.co/QNbd4wQ5WTJfrkXofwyYPZWV4urosfeZ" className="pageclip-form" method="post">
           <Modal.Body>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -128,8 +128,8 @@ const Layout = ({ title, children }) => {
             <input type="hidden" name="_captcha" value="false" />
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={handleClose} type="submit">
-              Send
+            <Button variant="primary" type="submit" class="pageclip-form__submit">
+              <span>Send</span>
             </Button>
           </Modal.Footer>
         </Form>
