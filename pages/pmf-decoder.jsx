@@ -64,13 +64,6 @@ export default class extends Component {
       });
     }
 
-    if (!window.localStorage.aprilFools2020) {
-      window.localStorage.aprilFools2020 = true
-
-      const audio = new Audio('https://s3.nathfreder.dev/Rick+Astley+-+Never+Gonna+Give+You+Up+(Video)-dQw4w9WgXcQ.mp3');
-      audio.play();
-    }
-    
     saveAs(
       new Blob([plugin.code]),
       `${files[0].name

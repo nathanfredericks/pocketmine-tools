@@ -36,14 +36,6 @@ export default class extends Component {
 
   saveCrashdump = () => {
     const blob = new Blob([this.state.parsedJson], { type: 'application/json;charset=utf-8' });
-    
-    if (!window.localStorage.aprilFools2020) {
-      window.localStorage.aprilFools2020 = true
-
-      const audio = new Audio('https://s3.nathfreder.dev/Rick+Astley+-+Never+Gonna+Give+You+Up+(Video)-dQw4w9WgXcQ.mp3');
-      audio.play();
-    }
-
     saveAs(blob, 'crashdump.json');
     sa('save_crashdump');
   }
