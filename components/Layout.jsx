@@ -10,7 +10,7 @@ import {
   ListGroup,
   Modal,
   Button,
-  Form
+  Form,
 } from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -21,7 +21,7 @@ import GearFill from 'bootstrap-icons/icons/gear-fill.svg';
 import Search from 'bootstrap-icons/icons/search.svg';
 import Pencil from 'bootstrap-icons/icons/pencil.svg';
 import Compass from 'bootstrap-icons/icons/compass.svg';
-import DocumentText from 'bootstrap-icons/icons/document-text.svg';
+import FileCode from 'bootstrap-icons/icons/file-code.svg';
 
 const Layout = ({ title, children }) => {
   const router = useRouter();
@@ -42,7 +42,7 @@ const Layout = ({ title, children }) => {
             PocketMine Tools
           </Navbar.Brand>
           <Navbar.Toggle />
-          <Navbar.Collapse >
+          <Navbar.Collapse>
             <Nav>
               <Nav.Link onClick={handleShow}>
                 Contact
@@ -98,7 +98,7 @@ const Layout = ({ title, children }) => {
                 </Link>
                 <Link href="/pmf-decoder">
                   <ListGroup.Item active={isActive(['/pmf-decoder'])}>
-                    <DocumentText width="1.25em" height="1.25em" /> <code>.pmf</code> Decoder
+                    <FileCode width="1.25em" height="1.25em" /> <code>.pmf</code> Decoder
                   </ListGroup.Item>
                 </Link>
               </ListGroup>
