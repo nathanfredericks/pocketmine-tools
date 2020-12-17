@@ -37,7 +37,7 @@
     "phar": "^1.8.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
-    "react-bootstrap": "^1.0.0-beta.14",
+    "react-bootstrap": "^1.4.0",
     "react-dom": "^16.13.0",
     "react-instantsearch-dom": "^6.0.0",
     "text-encoding": "^0.7.0",
