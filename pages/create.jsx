@@ -37,7 +37,7 @@ export default class extends Component {
         .split('.')
         .slice(0, -1)
         .join('.')
-      
+
       if (zip.files[`${originalName}/`] && zip.files[`${originalName}/`].dir) {
         zip.root = zip.files[`${originalName}/`].name
       }
@@ -66,9 +66,10 @@ export default class extends Component {
 
   render = () => {
     const { files } = this.state;
+    const { isIndex } = this.props;
 
     return (
-      <Layout title="Create .phar">
+      <Layout title={isIndex ? null : "Create .phar"}>
         <Form onSubmit={this.handleSubmit}>
           <Form.Label>Plugin</Form.Label>
           <InputGroup className="mb-3">
