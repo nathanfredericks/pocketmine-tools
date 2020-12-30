@@ -27,11 +27,13 @@ export default class extends Component {
       let parsedJson = JSON.parse(decodedCrashdump);
       parsedJson = JSON.stringify(parsedJson, null, 2);
 
-      sa('parse_crashdump');
       return this.setState({
         parsedJson,
       });
-    } catch {}
+      sa('parse_crashdump');
+    } catch (err) {
+      console.error(err)
+    }
   };
 
   saveCrashdump = () => {
