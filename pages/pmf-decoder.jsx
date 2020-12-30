@@ -71,8 +71,6 @@ export default class extends Component {
         .slice(0, -1)
         .join('.')}.php`,
     );
-
-    sa('decode_pmf');
   };
 
   render = () => {

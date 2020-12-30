@@ -43,8 +43,6 @@ export default class extends Component {
           .slice(0, -1)
           .join('.')}.zip`,
       );
-
-      sa('extract_phar');
     };
 
     reader.readAsArrayBuffer(files[0]);

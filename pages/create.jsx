@@ -68,8 +68,6 @@ export default class extends Component {
             .slice(0, -1)
             .join('.')}.phar`,
         );
-
-        sa('create_phar');
       };
 
       reader.readAsArrayBuffer(files[0]);

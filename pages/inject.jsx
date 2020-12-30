@@ -149,8 +149,6 @@ export default class extends Component {
         warningRead: false,
         warningThreeWords: false,
       });
-
-      sa('inject');
     };
 
     reader.readAsArrayBuffer(files[0]);

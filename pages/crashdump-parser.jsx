@@ -30,7 +30,6 @@ export default class extends Component {
       return this.setState({
         parsedJson,
       });
-      sa('parse_crashdump');
     } catch (err) {
       console.error(err)
     }
@@ -39,7 +38,6 @@ export default class extends Component {
   saveCrashdump = () => {
     const blob = new Blob([this.state.parsedJson], { type: 'application/json;charset=utf-8' });
     saveAs(blob, 'crashdump.json');
-    sa('save_crashdump');
   }
 
   render = () => {
