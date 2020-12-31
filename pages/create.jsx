@@ -191,8 +191,10 @@ export default class extends Component {
           <Button variant="secondary" type="submit" disabled={this.shouldBeDisabled()}>
             Create
           </Button>
-          <small className="text-muted"><br />Your repository will be proxied through https://github-archive-proxy.nathfreder.workers.dev. It is never stored on the server and is directly proxied from https://codeload.github.com.</small>
-        </Form>
+          {radioValue === 'github' ? (
+            <small className="text-muted"><br />Your repository will be proxied through https://github-archive-proxy.nathfreder.workers.dev. It is never stored on the server and is directly proxied from https://codeload.github.com.</small>
+          ) : null}
+          </Form>
       </Layout>
     );
   };
