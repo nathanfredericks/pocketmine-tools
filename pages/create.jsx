@@ -172,7 +172,7 @@ export default class extends Component {
                   value={this.state.repoUrl}
                 />
                 <Form.Text className="text-muted">
-                  Paste a GitHub URL.
+                  Paste a <strong>public</strong> GitHub URL.
                 </Form.Text>
               </Form.Group>
             </>
@@ -191,6 +191,7 @@ export default class extends Component {
           <Button variant="secondary" type="submit" disabled={this.shouldBeDisabled()}>
             Create
           </Button>
+          <small className="text-muted"><br />Your repository will be proxied through https://github-archive-proxy.nathfreder.workers.dev. It is never stored on the server and is directly proxied from https://codeload.github.com.</small>
         </Form>
       </Layout>
     );
