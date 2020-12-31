@@ -1,6 +1,6 @@
 /* global sa */
 import React, { Component } from 'react';
-import { Form, InputGroup, Button, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import { Form, InputGroup, Button, ToggleButtonGroup, ToggleButton, Alert } from 'react-bootstrap';
 import * as PHAR from 'phar';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
@@ -14,6 +14,8 @@ export default class extends Component {
     repoName: '',
     repoIsValid: false,
     repoUrl: '',
+    loading: false,
+    error: null,
   };
 
   handleFileChange = (event) => {
@@ -72,16 +74,33 @@ export default class extends Component {
 
       reader.readAsArrayBuffer(files[0]);
     } else if (radioValue === 'github') {
+      this.setState({
+        loading: true,
+        error: false,
+      });
       const infoResponse = await fetch(`https://api.github.com/repos/${repoName}`);
       const { name, default_branch: defaultBranch } = await infoResponse.json();
       if (infoResponse.status !== 200) {
-        return alert('Repository not found');
+        this.setState({
+          loading: false,
+          error: 'Repository not found',
+        });
+        return;
       }
 
       const pluginZipResponse = await fetch(`https://github-archive-proxy.nathfreder.workers.dev/?repoName=${repoName}&branch=${defaultBranch}`);
       if (pluginZipResponse.status !== 200) {
-        return alert("Couldn't download repository");
+        this.setState({
+          loading: false,
+          error: "Couldn't download repository",
+        });
+        return;
       }
+
+      this.setState({
+        loading: false,
+      });
+
       const pluginZip = await pluginZipResponse.arrayBuffer();
 
       const zip = await JSZip.loadAsync(pluginZip);
@@ -125,16 +144,23 @@ export default class extends Component {
   }
 
   shouldBeDisabled = () => {
-    const { files, radioValue, repoIsValid } = this.state;
+    const { files, radioValue, repoIsValid, loading } = this.state;
+
+    if (loading) {
+      return true;
+    }
+
     if (radioValue === 'plugin') {
       return files.length < 1;
-    } if (radioValue === 'github') {
+    }
+
+    if (radioValue === 'github') {
       return !repoIsValid;
     }
   }
 
   render = () => {
-    const { files, radioValue, repoUrl } = this.state;
+    const { files, radioValue, repoUrl, loading, error } = this.state;
     const { isIndex } = this.props;
 
     return (
@@ -143,6 +169,7 @@ export default class extends Component {
           <ToggleButton value="plugin">Plugin</ToggleButton>
           <ToggleButton value="github">GitHub URL</ToggleButton>
         </ToggleButtonGroup>
+        {error && radioValue === 'github' ? <Alert variant="danger">{error}</Alert> : null}
         <Form onSubmit={this.handleSubmit}>
           {radioValue === 'plugin' ? (
             <>
@@ -189,12 +216,13 @@ export default class extends Component {
             </Form.Text>
           </Form.Group>
           <Button variant="secondary" type="submit" disabled={this.shouldBeDisabled()}>
+            {loading ? <span className="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true" /> : null}
             Create
           </Button>
           {radioValue === 'github' ? (
             <small className="text-muted"><br />Your repository will be proxied through https://github-archive-proxy.nathfreder.workers.dev. It is never stored on the server and is directly proxied from https://codeload.github.com.</small>
           ) : null}
-          </Form>
+        </Form>
       </Layout>
     );
   };
