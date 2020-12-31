@@ -13,7 +13,7 @@ export default class extends Component {
     radioValue: 'plugin',
     repoName: '',
     repoIsValid: false,
-    repoUrl: ''
+    repoUrl: '',
   };
 
   handleFileChange = (event) => {
@@ -75,12 +75,12 @@ export default class extends Component {
       const infoResponse = await fetch(`https://api.github.com/repos/${repoName}`);
       const { name, default_branch: defaultBranch } = await infoResponse.json();
       if (infoResponse.status !== 200) {
-        return alert('Repository not found')
+        return alert('Repository not found');
       }
 
       const pluginZipResponse = await fetch(`https://github-archive-proxy.nathfreder.workers.dev/?repoName=${repoName}&branch=${defaultBranch}`);
       if (pluginZipResponse.status !== 200) {
-        return alert("Couldn't download repository")
+        return alert("Couldn't download repository");
       }
       const pluginZip = await pluginZipResponse.arrayBuffer();
 
@@ -119,7 +119,7 @@ export default class extends Component {
     } else {
       this.setState({
         repoIsValid: false,
-        repoUrl: event.target.value
+        repoUrl: event.target.value,
       });
     }
   }
@@ -134,7 +134,7 @@ export default class extends Component {
   }
 
   render = () => {
-    const { files, radioValue } = this.state;
+    const { files, radioValue, repoUrl } = this.state;
     const { isIndex } = this.props;
 
     return (
@@ -169,7 +169,7 @@ export default class extends Component {
                   type="text"
                   placeholder="https://github.com/pmmp/DevTools"
                   onChange={this.handleGitHubUrlChange}
-                  value={this.state.repoUrl}
+                  value={repoUrl}
                 />
                 <Form.Text className="text-muted">
                   Paste a <strong>public</strong> GitHub URL.
