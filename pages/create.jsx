@@ -220,7 +220,7 @@ export default class extends Component {
             Create
           </Button>
           {radioValue === 'github' ? (
-            <small className="text-muted"><br />Your repository will be proxied through https://github-archive-proxy.nathfreder.workers.dev. It is never stored on the server and is directly proxied from https://codeload.github.com.</small>
+            <small className="text-muted"><br />Your repository will be proxied through https://github-archive-proxy.nathfreder.workers.dev. It is never stored on the server and directly proxies from https://codeload.github.com.</small>
           ) : null}
         </Form>
       </Layout>
