@@ -12,23 +12,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js 14.15.1
+    - name: Use Node.js 14 LTS
       uses: actions/setup-node@v1
       with:
-        node-version: 14.15.1
+        node-version: '14'
     - name: yarn
       run: yarn
     - name: yarn build and export
       run: |
         yarn build
         yarn export
-        touch ./out/.nojekyll
-        touch ./out/CNAME
-        echo 'pmt.nathfreder.dev' > ./out/CNAME
-    - name: deploy to gh-pages
-      uses: peaceiris/actions-gh-pages@v2
+    - name: Deploy to S3
+      uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --acl public-read --follow-symlinks --delete
       env:
-        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: ./out
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        SOURCE_DIR: 'out'      # optional: defaults to entire repository
       
