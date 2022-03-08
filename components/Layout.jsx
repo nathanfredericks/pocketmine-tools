@@ -44,10 +44,10 @@ const Layout = ({ title, children }) => {
                 Discord
               </Nav.Link>
               <Nav.Link
-                href="https://github.com/pmt-mcpe-fun/website"
+                href="https://git.nfredericks.net/pmt-mcpe-fun/website"
                 target="_blank"
               >
-                GitHub
+                Source code
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
