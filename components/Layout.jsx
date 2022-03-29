@@ -43,12 +43,6 @@ const Layout = ({ title, children }) => {
               <Nav.Link href="https://discord.gg/qPqrKAF" target="_blank">
                 Discord
               </Nav.Link>
-              <Nav.Link
-                href="https://git.nfredericks.net/pmt-mcpe-fun/website"
-                target="_blank"
-              >
-                Source code
-              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
