@@ -38,7 +38,7 @@ export default class extends Component {
     const formData = new FormData();
     formData.append('fileToUpload', files[0]);
 
-    const response = await fetch('https://pmf-decoder.azurewebsites.net/', {
+    const response = await fetch('https://pmf-decoder.nathfreder.dev/', {
       method: 'POST',
       body: formData,
     });
