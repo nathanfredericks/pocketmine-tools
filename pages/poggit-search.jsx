@@ -8,7 +8,6 @@ import {
   connectSearchBox,
   connectStateResults,
 } from 'react-instantsearch-dom';
-import './poggit-search.scss';
 import SemverJS from '@brunorb/semverjs';
 import Layout from '../components/Layout';
 
