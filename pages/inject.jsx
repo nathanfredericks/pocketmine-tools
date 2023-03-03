@@ -169,9 +169,6 @@ export default class extends Component {
 
     return (
       <Layout title="API Injector">
-        <Alert variant="info">
-          API Injector will be deprecated upon release of PocketMine-MP v4.0
-        </Alert>
         <Form>
           <Form.Label>Plugin</Form.Label>
           <InputGroup className="mb-3">
