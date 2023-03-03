@@ -1,29 +1,46 @@
 import React, { Component } from 'react';
 import { Card, Badge, Form } from 'react-bootstrap';
-import algoliasearch from 'algoliasearch/lite';
+import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 import {
   InstantSearch,
   Hits,
   Highlight,
   connectSearchBox,
   connectStateResults,
+  Configure
 } from 'react-instantsearch-dom';
-import SemverJS from '@brunorb/semverjs';
 import Layout from '../components/Layout';
 
 export default class extends Component {
   render = () => {
-    const searchClient = algoliasearch(
-      'XI77W278IB',
-      'cf3b496f36aefb12a0a875810c234554',
-    );
+    const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
+      server: {
+        // @ts-ignore
+        apiKey: process.env.POGGIT_SEARCH_API_KEY,
+        nodes: [
+          {
+            // @ts-ignore
+            host: process.env.POGGIT_SEARCH_HOST,
+            // @ts-ignore
+            port: process.env.POGGIT_SEARCH_PORT,
+            // @ts-ignore
+            protocol: process.env.POGGIT_SEARCH_PROTOCOL,
+          },
+        ],
+      },
+      additionalSearchParameters: {
+        query_by: 'name,tagline,keywords',
+      },
+    });
+    const searchClient = typesenseInstantsearchAdapter.searchClient;
 
     return (
       <Layout title="Poggit Search">
         <InstantSearch
-          indexName="prod_POGGIT_SEARCH"
+          indexName="plugins"
           searchClient={searchClient}
         >
+          <Configure hitsPerPage={5} />
           <CustomSearchBox />
           <Content />
           <Hits hitComponent={Hit} />
@@ -57,16 +74,13 @@ const Content = connectStateResults(
 
 
 const Hit = ({ hit }) => {
-  if (hit.api && hit.api.length) {
-    if (SemverJS.split(hit.api[0].from).major == '3') {
       return (
         <Card className="w-100 mb-2">
           <Card.Body>
-            <a href={`https://poggit.pmmp.io/p/${hit.project_name}`}>
+            <a href={hit.html_url}>
               <Card.Title>
-
                 <Highlight attribute="name" tagName="mark" hit={hit} />
-                <Badge variant="light">{hit.api[0].from}-{hit.api[0].to}</Badge>
+                <Badge variant="light">{`v${hit.version}`}</Badge>
               </Card.Title>
             </a>
             <Card.Text>
@@ -74,9 +88,5 @@ const Hit = ({ hit }) => {
             </Card.Text>
           </Card.Body>
         </Card>
-      );
-    }
-    return null;
-  }
-  return null;
+  );
 };
