@@ -1,11 +1,5 @@
 {
-  "parser": "babel-eslint",
-  "extends": "airbnb",
-  "rules": {
-    "object-curly-newline": 0,
-    "react/jsx-one-expression-per-line": 0,
-    "arrow-parens": 0
-  },
+  "extends": "next",
   "env": {
     "browser": true
   }

@@ -1,15 +1,14 @@
-/* global sa */
 import React, { Component } from 'react';
-import { Form, InputGroup, Button, ToggleButtonGroup, ToggleButton, Alert } from 'react-bootstrap';
-import * as PHAR from 'phar';
-import JSZip from 'jszip';
-import { saveAs } from 'file-saver';
+import { Alert, Button, Form, InputGroup } from 'react-bootstrap';
 import Layout from '../components/Layout';
+import { saveAs } from 'file-saver';
 
-export default class extends Component {
+export default class Create extends Component {
   state = {
     files: [],
     stub: '<?php __HALT_COMPILER();',
+    loading: false,
+    error: null,
   };
 
   handleFileChange = (event) => {
@@ -26,68 +25,74 @@ export default class extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-
+    this.setState({
+      error: null,
+      loading: true,
+    });
     const { files, stub } = this.state;
 
     const reader = new FileReader();
 
     reader.onload = async () => {
-      const zip = await JSZip.loadAsync(new Uint8Array(reader.result));
-      const originalName = files[0].name
-        .split('.')
-        .slice(0, -1)
-        .join('.');
+      try {
+        const JSZip = (await import('jszip')).default;
+        const zip = await JSZip.loadAsync(new Uint8Array(reader.result));
+        const originalName = files[0].name.split('.').slice(0, -1).join('.');
 
-      if (zip.files[`${originalName}/`] && zip.files[`${originalName}/`].dir) {
-        zip.root = zip.files[`${originalName}/`].name;
+        if (
+          zip.files[`${originalName}/`] &&
+          zip.files[`${originalName}/`].dir
+        ) {
+          zip.root = zip.files[`${originalName}/`].name;
+        }
+
+        const ZipConverter = (await import('phar')).ZipConverter;
+        const phar = await ZipConverter.toPhar(
+          await zip.generateAsync({ type: 'uint8array' }),
+        );
+        phar.setStub(stub);
+        saveAs(
+          new Blob([phar.savePharData()], {
+            type: 'application/octet-stream',
+          }),
+          `${files[0].name.split('.').slice(0, -1).join('.')}.phar`,
+        );
+      } catch {
+        this.setState({
+          error: 'An error occurred while converting your plugin.',
+        });
+      } finally {
+        this.setState({
+          loading: false,
+        });
       }
+    };
 
-      const phar = await PHAR.ZipConverter.toPhar(
-        await zip.generateAsync({ type: 'uint8array' }),
-      );
-
-      phar.setStub(stub);
-
-      saveAs(
-        new Blob([phar.savePharData()], {
-          type: 'application/octet-stream',
-        }),
-        `${files[0].name
-          .split('.')
-          .slice(0, -1)
-          .join('.')}.phar`,
-      );
+    reader.onerror = () => {
+      this.setState({
+        error: 'An error occurred while converting your plugin.',
+        loading: false,
+      });
     };
 
     reader.readAsArrayBuffer(files[0]);
   };
 
-  shouldBeDisabled = () => {
-    const { files } = this.state;
-    return files.length < 1;
-  }
-
   render = () => {
-    const { files } = this.state;
-    const { isIndex } = this.props;
+    const { files, loading, error } = this.state;
 
     return (
-      <Layout title={isIndex ? null : 'Create .phar'}>
+      <Layout title={'Create .phar'}>
+        {error ? <Alert variant="danger">{error}</Alert> : null}
         <Form onSubmit={this.handleSubmit}>
-              <Form.Label>Plugin</Form.Label>
-              <InputGroup className="mb-3">
-                <div className="custom-file">
-                  <Form.Control
-                    type="file"
-                    className="custom-file-input"
-                    accept=".zip"
-                    onChange={this.handleFileChange}
-                  />
-                  <Form.Label className="custom-file-label" style={{ color: files[0] ? null : '#747c84' }}>
-                    {files[0] ? files[0].name : 'No zip selected'}
-                  </Form.Label>
-                </div>
-              </InputGroup>
+          <Form.Label>Plugin</Form.Label>
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="file"
+              accept=".zip,application/zip"
+              onChange={this.handleFileChange}
+            />
+          </InputGroup>
           <Form.Group className="mb-3">
             <Form.Label>Stub</Form.Label>
             <Form.Control
@@ -99,8 +104,20 @@ export default class extends Component {
               Don&#39;t change this unless you know what you&#39;re doing.
             </Form.Text>
           </Form.Group>
-          <Button variant="secondary" type="submit" disabled={this.shouldBeDisabled()}>
-            Create
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={loading || files.length < 1}
+          >
+            {loading ? (
+              <>
+                <span className="spinner-border spinner-border-sm mr-1" />{' '}
+                Converting
+                <span className="dots" />
+              </>
+            ) : (
+              'Create'
+            )}
           </Button>
         </Form>
       </Layout>

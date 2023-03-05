@@ -1,4 +1,8 @@
-module.exports = {
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer({
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -7,11 +11,17 @@ module.exports = {
 
     return config;
   },
-  exportTrailingSlash: true,
+  trailingSlash: true,
   env: {
     POGGIT_SEARCH_HOST: 'poggit-search.mcpe.fun',
     POGGIT_SEARCH_PORT: 443,
     POGGIT_SEARCH_PROTOCOL: 'https',
     POGGIT_SEARCH_API_KEY: 'xpjQapQFX5qnnEifV1a3hxD8E8e60aoh',
+    PMF_DECODER_HOST: 'pmf-decoder.mcpe.fun',
+    PMF_DECODER_PORT: 443,
+    PMF_DECODER_PROTOCOL: 'https',
   },
-};
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+});
