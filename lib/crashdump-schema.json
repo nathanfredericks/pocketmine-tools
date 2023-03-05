@@ -1,0 +1,289 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/Crashdump",
+  "definitions": {
+    "Crashdump": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format_version": {
+          "type": "integer",
+          "const": 4
+        },
+        "time": {
+          "type": "number",
+          "exclusiveMinimum" : 0
+        },
+        "uptime": {
+          "type": "number",
+          "exclusiveMinimum" : 0
+        },
+        "lastError": {
+          "$ref": "#/definitions/LastError"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "plugin_involvement": {
+          "enum": [
+            "none",
+            "direct",
+            "indirect"
+          ]
+        },
+        "plugin": {
+          "type": "string"
+        },
+        "code": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "trace": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "plugins": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Plugin"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extensions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "jit_mode": {
+          "anyOf": [
+            {
+              "type": "integer"
+            }
+         ]
+        },
+        "phpinfo": {
+          "type": "string"
+        },
+        "general": {
+          "$ref": "#/definitions/General"
+        },
+        "pocketmine.yml": {
+          "type": "string"
+        },
+        "server.properties": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "error",
+        "extensions",
+        "format_version",
+        "general",
+        "lastError",
+        "parameters",
+        "phpinfo",
+        "plugin",
+        "plugin_involvement",
+        "plugins",
+        "time",
+        "trace",
+        "uptime"
+      ],
+      "title": "Crashdump"
+    },
+    "Error": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "file",
+        "line",
+        "message",
+        "type"
+      ],
+      "title": "Error"
+    },
+    "General": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "base_version": {
+          "type": "string"
+        },
+        "build": {
+          "type": "integer"
+        },
+        "is_dev": {
+          "type": "boolean"
+        },
+        "protocol": {
+          "type": "integer"
+        },
+        "git": {
+          "type": "string"
+        },
+        "uname": {
+          "type": "string"
+        },
+        "php": {
+          "type": "string"
+        },
+        "zend": {
+          "type": "string"
+        },
+        "php_os": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "composer_libraries": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "base_version",
+        "build",
+        "composer_libraries",
+        "git",
+        "is_dev",
+        "name",
+        "os",
+        "php",
+        "php_os",
+        "protocol",
+        "uname",
+        "zend"
+      ],
+      "title": "General"
+    },
+    "LastError": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "fullFile": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer",
+          "exclusiveMinimum" : 0
+        },
+        "trace": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "file",
+        "fullFile",
+        "line",
+        "message",
+        "trace",
+        "type"
+      ],
+      "title": "LastError"
+    },
+    "Plugin": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "api": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "depends": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "softDepends": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "main": {
+          "type": "string"
+        },
+        "load": {
+          "enum": [
+            "STARTUP",
+            "POSTWORLD"
+          ]
+        },
+        "website": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "api",
+        "authors",
+        "enabled",
+        "load",
+        "name",
+        "version"
+      ],
+      "title": "Plugin"
+    }
+  }
+}

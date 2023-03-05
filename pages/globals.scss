@@ -1,0 +1,124 @@
+/* GLOBALS */
+// TODO FIX FOCUS ON NAV MOBILE
+code {
+  color: black;
+}
+
+.list-group-item.active code {
+  color: white;
+}
+
+.dots:before {
+  animation: dots 2s linear infinite;
+  content: '';
+}
+
+.card {
+  --bs-card-border-color: rgba(0, 0, 0, 0.125);
+}
+
+.form-control {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+@keyframes dots {
+  0%,
+  20% {
+    content: '.';
+  }
+  40% {
+    content: '..';
+  }
+  60% {
+    content: '...';
+  }
+  90%,
+  100% {
+    content: '';
+  }
+}
+
+/* LAYOUT */
+//.nav-accordion {
+//  --bs-accordion-body-padding-x: 0px;
+//  --bs-accordion-body-padding-y: 0px;
+//  --bs-accordion-border-color: rgba(0, 0, 0, 0.125);
+//  --bs-accordion-active-color: inherit;
+//  --bs-accordion-active-bg: inherit;
+//  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+//  --bs-accordion-btn-padding-x: 1rem;
+//  --bs-accordion-btn-padding-y: 0.5rem;
+//}
+//
+//.nav-accordion-header {
+//  border: var(--bs-accordion-border-width) solid
+//    var(--bs-accordion-border-color);
+//  box-shadow: none;
+//  height: 45px;
+//
+//  .accordion-button:not(.collapsed) {
+//    box-shadow: none;
+//  }
+//}
+//.nav-accordion-item {
+//  border: none;
+//}
+//.nav-accordion-header {
+//  border-radius: var(--bs-accordion-inner-border-radius);
+//}
+
+/* POGGIT SEARCH */
+.ais-Hits-list {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 0;
+}
+
+.ais-Highlight span,
+.ais-Highlight-highlighted {
+  color: #212529;
+}
+
+::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/* CRASHDUMP PARSER */
+.code-block {
+  border-radius: var(--bs-accordion-inner-border-radius);
+}
+
+.accordion-icon {
+  padding-top: 0.15rem !important;
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.raw-json-crashdump {
+  font-family: var(--bs-font-monospace);
+}
+
+/* MOTD GENERATOR */
+@font-face {
+  font-family: 'Mojangles';
+  src: local('Mojangles'), url(/static/Mojangles.ttf) format('truetype');
+}
+
+.preview {
+  font-family: 'Mojangles', monospace;
+  padding: 10px;
+  background-color: rgb(51, 51, 51);
+  color: #ffffff;
+  border-radius: 0.375rem;
+}
+
+.colour-btn {
+  margin-right: 2px;
+  margin-left: 2px;
+  margin-bottom: 2px;
+}
+
+.format-btn {
+  margin-top: 8px;
+  margin-left: 2px;
+}

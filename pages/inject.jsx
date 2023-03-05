@@ -1,28 +1,18 @@
-/* global sa */
-/* eslint-disable no-param-reassign */
-/* eslint-disable implicit-arrow-linebreak */
 import React, { Component } from 'react';
-import { Form, InputGroup, Button, Badge, Modal, Alert } from 'react-bootstrap';
-import * as PHAR from 'phar';
-import yaml from 'yaml-js';
+import { Alert, Button, Form, InputGroup, Modal } from 'react-bootstrap';
 import { saveAs } from 'file-saver';
 import Layout from '../components/Layout';
 
-const getFileExtension = (name) =>
-  name.slice((Math.max(0, name.lastIndexOf('.')) || Infinity) + 1);
-
-export default class extends Component {
+export default class Inject extends Component {
   state = {
     files: [],
-    apiVersion: '3.0.0',
-    replaceNbtTags: true,
-    protocolReplace: true,
-    replaceStrictTypes: true,
-    fixEntityActorNames: true,
+    apiVersion: '',
     warningModal: false,
     warningRead: false,
     warningThreeWords: false,
     originalPluginYml: {},
+    error: null,
+    loading: false,
   };
 
   handleChange = (event) => {
@@ -33,122 +23,59 @@ export default class extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-
-    const {
-      files,
-      apiVersion,
-      replaceNbtTags,
-      protocolReplace,
-      replaceStrictTypes,
-      // warningRead,
-    } = this.state;
-
+    this.setState({
+      error: null,
+      loading: true,
+    });
+    const { files, apiVersion } = this.state;
     const reader = new FileReader();
-
     reader.onload = async () => {
-      const phar = new PHAR.Archive();
+      try {
+        const Archive = (await import('phar')).Archive;
+        const phar = new Archive();
 
-      phar.loadPharData(new Uint8Array(reader.result));
-
-      phar.getFiles().forEach(({ name, contents }) => {
-        if (getFileExtension(name) === 'php') {
-          if (replaceNbtTags) {
-            const nbtTags = {
-              ByteArray: 'ByteArrayTag',
-              Byte: 'ByteTag',
-              Compound: 'CompoundTag',
-              Double: 'DoubleTag',
-              End: 'EndTag',
-              Float: 'FloatTag',
-              IntArray: 'IntArrayTag',
-              Int: 'IntTag',
-              Enum: 'ListTag',
-              Long: 'LongTag',
-              Short: 'ShortTag',
-              String: 'StringTag',
-            };
-
-            Object.keys(nbtTags).forEach((nbtTag) => {
-              const findRegex = new RegExp(
-                `pocketmine\\nbt\\tag\\${nbtTag};|()/mi`,
-              );
-              const replaceRegex = new RegExp(
-                `pocketmine\\nbt\\tag\\${nbtTags[nbtTag]}$1/`,
-              );
-
-              contents = contents.replace(findRegex, replaceRegex);
-            });
-          }
-
-          if (protocolReplace) {
-            contents = contents.replace(
-              /pocketmine\\network\\protocol\\(.+?)(;|\()/im,
-              /pocketmine\\network\\mcpe\\protocol\\$1$2/,
-            );
-          }
-
-          if (replaceStrictTypes) {
-            // Command strict types
-            contents = contents.replace(
-              /public\s+function\s+onCommand\s*\(\s*((([\w]|\\)*CommandSender)\s+)?\$([\w]+)\s*,\s*((([\w]|\\)*Command)\s+)?\$([\w]+)\s*,\s*(string\s+)?\$([\w]+)\s*,\s*(array\s+)?\$([\w]+)\s*\)\s*(:\s*bool\s*)?{/im,
-              'public function onCommand($2 $$$4, $6 $$$8, string $$$10, array $$$12): bool {',
-            );
-
-            // onRun strict types
-            contents = contents.replace(
-              /public\s+function\s+onRun\s*\(\s*(int\s+)?\$([\w]+)\s*\)\s*(:\s*\w+\s*)?{/im,
-              'public function onRun(int $$$2) {',
-            );
-          }
-
-          if (fixEntityActorNames) {
-            contents = contents.replace('EntityEventPacket', 'ActorEventPacket');
-            contents = contents.replace('EntityFallPacket', 'ActorFallPacket');
-            contents = contents.replace('EntityPickRequestPacket', 'ActorPickRequestPacket');
-            contents = contents.replace('AddEntityPacket', 'AddActorPacket');
-            contents = contents.replace('AddItemEntityPacket', 'AddItemActorPacket');
-            contents = contents.replace('AvailableEntityIdentifiersPacket', 'AvailableActorIdentifiersPacket');
-            contents = contents.replace('BlockEntityDataPacket', 'BlockActorDataPacket');
-            contents = contents.replace('MoveEntityAbsolutePacket', 'MoveActorAbsolutePacket');
-            contents = contents.replace('MoveEntityDeltaPacket', 'MoveActorDeltaPacket');
-            contents = contents.replace('RemoveEntityPacket', 'RemoveActorPacket');
-            contents = contents.replace('SetEntityDataPacket', 'SetActorDataPacket');
-            contents = contents.replace('SetEntityLinkPacket', 'SetActorLinkPacket');
-            contents = contents.replace('SetEntityMotionPacket', 'SetActorMotionPacket');
-            contents = contents.replace('TakeItemEntityPacket', 'TakeItemActorPacket');
-          }
-
-          phar.removeFile(name);
-          phar.addFile(new PHAR.File(name, contents));
+        phar.loadPharData(new Uint8Array(reader.result));
+        const yaml = (await import('js-yaml')).default;
+        const originalPluginYml = phar.getFile('plugin.yml');
+        if (!originalPluginYml) {
+          return this.setState({
+            error:
+              'An error occurred while injecting your plugin. Ensure that the plugin is in the root directory of the zip.',
+          });
         }
-      });
+        const pluginYml = yaml.load(originalPluginYml.getContents());
 
-      const pluginYml = yaml.load(phar.getFile('plugin.yml').contents);
+        this.setState({
+          originalPluginYml: pluginYml,
+        });
 
-      this.setState({
-        originalPluginYml: pluginYml,
-      });
+        pluginYml.api = apiVersion;
 
-      pluginYml.api = apiVersion;
+        phar.removeFile('plugin.yml');
+        const File = (await import('phar')).File;
+        phar.addFile(new File('plugin.yml', yaml.dump(pluginYml)));
 
-      phar.removeFile('plugin.yml');
-      phar.addFile(new PHAR.File('plugin.yml', yaml.dump(pluginYml)));
-
-      saveAs(
-        new Blob([phar.savePharData()], {
-          type: 'application/octet-stream',
-        }),
-        `${files[0].name
-          .split('.')
-          .slice(0, -1)
-          .join('.')}-${apiVersion}.phar`,
-      );
-
-      this.setState({
-        warningModal: false,
-        warningRead: false,
-        warningThreeWords: false,
-      });
+        saveAs(
+          new Blob([phar.savePharData()], {
+            type: 'application/octet-stream',
+          }),
+          `${files[0].name
+            .split('.')
+            .slice(0, -1)
+            .join('.')}-${apiVersion}.phar`,
+        );
+      } catch {
+        this.setState({
+          error: 'An error occurred while injecting your plugin.',
+        });
+      } finally {
+        this.setState({
+          warningModal: false,
+          warningThreeWords: false,
+          warningRead: false,
+          loading: false,
+        });
+      }
     };
 
     reader.readAsArrayBuffer(files[0]);
@@ -158,107 +85,43 @@ export default class extends Component {
     const {
       files,
       apiVersion,
-      replaceNbtTags,
-      protocolReplace,
-      replaceStrictTypes,
-      fixEntityActorNames,
       warningModal,
-      // originalPluginYml,
       warningThreeWords,
+      error,
+      loading,
     } = this.state;
 
     return (
       <Layout title="API Injector">
+        {error ? <Alert variant="danger">{error}</Alert> : null}
         <Form>
           <Form.Label>Plugin</Form.Label>
           <InputGroup className="mb-3">
-            <div className="custom-file">
-              <Form.Control
-                type="file"
-                className="custom-file-input"
-                accept=".phar"
-                onChange={this.handleChange}
-              />
-              <Form.Label className="custom-file-label" style={{ color: files[0] ? null : '#747c84' }}>
-                {files[0] ? files[0].name : 'No phar selected'}
-              </Form.Label>
-            </div>
+            <Form.Control
+              type="file"
+              accept=".phar"
+              onChange={this.handleChange}
+            />
           </InputGroup>
           <Form.Group className="mb-3">
             <Form.Label>API version</Form.Label>
             <Form.Control
               type="text"
               value={apiVersion}
+              placeholder="0.0.0"
               onChange={(event) =>
-                this.setState({ apiVersion: event.target.value })}
+                this.setState({ apiVersion: event.target.value })
+              }
             />
           </Form.Group>
-          <div className="mb-3">
-            <div className="custom-control custom-switch">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="replaceStrictTypes"
-                checked={replaceStrictTypes}
-                onChange={(event) =>
-                  this.setState({ replaceStrictTypes: event.target.checked })}
-              />
-              <label
-                className="custom-control-label"
-                htmlFor="replaceStrictTypes"
-              >
-                Add strict types{' '}
-                <Badge variant="light">3.0.0-ALPHA6 to 3.0.0-ALPHA7</Badge>
-              </label>
-            </div>
-            <div className="custom-control custom-switch">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="protocolReplace"
-                checked={protocolReplace}
-                onChange={(event) =>
-                  this.setState({ protocolReplace: event.target.checked })}
-              />
-              <label className="custom-control-label" htmlFor="protocolReplace">
-                Replace protocol{' '}
-                <Badge variant="light">2.0.0 to 3.0.0-ALPHA1</Badge>
-              </label>
-            </div>
-            <div className="custom-control custom-switch">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="replaceNbtTags"
-                checked={replaceNbtTags}
-                onChange={(event) =>
-                  this.setState({ replaceNbtTags: event.target.checked })}
-              />
-              <label className="custom-control-label" htmlFor="replaceNbtTags">
-                Replace NBT tags <Badge variant="light">1.0.0 to 2.0.0</Badge>
-              </label>
-            </div>
-            <div className="custom-control custom-switch">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="fixEntityActorNames"
-                checked={fixEntityActorNames}
-                onChange={(event) =>
-                  this.setState({ fixEntityActorNames: event.target.checked })}
-              />
-              <label className="custom-control-label" htmlFor="fixEntityActorNames">
-                Change <code>Entity</code> to <code>Actor</code> <Badge variant="light">3.8.7 to 3.9.0</Badge> <Badge variant="warning">New</Badge>
-              </label>
-            </div>
-          </div>
+
           <Button
-            variant="secondary"
-            // type="submit"
+            variant="primary"
             onClick={() =>
               this.setState({
                 warningModal: true,
-              })}
+              })
+            }
             disabled={files.length < 1 || apiVersion.length < 1}
           >
             Inject
@@ -270,16 +133,14 @@ export default class extends Component {
           size="lg"
         >
           <Modal.Header closeButton>
-            <Modal.Title>This is dangerous</Modal.Title>
+            <Modal.Title className="text-danger">This is dangerous</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <ol>
               <li>
                 This tool only forces the plugin to say that it supports API
-                version {apiVersion}, and optionally, blindly replaces some
-                specific backwards-incompatible changes in the{' '}
-                <code>.phar</code>. It will not fix the actual incompatibility
-                issues.
+                version <code>{apiVersion}</code>. It will not fix the actual
+                incompatibility issues.
               </li>
               <li>
                 If errors happen after loading the downloaded plugin, uninstall
@@ -295,18 +156,20 @@ export default class extends Component {
             </ol>
           </Modal.Body>
           <Modal.Footer>
-            {/* <Button
-              variant="secondary"
-              onClick={() => this.setState({ warningModal: false })}
-            >
-              Close
-            </Button> */}
             <Button
               variant="primary"
               onClick={this.handleSubmit}
-              disabled={!warningThreeWords}
+              disabled={!warningThreeWords || loading}
             >
-              Inject
+              {loading ? (
+                <>
+                  <span className="spinner-border spinner-border-sm mr-1" />{' '}
+                  Injecting
+                  <span className="dots" />
+                </>
+              ) : (
+                'Inject'
+              )}
             </Button>
           </Modal.Footer>
         </Modal>
