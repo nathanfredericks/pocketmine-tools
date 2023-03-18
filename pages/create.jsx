@@ -102,7 +102,6 @@ export default class Create extends Component {
             variant="primary"
             type="submit"
             disabled={loading || files.length < 1}
-            className="plausible-event-name=Make+.phar"
           >
             {loading ? (
               <>

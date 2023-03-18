@@ -126,7 +126,6 @@ class Main extends PluginBase{
             variant="primary"
             type="submit"
             disabled={!name || !api || nameError || loading}
-            className="plausible-event-name=Generate+Plugin"
           >
             {loading ? (
               <>

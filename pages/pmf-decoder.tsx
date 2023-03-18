@@ -105,7 +105,7 @@ export default class PMFDecoder extends Component {
               label="Beautify output"
             />
           </div>
-          <Button variant="primary" type="submit" disabled={!files || loading} className="plausible-event-name=Decode+PMF">
+          <Button variant="primary" type="submit" disabled={!files || loading}>
             {loading ? (
               <>
                 <span className="spinner-border spinner-border-sm mr-1" />{' '}
