@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
-        <script defer data-domain="pmt.nathfreder.dev" src="https://analytics.mcpe.fun/js/script.tagged-events.js"></script>
+        <script defer data-domain="pmt.nathfreder.dev" src="https://analytics.mcpe.fun/js/script.js"></script>
       </Head>
       <SSRProvider>
         <Component {...pageProps} />
