@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Button, Form, InputGroup, Modal } from 'react-bootstrap';
 import { saveAs } from 'file-saver';
 import Layout from '../components/Layout';
+import Link from "next/link";
 export default class Inject extends Component {
   state = {
     files: [],
@@ -11,6 +12,7 @@ export default class Inject extends Component {
     warningThreeWords: false,
     originalPluginYml: {},
     error: null,
+    errorLink: null,
     loading: false,
   };
   handleChange = (event) => {
@@ -37,6 +39,7 @@ export default class Inject extends Component {
           return this.setState({
             error:
               'An error occurred while injecting your plugin. Ensure that the plugin is in the root directory of the zip.',
+            errorLink: '/support#inject-directory-error'
           });
         }
         const pluginYml = yaml.load(originalPluginYml.getContents());
@@ -59,6 +62,7 @@ export default class Inject extends Component {
       } catch {
         this.setState({
           error: 'An error occurred while injecting your plugin.',
+          errorLink: '/support#inject-error'
         });
       } finally {
         this.setState({
@@ -78,11 +82,12 @@ export default class Inject extends Component {
       warningModal,
       warningThreeWords,
       error,
+      errorLink,
       loading,
     } = this.state;
     return (
       <Layout title="API Injector" showNav={true}>
-        {error ? <Alert variant="danger">{error}</Alert> : null}
+        {error ? <Alert variant="danger">{error} <Link href={errorLink}>More info.</Link></Alert> : null}
         <Form>
           <Form.Label>Plugin (<code>.phar</code> file)</Form.Label>
           <InputGroup className="mb-3">
@@ -97,7 +102,7 @@ export default class Inject extends Component {
             <Form.Control
               type="text"
               value={apiVersion}
-              placeholder="0.0.0"
+              placeholder="4.0.0"
               onChange={(event) =>
                 this.setState({ apiVersion: event.target.value })
               }
