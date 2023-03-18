@@ -153,6 +153,7 @@ export default class Inject extends Component {
               variant="primary"
               onClick={this.handleSubmit}
               disabled={!warningThreeWords || loading}
+              className="plausible-event-name=Inject+Plugin"
             >
               {loading ? (
                 <>

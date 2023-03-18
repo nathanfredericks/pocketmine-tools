@@ -116,6 +116,7 @@ export default class CrashdumpParser extends Component {
             variant="primary"
             type="submit"
             disabled={!crashdump || loading}
+            className="plausible-event-name=Decode+Crashdump"
           >
             {loading ? (
               <>
@@ -151,7 +152,7 @@ export default class CrashdumpParser extends Component {
                   className="mb-3 raw-json-crashdump"
                 />
               </Form.Group>
-              <Button variant="primary" onClick={this.saveCrashdump}>
+              <Button variant="primary" onClick={this.saveCrashdump} className="plausible-event-name=Download+Crashdump">
                 Download
               </Button>
             </Tab>
