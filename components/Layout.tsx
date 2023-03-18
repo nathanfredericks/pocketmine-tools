@@ -35,7 +35,6 @@ export default function Layout({
       </Head>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
         <Container>
-          <Link href="/" legacyBehavior>
             <Navbar.Brand>
               <PMTLogo
                 width="30"
@@ -44,7 +43,6 @@ export default function Layout({
               />
               PocketMine Tools
             </Navbar.Brand>
-          </Link>
           <Navbar.Toggle />
           <Navbar.Collapse>
             <Nav className="me-auto">
