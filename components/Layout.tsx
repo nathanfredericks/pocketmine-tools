@@ -8,7 +8,7 @@ import {
   Button,
   Nav,
   NavDropdown, Badge
-} from "react-bootstrap";
+} from 'react-bootstrap';
 import Link from 'next/link';
 import Head from 'next/head';
 import PMTLogo from '../public/static/logo.svg';

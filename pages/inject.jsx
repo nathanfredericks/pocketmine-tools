@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Button, Form, InputGroup, Modal } from 'react-bootstrap';
 import { saveAs } from 'file-saver';
 import Layout from '../components/Layout';
-import Link from "next/link";
+import Link from 'next/link';
 export default class Inject extends Component {
   state = {
     files: [],
