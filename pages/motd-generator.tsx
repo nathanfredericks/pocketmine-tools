@@ -2,9 +2,7 @@
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
 import { Button, Form } from 'react-bootstrap';
-
 const SELECTION_SIGN = '§';
-
 const colourCodes = {
   0: {
     colour: '#000000',
@@ -114,7 +112,6 @@ const formattingCodes = {
     css: 'font-style:italic;',
   },
 };
-
 type MOTDGeneratorState = {
   motd: string;
   preview: string;
@@ -123,7 +120,6 @@ type MOTDGeneratorState = {
   kError: boolean;
   htmlMotd: string;
 };
-
 export default class MOTDGenerator extends Component {
   state: MOTDGeneratorState = {
     motd: '',
@@ -134,9 +130,7 @@ export default class MOTDGenerator extends Component {
     htmlMotd: '',
     charsInMotd: 0,
   };
-
   textareaRef = React.createRef();
-
   componentDidMount = () => {
     const colourButtons = Object.entries(colourCodes).map(([key, val]) => (
       <Button
@@ -152,7 +146,6 @@ export default class MOTDGenerator extends Component {
         {`${SELECTION_SIGN}${key}`}
       </Button>
     ));
-
     const formattingButtons = Object.entries(formattingCodes).map(
       ([key, val]) => {
         return (
@@ -168,13 +161,11 @@ export default class MOTDGenerator extends Component {
         );
       },
     );
-
     this.setState({
       colourButtons,
       formattingButtons,
     });
   };
-
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newMotd = event.currentTarget.value;
     if (newMotd.includes(`${SELECTION_SIGN}k`)) {
@@ -191,7 +182,6 @@ export default class MOTDGenerator extends Component {
     });
     this.renderMotd(newMotd);
   };
-
   renderMotd = (motd: string) => {
     let htmlMotd = '';
     let chars = 0;
@@ -233,11 +223,10 @@ export default class MOTDGenerator extends Component {
         } else {
           htmlMotd += `<span style="${currentFormatting.join('')}${
             format.css
-          }}">${match[2]}</span>`;
+          }">${match[2]}</span>`;
           currentFormatting.push(format.css);
         }
       }
-
       if (match[1] === 'r') {
         currentFormatting = [];
         currentColour = null;
@@ -245,13 +234,11 @@ export default class MOTDGenerator extends Component {
       }
       chars += match[2].length;
     }
-
     this.setState({
       htmlMotd,
       charsInMotd: chars,
     });
   };
-
   insertCode = (code) => {
     let oldMotd = this.state.motd;
     const insertAt = (str, sub, pos) =>
@@ -272,9 +259,8 @@ export default class MOTDGenerator extends Component {
       motd: oldMotd,
     });
   };
-
   render = () => (
-    <Layout title="MOTD Generator">
+    <Layout title="MOTD Generator" showNav={true}>
       {this.state.colourButtons}
       <br />
       {this.state.formattingButtons}
@@ -285,7 +271,7 @@ export default class MOTDGenerator extends Component {
       >
         Reset
       </Button>
-      <Form.Group>
+      <Form.Group className="mt-3">
         <Form.Control
           as="textarea"
           ref={this.textareaRef}

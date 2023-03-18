@@ -2,30 +2,30 @@ import React, { Component, type SyntheticEvent } from 'react';
 import { Alert, Button, Form, InputGroup } from 'react-bootstrap';
 import { saveAs } from 'file-saver';
 import Layout from '../components/Layout';
-
+import Link from 'next/link';
 type ExtractState = {
   files: FileList | null;
   loading: boolean;
   error: string | null;
+  errorLink: string | null;
 };
-
 export default class Extract extends Component<{}, ExtractState> {
   state: ExtractState = {
     files: null,
     loading: false,
     error: null,
+    errorLink: null,
   };
-
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       files: event.currentTarget.files,
     });
   };
-
   handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
     this.setState({
       error: null,
+      errorLink: null,
       loading: true,
     });
     const { files } = this.state;
@@ -50,6 +50,7 @@ export default class Extract extends Component<{}, ExtractState> {
         } catch {
           this.setState({
             error: 'An error occurred while converting your plugin.',
+            errorLink: '/support#convert-error'
           });
         } finally {
           this.setState({
@@ -60,20 +61,20 @@ export default class Extract extends Component<{}, ExtractState> {
       reader.onerror = () => {
         this.setState({
           error: 'An error occurred while converting your plugin.',
+          errorLink: '/support#convert-error',
           loading: false,
         });
       };
       reader.readAsArrayBuffer(files[0]);
     }
   };
-
   render = () => {
-    const { files, error, loading } = this.state;
+    const { files, error, errorLink, loading } = this.state;
     return (
-      <Layout title="Extract .phar">
-        {error ? <Alert variant="danger">{error}</Alert> : null}
+      <Layout title="Extract .phar" showNav={true}>
+        {error ? <Alert variant="danger">{error} <Link href={errorLink!}>More info.</Link></Alert> : null}
         <Form onSubmit={this.handleSubmit}>
-          <Form.Label>Plugin</Form.Label>
+          <Form.Label>Plugin (<code>.phar</code> file)</Form.Label>
           <InputGroup className="mb-3">
             <Form.Control
               type="file"

@@ -4,24 +4,24 @@ import Layout from '../components/Layout';
 import { dump } from 'js-yaml';
 import { correctNamespacePart } from '../lib/utils';
 import { saveAs } from 'file-saver';
-
+import Link from 'next/link';
 type GenerateState = {
   name: string | null;
   api: string | null;
   nameError: boolean;
   loading: boolean;
   error: string | null;
+  errorLink: string | null;
 };
-
 export default class Generate extends Component {
   state: GenerateState = {
     name: null,
     api: null,
     nameError: false,
     error: null,
+    errorLink: null,
     loading: false,
   };
-
   handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputName = event.currentTarget.value;
     if (/[^A-Za-z0-9_-]/.test(inputName)) {
@@ -37,13 +37,11 @@ export default class Generate extends Component {
       name: event.currentTarget.value,
     });
   };
-
   handleAPIChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       api: event.currentTarget.value,
     });
   };
-
   handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     this.setState({
@@ -91,6 +89,7 @@ class Main extends PluginBase{
     } catch {
       this.setState({
         error: 'An error occurred while generating your plugin.',
+        errorLink: '/support#generate-error'
       });
     } finally {
       this.setState({
@@ -98,12 +97,11 @@ class Main extends PluginBase{
       });
     }
   };
-
   render = () => {
-    const { name, api, nameError, error, loading } = this.state;
+    const { name, api, nameError, error, errorLink, loading } = this.state;
     return (
-      <Layout title={'Generate plugin'}>
-        {error ? <Alert variant="danger">{error}</Alert> : null}
+      <Layout title="Generate plugin" showNav={true}>
+        {error ? <Alert variant="danger">{error} <Link href={errorLink!}>More info.</Link></Alert> : null}
         <Form onSubmit={this.handleSubmit}>
           <Form.Group className="mb-3">
             <Form.Label>Plugin name</Form.Label>

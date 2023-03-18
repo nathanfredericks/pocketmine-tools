@@ -2,14 +2,12 @@ import React, { Component, SyntheticEvent } from 'react';
 import { Alert, Button, Form, InputGroup } from 'react-bootstrap';
 import { saveAs } from 'file-saver';
 import Layout from '../components/Layout';
-
 type PMFDecoderState = {
   files: FileList | null;
   loading: boolean;
   error: string | null;
   beautifyOutput: boolean;
 };
-
 export default class PMFDecoder extends Component {
   state: PMFDecoderState = {
     beautifyOutput: false,
@@ -17,13 +15,11 @@ export default class PMFDecoder extends Component {
     files: null,
     loading: false,
   };
-
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       files: event.target.files,
     });
   };
-
   handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     const { files, beautifyOutput } = this.state;
@@ -84,14 +80,13 @@ export default class PMFDecoder extends Component {
       );
     }
   };
-
   render = () => {
     const { files, loading, error, beautifyOutput } = this.state;
     return (
-      <Layout title="PMF Decoder">
+      <Layout title="PMF Decoder" showNav={true}>
         {error ? <Alert variant="danger">{error}</Alert> : null}
         <Form onSubmit={this.handleSubmit}>
-          <Form.Label>Plugin</Form.Label>
+          <Form.Label>Plugin (<code>.pmf</code> file)</Form.Label>
           <InputGroup className="mb-3">
             <Form.Control
               type="file"
@@ -123,8 +118,8 @@ export default class PMFDecoder extends Component {
           </Button>
           <small className="text-muted">
             <br />
-            Your plugin will be uploaded to{' '}
-            <a>{process.env.PMF_DECODER_HOST}</a> and stored temporarily.
+            Your plugin will be sent to{' '}
+            <a>{process.env.PMF_DECODER_HOST}</a> for decoding.
           </small>
         </Form>
       </Layout>
