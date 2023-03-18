@@ -76,7 +76,7 @@ export default class Support extends Component {
       </p>
       <h3 id="generate-error">An error occurred while generating your plugin.</h3>
       <p>This error occurs when there is an error generating your plugin. Please file a bug report if you experience this error. Make sure to include your browser, device, plugin name and plugin API.</p>
-      <h3 id="inject-error">An error occurred while injecting your plugin. Ensure that the plugin is in the root directory of the zip.</h3>
+      <h3 id="inject-directory-error">An error occurred while injecting your plugin. Ensure that the plugin is in the root directory of the zip.</h3>
       <p>This error occurs when a <code>plugin.yml</code> file is not located in the root directory of the uploaded plugin.
         <ul>
           <li>Use the <em>Extract <code>.phar</code></em> tool to extract your plugin to a <code>.zip</code> file.</li>
@@ -88,6 +88,14 @@ export default class Support extends Component {
           <li>If your folder structure looks like <strong>Example 3 or 4</strong>, move your files into the root of the <code>.zip</code> file. Your file structure should look like <strong>Example 1</strong>.</li>
           <li>Use the <em>Create <code>.phar</code></em> tool to convert your plugin back to <code>.phar</code>.</li>
         </ul>
+      </p>
+      <h3 id="inject-error">An error occurred while injecting your plugin.</h3>
+      <p>
+        This error occurs when your plugin cannot be injected. Often this error is caused by uploading the wrong file type.
+        <ul>
+          <li><strong>API Injector</strong><br />Required file type: <code>.phar</code></li>
+        </ul>
+        <span className="text-bg-info">Note that simply changing the file extension will not change the file type.</span>
       </p>
       <h3 id="pmf-decode-error">Sorry, there was an error decoding your file.</h3>
       <p>

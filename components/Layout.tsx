@@ -7,8 +7,8 @@ import {
   Tab,
   Button,
   Nav,
-  NavDropdown
-} from 'react-bootstrap';
+  NavDropdown, Badge
+} from "react-bootstrap";
 import Link from 'next/link';
 import Head from 'next/head';
 import PMTLogo from '../public/static/logo.svg';
@@ -54,7 +54,7 @@ export default function Layout({
               <NavDropdown.Item href="https://mcpeme.mcpe.fun" target="_blank">mcpe.me</NavDropdown.Item>
               <NavDropdown.Item href="https://v1.mcpe.fun" target="_blank">v1 (Old PMT)</NavDropdown.Item>
               <NavDropdown.Item href="https://v2.mcpe.fun" target="_blank">v2</NavDropdown.Item>
-              <NavDropdown.Item href="https://v3.mcpe.fun" target="_blank">v3</NavDropdown.Item>
+              <NavDropdown.Item href="https://v3.mcpe.fun" target="_blank">v3 <Badge bg="info">Current</Badge></NavDropdown.Item>
             </NavDropdown>
             </Nav>
           </Navbar.Collapse>
