@@ -2,40 +2,43 @@ import React, { Component, SyntheticEvent } from 'react';
 import { Alert, Button, Form, Tab, Tabs } from 'react-bootstrap';
 import { saveAs } from 'file-saver';
 import Layout from '../components/Layout';
-import CrashdumpPreview from '../components/CrashdumpPreview';
 import Crashdump from '../lib/crashdump.interface';
-
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
 type CrashdumpParserState = {
   parseError: string | null;
+  parseErrorLink: string | null;
   previewError: string | null;
+  previewErrorLink: string | null;
   parsedCrashdumpStr: string | null;
   parsedCrashdumpObj: Crashdump | null;
   loading: boolean;
   crashdump: string | null;
 };
-
 export default class CrashdumpParser extends Component {
   state: CrashdumpParserState = {
     parseError: null,
+    parseErrorLink: null,
     previewError: null,
+    previewErrorLink: null,
     parsedCrashdumpStr: null,
     parsedCrashdumpObj: null,
     loading: false,
     crashdump: null,
   };
-
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       crashdump: event.currentTarget.value,
     });
   };
-
   handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     this.setState({
       loading: true,
       parseError: null,
+      parseErrorLink: null,
       previewError: null,
+      previewErrorLink: null,
       parsedCrashdumpStr: null,
       parsedCrashdumpObj: null,
     });
@@ -53,6 +56,7 @@ export default class CrashdumpParser extends Component {
       return this.setState({
         loading: false,
         parseError: 'Sorry, an error occurred decoding your crashdump.',
+        parseErrorLink: '/support#decode-crashdump-error'
       });
     }
     if (json.preview) {
@@ -63,6 +67,7 @@ export default class CrashdumpParser extends Component {
       this.setState({
         previewError:
           'Sorry, your crashdump could not be previewed. Raw JSON is still available.',
+        previewErrorLink: '/support#preview-not-avail-error'
       });
     }
     this.setState({
@@ -70,26 +75,32 @@ export default class CrashdumpParser extends Component {
       parsedCrashdumpStr: json.crashdump,
     });
   };
-
   saveCrashdump = () => {
     const blob = new Blob([this.state.parsedCrashdumpStr!], {
       type: 'application/json;charset=utf-8',
     });
     saveAs(blob, 'crashdump.json');
   };
-
   render() {
     const {
       parseError,
+      parseErrorLink,
       previewError,
+      previewErrorLink,
       parsedCrashdumpStr,
       parsedCrashdumpObj,
       loading,
       crashdump,
     } = this.state;
+    let CrashdumpPreview: any = null;
+    if (parsedCrashdumpStr && !previewError) {
+      CrashdumpPreview = dynamic(import('../components/CrashdumpPreview'), {
+        loading: () => <p>Loading preview<span className="dots" /></p>,
+      });
+    }
     return (
-      <Layout title="Crashdump Parser">
-        {parseError ? <Alert variant="danger">{parseError}</Alert> : null}
+      <Layout title="Crashdump Parser" showNav={true}>
+        {parseError ? <Alert variant="danger">{parseError} <Link href={parseErrorLink!}>More info.</Link></Alert> : null}
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
             <Form.Label>Crashdump</Form.Label>
@@ -125,7 +136,7 @@ export default class CrashdumpParser extends Component {
           <Tabs defaultActiveKey="preview" className="mb-3 mt-3">
             <Tab eventKey="preview" title="Preview">
               {previewError ? (
-                <Alert variant="danger">{previewError}</Alert>
+                <Alert variant="danger">{previewError} <Link href={previewErrorLink!}>More info.</Link></Alert>
               ) : (
                 <CrashdumpPreview crashdump={parsedCrashdumpObj!} />
               )}

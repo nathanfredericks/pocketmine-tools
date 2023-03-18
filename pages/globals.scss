@@ -1,7 +1,6 @@
 /* GLOBALS */
-// TODO FIX FOCUS ON NAV MOBILE
 code {
-  color: black;
+  color: var(--bs-body-color);
 }
 
 .list-group-item.active code {
@@ -38,35 +37,6 @@ code {
   }
 }
 
-/* LAYOUT */
-//.nav-accordion {
-//  --bs-accordion-body-padding-x: 0px;
-//  --bs-accordion-body-padding-y: 0px;
-//  --bs-accordion-border-color: rgba(0, 0, 0, 0.125);
-//  --bs-accordion-active-color: inherit;
-//  --bs-accordion-active-bg: inherit;
-//  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-//  --bs-accordion-btn-padding-x: 1rem;
-//  --bs-accordion-btn-padding-y: 0.5rem;
-//}
-//
-//.nav-accordion-header {
-//  border: var(--bs-accordion-border-width) solid
-//    var(--bs-accordion-border-color);
-//  box-shadow: none;
-//  height: 45px;
-//
-//  .accordion-button:not(.collapsed) {
-//    box-shadow: none;
-//  }
-//}
-//.nav-accordion-item {
-//  border: none;
-//}
-//.nav-accordion-header {
-//  border-radius: var(--bs-accordion-inner-border-radius);
-//}
-
 /* POGGIT SEARCH */
 .ais-Hits-list {
   list-style-type: none;
@@ -100,12 +70,18 @@ code {
 
 /* MOTD GENERATOR */
 @font-face {
-  font-family: 'Mojangles';
-  src: local('Mojangles'), url(/static/Mojangles.ttf) format('truetype');
+  font-family: "Minecraft";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/static/fonts/minecraft_font.woff") format("woff"),
+  url("/static/fonts/minecraft_font.eot") format("eot"),
+  url("/static/fonts/minecraft_font.ttf") format("truetype"),
+  url("/static/fonts/minecraft_font.svg#Minecraft") format("svg");
+  unicode-range: U+0000-FFFD, U+0080-00FF, U+2000-206F;
 }
 
 .preview {
-  font-family: 'Mojangles', monospace;
+  font-family: 'Minecraft', monospace;
   padding: 10px;
   background-color: rgb(51, 51, 51);
   color: #ffffff;

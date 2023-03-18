@@ -14,16 +14,13 @@ import GearFill from 'bootstrap-icons/icons/gear-fill.svg';
 import BoxFill from 'bootstrap-icons/icons/box-fill.svg';
 import FiletypePHP from 'bootstrap-icons/icons/filetype-php.svg';
 import Crashdump from '../lib/crashdump.interface';
-
 SyntaxHighlighter.registerLanguage('php', php);
 SyntaxHighlighter.registerLanguage('properties', properties);
 SyntaxHighlighter.registerLanguage('yml', yml);
-
 type CrashdumpPreviewProps = {
   crashdump: Crashdump;
 };
-
-function CrashdumpPreview({ crashdump }: CrashdumpPreviewProps) {
+export default function CrashdumpPreview({ crashdump }: CrashdumpPreviewProps) {
   return (
     <>
       <h4>{crashdump.lastError.message}</h4>
@@ -268,5 +265,3 @@ function CrashdumpPreview({ crashdump }: CrashdumpPreviewProps) {
     </>
   );
 }
-
-export default CrashdumpPreview;

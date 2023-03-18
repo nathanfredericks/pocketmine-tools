@@ -2,50 +2,45 @@ import React, { Component } from 'react';
 import { Alert, Button, Form, InputGroup } from 'react-bootstrap';
 import Layout from '../components/Layout';
 import { saveAs } from 'file-saver';
-
+import Link from 'next/link';
 export default class Create extends Component {
   state = {
     files: [],
     stub: '<?php __HALT_COMPILER();',
     loading: false,
     error: null,
+    errorLink: null
   };
-
   handleFileChange = (event) => {
     this.setState({
       files: event.target.files,
     });
   };
-
   handleStubChange = (event) => {
     this.setState({
       stub: event.target.value,
     });
   };
-
   handleSubmit = async (event) => {
     event.preventDefault();
     this.setState({
       error: null,
+      errorLink: null,
       loading: true,
     });
     const { files, stub } = this.state;
-
     const reader = new FileReader();
-
     reader.onload = async () => {
       try {
         const JSZip = (await import('jszip')).default;
         const zip = await JSZip.loadAsync(new Uint8Array(reader.result));
         const originalName = files[0].name.split('.').slice(0, -1).join('.');
-
         if (
           zip.files[`${originalName}/`] &&
           zip.files[`${originalName}/`].dir
         ) {
           zip.root = zip.files[`${originalName}/`].name;
         }
-
         const ZipConverter = (await import('phar')).ZipConverter;
         const phar = await ZipConverter.toPhar(
           await zip.generateAsync({ type: 'uint8array' }),
@@ -57,35 +52,34 @@ export default class Create extends Component {
           }),
           `${files[0].name.split('.').slice(0, -1).join('.')}.phar`,
         );
-      } catch {
-        this.setState({
-          error: 'An error occurred while converting your plugin.',
-        });
+      } catch (err) {
+          this.setState({
+            error: 'An error occurred while converting your plugin. Please check your network connection and try again.',
+            errorLink: '/support#convert-error'
+          });
       } finally {
         this.setState({
           loading: false,
         });
       }
     };
-
     reader.onerror = () => {
+      console.log('net err');
       this.setState({
         error: 'An error occurred while converting your plugin.',
+        errorLink: '/support#convert-error',
         loading: false,
       });
     };
-
     reader.readAsArrayBuffer(files[0]);
   };
-
   render = () => {
-    const { files, loading, error } = this.state;
-
+    const { files, loading, error, errorLink } = this.state;
     return (
-      <Layout title={'Create .phar'}>
-        {error ? <Alert variant="danger">{error}</Alert> : null}
+      <Layout title="Create .phar" showNav={true}>
+        {error ? <Alert variant="danger">{error} <Link href={errorLink}>More info.</Link></Alert> : null}
         <Form onSubmit={this.handleSubmit}>
-          <Form.Label>Plugin</Form.Label>
+          <Form.Label>Plugin (<code>.zip</code> file)</Form.Label>
           <InputGroup className="mb-3">
             <Form.Control
               type="file"

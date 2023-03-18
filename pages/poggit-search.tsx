@@ -11,7 +11,6 @@ import {
 import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 import Layout from '../components/Layout';
 import useDebounce from '../lib/useDebounce';
-
 export default class PoggitSearch extends Component {
   render() {
     const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
@@ -35,7 +34,7 @@ export default class PoggitSearch extends Component {
     });
     const searchClient = typesenseInstantsearchAdapter.searchClient;
     return (
-      <Layout title="Poggit Search">
+      <Layout title="Poggit Search" showNav={true}>
         <InstantSearch searchClient={searchClient} indexName="plugins">
           <Configure hitsPerPage={5} />
           <CustomSearchBox />
@@ -47,13 +46,11 @@ export default class PoggitSearch extends Component {
     );
   }
 }
-
 // @ts-ignore
 const CustomSearchBox = ({ ...props }) => {
   const { refine } = useSearchBox(props);
   const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
-
   useEffect(() => {
     if (debouncedSearchTerm) {
       refine(searchTerm);
@@ -61,7 +58,6 @@ const CustomSearchBox = ({ ...props }) => {
       refine('');
     }
   });
-
   return (
     <Form>
       <Form.Control
@@ -73,7 +69,6 @@ const CustomSearchBox = ({ ...props }) => {
     </Form>
   );
 };
-
 // @ts-ignore
 function Hit({ hit }) {
   return (
@@ -94,7 +89,6 @@ function Hit({ hit }) {
     </Card>
   );
 }
-
 // @ts-ignore
 function NoResultsBoundary({ children, fallback }) {
   const { results } = useInstantSearch();
@@ -110,7 +104,6 @@ function NoResultsBoundary({ children, fallback }) {
   }
   return children;
 }
-
 function NoResults() {
   const { indexUiState } = useInstantSearch();
   return (

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Alert, Button, Form, InputGroup, Modal } from 'react-bootstrap';
 import { saveAs } from 'file-saver';
 import Layout from '../components/Layout';
-
 export default class Inject extends Component {
   state = {
     files: [],
@@ -14,13 +13,11 @@ export default class Inject extends Component {
     error: null,
     loading: false,
   };
-
   handleChange = (event) => {
     this.setState({
       files: event.target.files,
     });
   };
-
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
@@ -33,7 +30,6 @@ export default class Inject extends Component {
       try {
         const Archive = (await import('phar')).Archive;
         const phar = new Archive();
-
         phar.loadPharData(new Uint8Array(reader.result));
         const yaml = (await import('js-yaml')).default;
         const originalPluginYml = phar.getFile('plugin.yml');
@@ -44,17 +40,13 @@ export default class Inject extends Component {
           });
         }
         const pluginYml = yaml.load(originalPluginYml.getContents());
-
         this.setState({
           originalPluginYml: pluginYml,
         });
-
         pluginYml.api = apiVersion;
-
         phar.removeFile('plugin.yml');
         const File = (await import('phar')).File;
         phar.addFile(new File('plugin.yml', yaml.dump(pluginYml)));
-
         saveAs(
           new Blob([phar.savePharData()], {
             type: 'application/octet-stream',
@@ -77,10 +69,8 @@ export default class Inject extends Component {
         });
       }
     };
-
     reader.readAsArrayBuffer(files[0]);
   };
-
   render = () => {
     const {
       files,
@@ -90,12 +80,11 @@ export default class Inject extends Component {
       error,
       loading,
     } = this.state;
-
     return (
-      <Layout title="API Injector">
+      <Layout title="API Injector" showNav={true}>
         {error ? <Alert variant="danger">{error}</Alert> : null}
         <Form>
-          <Form.Label>Plugin</Form.Label>
+          <Form.Label>Plugin (<code>.phar</code> file)</Form.Label>
           <InputGroup className="mb-3">
             <Form.Control
               type="file"
@@ -114,7 +103,6 @@ export default class Inject extends Component {
               }
             />
           </Form.Group>
-
           <Button
             variant="primary"
             onClick={() =>

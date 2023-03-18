@@ -1,14 +1,12 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
-
 module.exports = withBundleAnalyzer({
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
-
     return config;
   },
   trailingSlash: true,
@@ -20,8 +18,6 @@ module.exports = withBundleAnalyzer({
     PMF_DECODER_HOST: 'pmf-decoder.mcpe.fun',
     PMF_DECODER_PORT: 443,
     PMF_DECODER_PROTOCOL: 'https',
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+    CONTACT_EMAIL: 'nathan[at]nathfreder.dev'
+  }
 });
