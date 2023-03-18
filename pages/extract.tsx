@@ -82,7 +82,7 @@ export default class Extract extends Component<{}, ExtractState> {
               onChange={this.handleChange}
             />
           </InputGroup>
-          <Button variant="primary" type="submit" disabled={loading || !files}>
+          <Button variant="primary" type="submit" disabled={loading || !files} className="plausible-event-name=Extract+.phar">
             {loading ? (
               <>
                 <span className="spinner-border spinner-border-sm mr-1" />{' '}
