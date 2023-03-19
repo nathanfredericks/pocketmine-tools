@@ -48,6 +48,7 @@ export default function Layout({
             <Nav className="me-auto">
               <Nav.Link href="/" as={Link} className={isActive(['/']) ? 'active' : ''}>Home</Nav.Link>
               <Nav.Link href="/support" as={Link} className={isActive(['/support']) ? 'active' : ''}>Support</Nav.Link>
+              <Nav.Link href="https://github.com/pmt-mcpe-fun/website/tree/v3" target="_blank">GitHub</Nav.Link>
             </Nav>
             <Nav className="ms-auto">
             <NavDropdown title="Versions">
