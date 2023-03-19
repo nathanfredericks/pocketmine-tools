@@ -101,8 +101,12 @@ export default class Support extends Component {
       <p>
         This error occurs when there an an error decoding your <code>.pmf</code> plugin. Check that your plugin is valid and not corrupted.
       </p>
-      <h3>Sorry, there was an error beautifying your code. Try turning off beautify output.</h3>
+      <h3 id="pmf-beautify-error">Sorry, there was an error beautifying your code. Try turning off beautify output.</h3>
       <p>This error often occurs when the PHP code in the <code>.pmf</code> plugin has an invalid syntax. Try uploading a different plugin or turn of beautify output to get the original code.</p>
+      <h3 id="pmf-size-error">Sorry, your .pmf plugin is too large. The maximum size is 5 megabytes.</h3>
+      <p>This error occurs when you upload a <code>.pmf</code> plugin bigger than 5 megabytes. Please upload a smaller plugin.</p>
+      <h3 id="pmf-ext-error">Sorry, only .pmf plugins are allowed.</h3>
+      <p>This error occurs when you upload a plugin not ending in <code>.pmf</code>. Please ensure your plugin has the correct extension and is a <code>.pmf</code> plugin.</p>
       <h2>Contact me</h2>
       <p className="text-bg-info">To file a bug report, please see the FAQ section at the top of the page.</p>
       <p>For other inquiries, please email me at {process.env.CONTACT_EMAIL}. Note that this email is not for support with plugin development. Emails of this nature will be ignored.</p>
