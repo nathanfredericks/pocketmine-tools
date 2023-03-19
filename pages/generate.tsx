@@ -5,6 +5,8 @@ import { dump } from 'js-yaml';
 import { correctNamespacePart } from '../lib/utils';
 import { saveAs } from 'file-saver';
 import Link from 'next/link';
+// @ts-ignore
+import friendlyWords from 'friendly-words';
 type GenerateState = {
   name: string | null;
   api: string | null;
@@ -109,6 +111,8 @@ class Main extends PluginBase{
               type="text"
               onChange={this.handleNameChange}
               isInvalid={nameError}
+              // @ts-ignore
+              placeholder={this.props.funPluginName}
             />
             <Form.Control.Feedback type="invalid">
               Only letters, numbers, underscores and dashes are allowed.
@@ -141,4 +145,9 @@ class Main extends PluginBase{
       </Layout>
     );
   };
+}
+export async function getServerSideProps() {
+  const random1 = friendlyWords.predicates[Math.floor((Math.random()*friendlyWords.predicates.length))];
+  const random2 = friendlyWords.objects[Math.floor((Math.random()*friendlyWords.objects.length))];
+  return { props: { funPluginName: `${random1}-${random2}` } }
 }
