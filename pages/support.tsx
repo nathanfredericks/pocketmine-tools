@@ -112,7 +112,7 @@ export default class Support extends Component {
       <ol>
         <li>Check that you have an <code>A</code> record pointing to your server&apos;s IP address.</li>
         <li>Check that the hostname and port are entered correctly.</li>
-      </ol> q
+      </ol>
       <h3 id="ping-error">Sorry, an error occurred pinging your server.</h3>
       <p>This error occurs when your server cannot be pinged. Check that the server is online and the hostname and port are entered correctly. If you continue to experience errors, file a bug report and make sure to include the affected hostname and port.</p>
       <h2>Contact me</h2>
