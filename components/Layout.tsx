@@ -11,7 +11,7 @@ import {
 } from 'react-bootstrap';
 import Link from 'next/link';
 import Head from 'next/head';
-import PMTLogo from '../public/static/logo.svg';
+import PMTLogo from '../public/static/logo-white.svg';
 import NavItems from './NavItems';
 import { useRouter } from 'next/router';
 type LayoutProps = {
@@ -33,7 +33,7 @@ export default function Layout({
           {title ? `${title} - PocketMine Tools` : 'PocketMine Tools'}
         </title>
       </Head>
-      <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
             <Navbar.Brand>
               <PMTLogo
