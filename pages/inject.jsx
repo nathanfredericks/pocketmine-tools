@@ -102,7 +102,6 @@ export default class Inject extends Component {
             <Form.Control
               type="text"
               value={apiVersion}
-              placeholder="4.0.0"
               onChange={(event) =>
                 this.setState({ apiVersion: event.target.value })
               }

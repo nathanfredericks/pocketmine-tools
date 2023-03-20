@@ -119,7 +119,6 @@ class Main extends PluginBase{
             <Form.Control
               type="text"
               onChange={this.handleAPIChange}
-              placeholder="4.0.0"
             />
           </Form.Group>
           <Button
