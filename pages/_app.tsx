@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta charSet="UTF-8" />
         <meta
           name="description"
-          content="Create and extract PocketMine plugins online"
+          content="Create and extract PocketMine plugins online."
         />
         <meta
           name="keywords"

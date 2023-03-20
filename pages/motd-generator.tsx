@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
 import { Button, Form } from 'react-bootstrap';
+import { useRouter } from 'next/router'
 const SELECTION_SIGN = '§';
 const colourCodes = {
   0: {
@@ -161,6 +162,22 @@ export default class MOTDGenerator extends Component {
         );
       },
     );
+    if (this.props.motd) {
+      const newMotd = this.props.motd;
+      if (newMotd.includes(`${SELECTION_SIGN}k`)) {
+        this.setState({
+          kError: true,
+        });
+      } else {
+        this.setState({
+          kError: false,
+        });
+      }
+      this.setState({
+        motd: newMotd,
+      });
+      this.renderMotd(newMotd);
+    }
     this.setState({
       colourButtons,
       formattingButtons,
@@ -295,4 +312,8 @@ export default class MOTDGenerator extends Component {
       ) : null}
     </Layout>
   );
+}
+MOTDGenerator.getInitialProps = async ({ query }) => {
+  const {motd} = query
+  return {motd}
 }
