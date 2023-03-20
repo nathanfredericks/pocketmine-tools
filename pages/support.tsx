@@ -109,7 +109,7 @@ export default class Support extends Component {
       <p>This error occurs when you upload a plugin not ending in <code>.pmf</code>. Please ensure your plugin has the correct extension and is a <code>.pmf</code> plugin.</p>
       <h2>Contact me</h2>
       <p className="text-bg-info">To file a bug report, please see the FAQ section at the top of the page.</p>
-      <p>For other inquiries, please email me at {process.env.CONTACT_EMAIL}. Note that this email is not for support with plugin development. Emails of this nature will be ignored.</p>
+      <p>For other inquiries, please email me at <a href={`mailto:${process.env.CONTACT_EMAIL}`}>{process.env.CONTACT_EMAIL}</a>. Note that this email is not for support with plugin development. Emails of this nature will be ignored.</p>
     </Layout>
   );
 }

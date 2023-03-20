@@ -18,6 +18,6 @@ module.exports = withBundleAnalyzer({
     PMF_DECODER_HOST: 'pmf-decoder.mcpe.fun',
     PMF_DECODER_PORT: 443,
     PMF_DECODER_PROTOCOL: 'https',
-    CONTACT_EMAIL: 'nathan[at]nathfreder.dev'
+    CONTACT_EMAIL: 'nathan@nathfreder.dev'
   }
 });
