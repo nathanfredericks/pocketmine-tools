@@ -107,6 +107,14 @@ export default class Support extends Component {
       <p>This error occurs when you upload a <code>.pmf</code> plugin bigger than 5 megabytes. Please upload a smaller plugin.</p>
       <h3 id="pmf-ext-error">Sorry, only .pmf plugins are allowed.</h3>
       <p>This error occurs when you upload a plugin not ending in <code>.pmf</code>. Please ensure your plugin has the correct extension and is a <code>.pmf</code> plugin.</p>
+      <h3 id="ping-error-host">Sorry, an error occurred pinging your server. Ensure you have the correct hostname.</h3>
+      <p>This error is shown when your server&apos;s DNS record cannot be found.</p>
+      <ol>
+        <li>Check that you have an <code>A</code> record pointing to your server&apos;s IP address.</li>
+        <li>Check that the hostname and port are entered correctly.</li>
+      </ol> q
+      <h3 id="ping-error">Sorry, an error occurred pinging your server.</h3>
+      <p>This error occurs when your server cannot be pinged. Check that the server is online and the hostname and port are entered correctly. If you continue to experience errors, file a bug report and make sure to include the affected hostname and port.</p>
       <h2>Contact me</h2>
       <p className="text-bg-info">To file a bug report, please see the FAQ section at the top of the page.</p>
       <p>For other inquiries, please email me at <a href={`mailto:${process.env.CONTACT_EMAIL}`}>{process.env.CONTACT_EMAIL}</a>. Note that this email is not for support with plugin development. Emails of this nature will be ignored.</p>

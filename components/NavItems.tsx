@@ -8,6 +8,7 @@ import BoxSeamFill from 'bootstrap-icons/icons/box-seam-fill.svg';
 import BugFill from 'bootstrap-icons/icons/bug-fill.svg';
 import PlusSquareFill from 'bootstrap-icons/icons/plus-square-fill.svg';
 import BracesAsterisk from 'bootstrap-icons/icons/braces-asterisk.svg';
+import InfoCircleFill from 'bootstrap-icons/icons/info-circle-fill.svg';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 export default function NavItems({ open }: any) {
@@ -76,6 +77,14 @@ export default function NavItems({ open }: any) {
             active={isActive(['/motd-generator'])}
           >
             <Pencil width="1.25em" height="1.25em" /> MOTD Generator
+          </ListGroup.Item>
+        </Link>
+        <Link href="/ping" legacyBehavior>
+          <ListGroup.Item
+            as="li"
+            active={isActive(['/ping'])}
+          >
+            <InfoCircleFill width="1.25em" height="1.25em" /> Ping server
           </ListGroup.Item>
         </Link>
       </ListGroup>

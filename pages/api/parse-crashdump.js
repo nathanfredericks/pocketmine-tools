@@ -17,13 +17,13 @@ export default function handler(req, res) {
           'crashdump': JSON.stringify(parsedCrashdump, null, 2)
         });
       } catch {
-        res.status(401).json({
+        res.status(400).json({
           code: 'PARSE_ERROR',
           message: 'Error parsing crashdump.'
         });
       }
     } else {
-      res.status(401).json({
+      res.status(400).json({
         code: 'MISSING_CRASHDUMP',
         message: 'Missing crashdump.'
       });

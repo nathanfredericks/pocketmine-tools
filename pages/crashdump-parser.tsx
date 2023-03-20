@@ -52,7 +52,7 @@ export default class CrashdumpParser extends Component {
       }),
     });
     const json = await response.json();
-    if (response.status === 401) {
+    if (response.status === 400) {
       return this.setState({
         loading: false,
         parseError: 'Sorry, an error occurred decoding your crashdump.',
