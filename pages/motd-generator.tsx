@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
 import { Button, Form } from 'react-bootstrap';
-import { useRouter } from 'next/router'
 const SELECTION_SIGN = '§';
 const colourCodes = {
   0: {

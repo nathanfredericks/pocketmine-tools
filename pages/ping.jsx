@@ -77,7 +77,6 @@ export default class CrashdumpParser extends Component {
               <Form.Label>Host</Form.Label>
               <Form.Control type="text" placeholder="play.lbsg.net" onChange={this.handleHostChange} />
             </Form.Group>
-
             <Form.Group as={Col}>
               <Form.Label>Port</Form.Label>
               <Form.Control type="number" placeholder="19132" onChange={this.handlePortChange} />
