@@ -22,7 +22,7 @@ export default function NavItems({ open }: any) {
       <ListGroup as="ul" className="mb-3">
         <Link href="/create" legacyBehavior>
           <ListGroup.Item as="li" active={isActive(['/create'])}>
-            <BoxSeamFill width="1.25em" height="1.25em" /> Make{' '}
+            <BoxSeamFill width="1.25em" height="1.25em" /> Create{' '}
             <code>.phar</code>
           </ListGroup.Item>
         </Link>
