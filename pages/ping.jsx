@@ -72,15 +72,15 @@ export default class CrashdumpParser extends Component {
       <Layout title="Ping server" showNav={true}>
         {pingError ? <Alert variant="danger">{pingError} <Link href={pingErrorLink}>More info.</Link></Alert> : null}
         <Form onSubmit={this.handleSubmit}>
-          <Row className="mb-3">
-            <Form.Group as={Col}>
+          <Row className="mb-3 align-items-center mt">
+            <Col xs="auto">
               <Form.Label>Host</Form.Label>
               <Form.Control type="text" placeholder="play.lbsg.net" onChange={this.handleHostChange} />
-            </Form.Group>
-            <Form.Group as={Col}>
-              <Form.Label>Port</Form.Label>
+            </Col>
+            <Col xs="auto">
+              <Form.Label className="mt-3 mt-md-0">Port</Form.Label>
               <Form.Control type="number" placeholder="19132" onChange={this.handlePortChange} />
-            </Form.Group>
+            </Col>
           </Row>
           <Button
             variant="primary"

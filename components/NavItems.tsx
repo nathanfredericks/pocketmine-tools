@@ -9,6 +9,7 @@ import BugFill from 'bootstrap-icons/icons/bug-fill.svg';
 import PlusSquareFill from 'bootstrap-icons/icons/plus-square-fill.svg';
 import BracesAsterisk from 'bootstrap-icons/icons/braces-asterisk.svg';
 import InfoCircleFill from 'bootstrap-icons/icons/info-circle-fill.svg';
+import HeartFill from 'bootstrap-icons/icons/heart-fill.svg';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 export default function NavItems({ open }: any) {
@@ -88,6 +89,9 @@ export default function NavItems({ open }: any) {
           </ListGroup.Item>
         </Link>
       </ListGroup>
+        <footer className="pt-3 text-body-secondary">
+          Made with <HeartFill className="text-danger" /> in Canada by <a href="https://nathfreder.dev">Nathan Fredericks</a>
+        </footer>
       </div>
     </Collapse>
   );

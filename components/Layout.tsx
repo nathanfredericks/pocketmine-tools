@@ -35,6 +35,7 @@ export default function Layout({
       </Head>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
+          <Link href="/" passHref legacyBehavior>
             <Navbar.Brand>
               <PMTLogo
                 width="30"
@@ -43,6 +44,7 @@ export default function Layout({
               />
               PocketMine Tools
             </Navbar.Brand>
+          </Link>
           <Navbar.Toggle />
           <Navbar.Collapse>
             <Nav className="me-auto">
@@ -54,7 +56,7 @@ export default function Layout({
               <NavDropdown.Item href="https://mcpeme.mcpe.fun" target="_blank">mcpe.me</NavDropdown.Item>
               <NavDropdown.Item href="https://v1.mcpe.fun" target="_blank">v1 (Old PMT)</NavDropdown.Item>
               <NavDropdown.Item href="https://v2.mcpe.fun" target="_blank">v2</NavDropdown.Item>
-              <NavDropdown.Item href="https://v3.mcpe.fun" target="_blank">v3 <Badge bg="info">Current</Badge></NavDropdown.Item>
+              <NavDropdown.Item href="https://v3.mcpe.fun" target="_blank">v3 <Badge bg="primary">Current</Badge></NavDropdown.Item>
             </NavDropdown>
             </Nav>
           </Navbar.Collapse>
