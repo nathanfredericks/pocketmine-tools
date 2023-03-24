@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import Crashdump from '../lib/crashdump.interface';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 type CrashdumpParserState = {
   parseError: string | null;
   parseErrorLink: string | null;
@@ -99,65 +100,71 @@ export default class CrashdumpParser extends Component {
       });
     }
     return (
-      <Layout title="Crashdump Parser" showNav={true}>
-        {parseError ? <Alert variant="danger">{parseError} <Link href={parseErrorLink!}>More info.</Link></Alert> : null}
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group>
-            <Form.Label>Crashdump</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={6}
-              onChange={this.handleChange}
-              placeholder="Paste crashdump here"
-              className="mb-3"
-            />
-          </Form.Group>
-          <Button
-            variant="primary"
-            type="submit"
-            disabled={!crashdump || loading}
-          >
-            {loading ? (
-              <>
-                <span className="spinner-border spinner-border-sm mr-1" />{' '}
-                Decoding
-                <span className="dots" />
-              </>
-            ) : (
-              'Decode'
-            )}
-          </Button>
-          <small className="text-muted">
-            <br />
-            Your crashdump will be sent to the server for decoding.
-          </small>
-        </Form>
-        {parsedCrashdumpStr ? (
-          <Tabs defaultActiveKey="preview" className="mb-3 mt-3">
-            <Tab eventKey="preview" title="Preview">
-              {previewError ? (
-                <Alert variant="danger">{previewError} <Link href={previewErrorLink!}>More info.</Link></Alert>
+      <>
+        <Head>
+          <meta name="description" content="Decode and preview crashdumps" />
+        </Head>
+        <Layout title="Crashdump Parser" showNav={true}>
+          {parseError ?
+            <Alert variant="danger">{parseError} <Link href={parseErrorLink!}>More info.</Link></Alert> : null}
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group>
+              <Form.Label>Crashdump</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={6}
+                onChange={this.handleChange}
+                placeholder="Paste crashdump here"
+                className="mb-3"
+              />
+            </Form.Group>
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={!crashdump || loading}
+            >
+              {loading ? (
+                <>
+                  <span className="spinner-border spinner-border-sm mr-1" />{' '}
+                  Decoding
+                  <span className="dots" />
+                </>
               ) : (
-                <CrashdumpPreview crashdump={parsedCrashdumpObj!} />
+                'Decode'
               )}
-            </Tab>
-            <Tab eventKey="raw" title="Raw JSON">
-              <Form.Group>
-                <Form.Control
-                  as="textarea"
-                  rows={12}
-                  value={parsedCrashdumpStr}
-                  disabled
-                  className="mb-3 raw-json-crashdump"
-                />
-              </Form.Group>
-              <Button variant="primary" onClick={this.saveCrashdump}>
-                Download
-              </Button>
-            </Tab>
-          </Tabs>
-        ) : null}
-      </Layout>
+            </Button>
+            <small className="text-muted">
+              <br />
+              Your crashdump will be sent to the server for decoding.
+            </small>
+          </Form>
+          {parsedCrashdumpStr ? (
+            <Tabs defaultActiveKey="preview" className="mb-3 mt-3">
+              <Tab eventKey="preview" title="Preview">
+                {previewError ? (
+                  <Alert variant="danger">{previewError} <Link href={previewErrorLink!}>More info.</Link></Alert>
+                ) : (
+                  <CrashdumpPreview crashdump={parsedCrashdumpObj!} />
+                )}
+              </Tab>
+              <Tab eventKey="raw" title="Raw JSON">
+                <Form.Group>
+                  <Form.Control
+                    as="textarea"
+                    rows={12}
+                    value={parsedCrashdumpStr}
+                    disabled
+                    className="mb-3 raw-json-crashdump"
+                  />
+                </Form.Group>
+                <Button variant="primary" onClick={this.saveCrashdump}>
+                  Download
+                </Button>
+              </Tab>
+            </Tabs>
+          ) : null}
+        </Layout>
+      </>
     );
   }
 }

@@ -3,6 +3,7 @@ import { Alert, Button, Form, InputGroup } from 'react-bootstrap';
 import { saveAs } from 'file-saver';
 import Layout from '../components/Layout';
 import Link from 'next/link';
+import Head from 'next/head';
 type PMFDecoderState = {
   files: FileList | null;
   loading: boolean;
@@ -108,46 +109,51 @@ export default class PMFDecoder extends Component {
   render = () => {
     const { files, loading, error, errorLink, beautifyOutput } = this.state;
     return (
-      <Layout title="PMF Decoder" showNav={true}>
-        {error ? <Alert variant="danger">{error} <Link href={errorLink!}>More info.</Link></Alert> : null}
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Label>Plugin (<code>.pmf</code> file)</Form.Label>
-          <InputGroup className="mb-3">
-            <Form.Control
-              type="file"
-              name="fileToUpload"
-              accept=".pmf"
-              onChange={this.handleChange}
-            />
-          </InputGroup>
-          <div className="mb-3">
-            <Form.Check
-              type="switch"
-              checked={beautifyOutput}
-              onChange={(event) =>
-                this.setState({ beautifyOutput: event.target.checked })
-              }
-              label="Beautify output"
-            />
-          </div>
-          <Button variant="primary" type="submit" disabled={!files || loading}>
-            {loading ? (
-              <>
-                <span className="spinner-border spinner-border-sm mr-1" />{' '}
-                Decoding
-                <span className="dots" />
-              </>
-            ) : (
-              'Decode'
-            )}
-          </Button>
-          <small className="text-muted">
-            <br />
-            Your plugin will be sent to{' '}
-            <a>{process.env.PMF_DECODER_HOST}</a> for decoding.
-          </small>
-        </Form>
-      </Layout>
+      <>
+        <Head>
+          <meta name="description" content="Decode and beautify .pmf plugins" />
+        </Head>
+        <Layout title="PMF Decoder" showNav={true}>
+          {error ? <Alert variant="danger">{error} <Link href={errorLink!}>More info.</Link></Alert> : null}
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Label>Plugin (<code>.pmf</code> file)</Form.Label>
+            <InputGroup className="mb-3">
+              <Form.Control
+                type="file"
+                name="fileToUpload"
+                accept=".pmf"
+                onChange={this.handleChange}
+              />
+            </InputGroup>
+            <div className="mb-3">
+              <Form.Check
+                type="switch"
+                checked={beautifyOutput}
+                onChange={(event) =>
+                  this.setState({ beautifyOutput: event.target.checked })
+                }
+                label="Beautify output"
+              />
+            </div>
+            <Button variant="primary" type="submit" disabled={!files || loading}>
+              {loading ? (
+                <>
+                  <span className="spinner-border spinner-border-sm mr-1" />{' '}
+                  Decoding
+                  <span className="dots" />
+                </>
+              ) : (
+                'Decode'
+              )}
+            </Button>
+            <small className="text-muted">
+              <br />
+              Your plugin will be sent to{' '}
+              <a>{process.env.PMF_DECODER_HOST}</a> for decoding.
+            </small>
+          </Form>
+        </Layout>
+      </>
     );
   };
 }

@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Badge, Card, Form } from 'react-bootstrap';
 import {
   Configure,
@@ -6,11 +6,12 @@ import {
   Hits,
   InstantSearch,
   useInstantSearch,
-  useSearchBox,
+  useSearchBox
 } from 'react-instantsearch-hooks-web';
 import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 import Layout from '../components/Layout';
 import useDebounce from '../lib/useDebounce';
+import Head from 'next/head';
 export default class PoggitSearch extends Component {
   render() {
     const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
@@ -34,15 +35,20 @@ export default class PoggitSearch extends Component {
     });
     const searchClient = typesenseInstantsearchAdapter.searchClient;
     return (
-      <Layout title="Poggit Search" showNav={true}>
-        <InstantSearch searchClient={searchClient} indexName="plugins">
-          <Configure hitsPerPage={5} />
-          <CustomSearchBox />
-          <NoResultsBoundary fallback={<NoResults />}>
-            <Hits hitComponent={Hit} />
-          </NoResultsBoundary>
-        </InstantSearch>
-      </Layout>
+      <>
+        <Head>
+          <meta name="description" content="Search Poggit for plugins" />
+        </Head>
+        <Layout title="Poggit Search" showNav={true}>
+          <InstantSearch searchClient={searchClient} indexName="plugins">
+            <Configure hitsPerPage={5} />
+            <CustomSearchBox />
+            <NoResultsBoundary fallback={<NoResults />}>
+              <Hits hitComponent={Hit} />
+            </NoResultsBoundary>
+          </InstantSearch>
+        </Layout>
+      </>
     );
   }
 }

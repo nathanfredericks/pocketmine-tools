@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
+import Head from 'next/head';
 export default class Home extends Component {
   render = () => (
-    <Layout title={null} showNav={true}>
-      <h1>Welcome to PocketMine Tools!</h1>
-      <p>
-        Convert PocketMine-MP plugins online.
-      </p>
-    </Layout>
+    <>
+      <Head>
+        <meta name="description" content="Convert PocketMine-MP plugins online" />
+      </Head>
+      <Layout title={null} showNav={true}>
+        <h1>Welcome to PocketMine Tools!</h1>
+        <p>
+          Convert PocketMine-MP plugins online
+        </p>
+      </Layout>
+    </>
   );
 }
