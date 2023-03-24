@@ -5,6 +5,7 @@ import { dump } from 'js-yaml';
 import { correctNamespacePart } from '../lib/utils';
 import { saveAs } from 'file-saver';
 import Link from 'next/link';
+import Head from 'next/head';
 type GenerateState = {
   name: string | null;
   api: string | null;
@@ -100,44 +101,49 @@ class Main extends PluginBase{
   render = () => {
     const { name, api, nameError, error, errorLink, loading } = this.state;
     return (
-      <Layout title="Generate plugin" showNav={true}>
-        {error ? <Alert variant="danger">{error} <Link href={errorLink!}>More info.</Link></Alert> : null}
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group className="mb-3">
-            <Form.Label>Plugin name</Form.Label>
-            <Form.Control
-              type="text"
-              onChange={this.handleNameChange}
-              isInvalid={nameError}
-            />
-            <Form.Control.Feedback type="invalid">
-              Only letters, numbers, underscores and dashes are allowed.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Plugin API version</Form.Label>
-            <Form.Control
-              type="text"
-              onChange={this.handleAPIChange}
-            />
-          </Form.Group>
-          <Button
-            variant="primary"
-            type="submit"
-            disabled={!name || !api || nameError || loading}
-          >
-            {loading ? (
-              <>
-                <span className="spinner-border spinner-border-sm mr-1" />{' '}
-                Generating
-                <span className="dots" />
-              </>
-            ) : (
-              'Generate'
-            )}
-          </Button>
-        </Form>
-      </Layout>
+      <>
+        <Head>
+          <meta name="description" content="Generate a skeleton plugin" />
+        </Head>
+        <Layout title="Generate plugin" showNav={true}>
+          {error ? <Alert variant="danger">{error} <Link href={errorLink!}>More info.</Link></Alert> : null}
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Plugin name</Form.Label>
+              <Form.Control
+                type="text"
+                onChange={this.handleNameChange}
+                isInvalid={nameError}
+              />
+              <Form.Control.Feedback type="invalid">
+                Only letters, numbers, underscores and dashes are allowed.
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Plugin API version</Form.Label>
+              <Form.Control
+                type="text"
+                onChange={this.handleAPIChange}
+              />
+            </Form.Group>
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={!name || !api || nameError || loading}
+            >
+              {loading ? (
+                <>
+                  <span className="spinner-border spinner-border-sm mr-1" />{' '}
+                  Generating
+                  <span className="dots" />
+                </>
+              ) : (
+                'Generate'
+              )}
+            </Button>
+          </Form>
+        </Layout>
+      </>
     );
   };
 }

@@ -3,6 +3,7 @@ import { Alert, Button, Form, InputGroup } from 'react-bootstrap';
 import { saveAs } from 'file-saver';
 import Layout from '../components/Layout';
 import Link from 'next/link';
+import Head from 'next/head';
 type ExtractState = {
   files: FileList | null;
   loading: boolean;
@@ -71,30 +72,35 @@ export default class Extract extends Component<{}, ExtractState> {
   render = () => {
     const { files, error, errorLink, loading } = this.state;
     return (
-      <Layout title="Extract .phar" showNav={true}>
-        {error ? <Alert variant="danger">{error} <Link href={errorLink!}>More info.</Link></Alert> : null}
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Label>Plugin (<code>.phar</code> file)</Form.Label>
-          <InputGroup className="mb-3">
-            <Form.Control
-              type="file"
-              accept=".phar"
-              onChange={this.handleChange}
-            />
-          </InputGroup>
-          <Button variant="primary" type="submit" disabled={loading || !files}>
-            {loading ? (
-              <>
-                <span className="spinner-border spinner-border-sm mr-1" />{' '}
-                Converting
-                <span className="dots" />
-              </>
-            ) : (
-              'Extract'
-            )}
-          </Button>
-        </Form>
-      </Layout>
+      <>
+        <Head>
+          <meta name="description" content="Convert .phar to .zip" />
+        </Head>
+        <Layout title="Extract .phar" showNav={true}>
+          {error ? <Alert variant="danger">{error} <Link href={errorLink!}>More info.</Link></Alert> : null}
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Label>Plugin (<code>.phar</code> file)</Form.Label>
+            <InputGroup className="mb-3">
+              <Form.Control
+                type="file"
+                accept=".phar"
+                onChange={this.handleChange}
+              />
+            </InputGroup>
+            <Button variant="primary" type="submit" disabled={loading || !files}>
+              {loading ? (
+                <>
+                  <span className="spinner-border spinner-border-sm mr-1" />{' '}
+                  Converting
+                  <span className="dots" />
+                </>
+              ) : (
+                'Extract'
+              )}
+            </Button>
+          </Form>
+        </Layout>
+      </>
     );
   };
 }

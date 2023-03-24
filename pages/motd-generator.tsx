@@ -2,12 +2,13 @@
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
 import { Button, Form } from 'react-bootstrap';
+import Head from 'next/head';
 const SELECTION_SIGN = '§';
 const colourCodes = {
   0: {
     colour: '#000000',
     css: 'color:#000000;',
-    textIsBlack: false,
+    textIsBlack: false
   },
   1: {
     colour: '#0000AA',
@@ -276,40 +277,45 @@ export default class MOTDGenerator extends Component {
     });
   };
   render = () => (
-    <Layout title="MOTD Generator" showNav={true}>
-      {this.state.colourButtons}
-      <br />
-      {this.state.formattingButtons}
-      <Button
-        className="format-btn"
-        onClick={() => this.insertCode('r')}
-        variant="primary"
-      >
-        Reset
-      </Button>
-      <Form.Group className="mt-3">
-        <Form.Control
-          as="textarea"
-          ref={this.textareaRef}
-          autoFocus
-          style={{ marginTop: 8, resize: 'none' }}
-          placeholder={`${SELECTION_SIGN}cMy awesome MOTD`}
-          value={this.state.motd}
-          className="motd-textarea mt-3"
-          onChange={this.handleChange}
-          isInvalid={this.state.kError}
-        />
-        <Form.Control.Feedback type="invalid">
-          The {`${SELECTION_SIGN}k`} format code is not supported.
-        </Form.Control.Feedback>
-      </Form.Group>
-      {!this.state.kError && this.state.charsInMotd ? (
-        <div
-          className="preview mt-3"
-          dangerouslySetInnerHTML={{ __html: this.state.htmlMotd }}
-        />
-      ) : null}
-    </Layout>
+    <>
+      <Head>
+        <meta name="description" content="Generate and preview MOTDs" />
+      </Head>
+      <Layout title="MOTD Generator" showNav={true}>
+        {this.state.colourButtons}
+        <br />
+        {this.state.formattingButtons}
+        <Button
+          className="format-btn"
+          onClick={() => this.insertCode('r')}
+          variant="primary"
+        >
+          Reset
+        </Button>
+        <Form.Group className="mt-3">
+          <Form.Control
+            as="textarea"
+            ref={this.textareaRef}
+            autoFocus
+            style={{ marginTop: 8, resize: 'none' }}
+            placeholder={`${SELECTION_SIGN}cMy awesome MOTD`}
+            value={this.state.motd}
+            className="motd-textarea mt-3"
+            onChange={this.handleChange}
+            isInvalid={this.state.kError}
+          />
+          <Form.Control.Feedback type="invalid">
+            The {`${SELECTION_SIGN}k`} format code is not supported.
+          </Form.Control.Feedback>
+        </Form.Group>
+        {!this.state.kError && this.state.charsInMotd ? (
+          <div
+            className="preview mt-3"
+            dangerouslySetInnerHTML={{ __html: this.state.htmlMotd }}
+          />
+        ) : null}
+      </Layout>
+    </>
   );
 }
 MOTDGenerator.getInitialProps = async ({ query }) => {

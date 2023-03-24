@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Alert, Button, Form, Row, Col, Table } from 'react-bootstrap';
+import { Alert, Button, Col, Form, Row, Table } from 'react-bootstrap';
 import Layout from '../components/Layout';
 import Link from 'next/link';
+import Head from 'next/head';
 export default class CrashdumpParser extends Component {
   state = {
     pingError: null,
@@ -9,7 +10,7 @@ export default class CrashdumpParser extends Component {
     host: null,
     port: null,
     loading: false,
-    data: null,
+    data: null
   };
   handleHostChange = (event) => {
     this.setState({
@@ -69,59 +70,65 @@ export default class CrashdumpParser extends Component {
       data
     } = this.state;
     return (
-      <Layout title="Ping server" showNav={true}>
-        {pingError ? <Alert variant="danger">{pingError} <Link href={pingErrorLink}>More info.</Link></Alert> : null}
-        <Form onSubmit={this.handleSubmit}>
-          <Row className="mb-3 align-items-center mt">
-            <Col xs="auto">
-              <Form.Label>Host</Form.Label>
-              <Form.Control type="text" placeholder="play.lbsg.net" onChange={this.handleHostChange} />
-            </Col>
-            <Col xs="auto">
-              <Form.Label className="mt-3 mt-md-0">Port</Form.Label>
-              <Form.Control type="number" placeholder="19132" onChange={this.handlePortChange} />
-            </Col>
-          </Row>
-          <Button
-            variant="primary"
-            type="submit"
-            disabled={!host || !port || loading}
-            className="mb-3"
-          >
-            {loading ? (
-              <>
-                <span className="spinner-border spinner-border-sm mr-1" />{' '}
-                Pinging
-                <span className="dots" />
-              </>
-            ) : (
-              'Ping'
-            )}
-          </Button>
-        </Form>
-        {data ? (
-          <Table responsive>
-            <tbody>
-            <tr>
-              <td>MOTD</td>
-              <td>{data.name} <a href={`/motd-generator/?motd=${data.name}`} target="_blank">Open in MOTD Generator</a></td>
-            </tr>
-            <tr>
-              <td>MCPE Version</td>
-              <td>v{data.mcpeVersion}</td>
-            </tr>
-            <tr>
-              <td>Current players</td>
-              <td>{data.currentPlayers}</td>
-            </tr>
-            <tr>
-              <td>Max players</td>
-              <td>{data.maxPlayers}</td>
-            </tr>
-            </tbody>
-          </Table>
-        ) : null}
-      </Layout>
+      <>
+        <Head>
+          <meta name="description" content="Ping Minecraft servers" />
+        </Head>
+        <Layout title="Ping server" showNav={true}>
+          {pingError ? <Alert variant="danger">{pingError} <Link href={pingErrorLink}>More info.</Link></Alert> : null}
+          <Form onSubmit={this.handleSubmit}>
+            <Row className="mb-3 align-items-center mt">
+              <Col xs="auto">
+                <Form.Label>Host</Form.Label>
+                <Form.Control type="text" placeholder="play.lbsg.net" onChange={this.handleHostChange} />
+              </Col>
+              <Col xs="auto">
+                <Form.Label className="mt-3 mt-md-0">Port</Form.Label>
+                <Form.Control type="number" placeholder="19132" onChange={this.handlePortChange} />
+              </Col>
+            </Row>
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={!host || !port || loading}
+              className="mb-3"
+            >
+              {loading ? (
+                <>
+                  <span className="spinner-border spinner-border-sm mr-1" />{' '}
+                  Pinging
+                  <span className="dots" />
+                </>
+              ) : (
+                'Ping'
+              )}
+            </Button>
+          </Form>
+          {data ? (
+            <Table responsive>
+              <tbody>
+              <tr>
+                <td>MOTD</td>
+                <td>{data.name} <a href={`/motd-generator/?motd=${data.name}`} target="_blank">Open in MOTD
+                  Generator</a></td>
+              </tr>
+              <tr>
+                <td>MCPE Version</td>
+                <td>v{data.mcpeVersion}</td>
+              </tr>
+              <tr>
+                <td>Current players</td>
+                <td>{data.currentPlayers}</td>
+              </tr>
+              <tr>
+                <td>Max players</td>
+                <td>{data.maxPlayers}</td>
+              </tr>
+              </tbody>
+            </Table>
+          ) : null}
+        </Layout>
+      </>
     );
   }
 }

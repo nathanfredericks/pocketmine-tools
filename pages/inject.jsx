@@ -3,6 +3,7 @@ import { Alert, Button, Form, InputGroup, Modal } from 'react-bootstrap';
 import { saveAs } from 'file-saver';
 import Layout from '../components/Layout';
 import Link from 'next/link';
+import Head from 'next/head';
 export default class Inject extends Component {
   state = {
     files: [],
@@ -86,86 +87,91 @@ export default class Inject extends Component {
       loading,
     } = this.state;
     return (
-      <Layout title="API Injector" showNav={true}>
-        {error ? <Alert variant="danger">{error} <Link href={errorLink}>More info.</Link></Alert> : null}
-        <Form>
-          <Form.Label>Plugin (<code>.phar</code> file)</Form.Label>
-          <InputGroup className="mb-3">
-            <Form.Control
-              type="file"
-              accept=".phar"
-              onChange={this.handleChange}
-            />
-          </InputGroup>
-          <Form.Group className="mb-3">
-            <Form.Label>API version</Form.Label>
-            <Form.Control
-              type="text"
-              value={apiVersion}
-              onChange={(event) =>
-                this.setState({ apiVersion: event.target.value })
-              }
-            />
-          </Form.Group>
-          <Button
-            variant="primary"
-            onClick={() =>
-              this.setState({
-                warningModal: true,
-              })
-            }
-            disabled={files.length < 1 || apiVersion.length < 1}
-          >
-            Inject
-          </Button>
-        </Form>
-        <Modal
-          show={warningModal}
-          onHide={() => this.setState({ warningModal: false })}
-          size="lg"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title className="text-danger">This is dangerous</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <ol>
-              <li>
-                This tool only forces the plugin to say that it supports API
-                version <code>{apiVersion}</code>. It will not fix the actual
-                incompatibility issues.
-              </li>
-              <li>
-                If errors happen after loading the downloaded plugin, uninstall
-                it immediately and contact the plugin developer for support.
-              </li>
-              <li>
-                Click{' '}
-                <em onClick={() => this.setState({ warningThreeWords: true })}>
-                  these three words
-                </em>{' '}
-                if you have read the above.
-              </li>
-            </ol>
-          </Modal.Body>
-          <Modal.Footer>
+      <>
+        <Head>
+          <meta name="description" content="Inject new API versions" />
+        </Head>
+        <Layout title="API Injector" showNav={true}>
+          {error ? <Alert variant="danger">{error} <Link href={errorLink}>More info.</Link></Alert> : null}
+          <Form>
+            <Form.Label>Plugin (<code>.phar</code> file)</Form.Label>
+            <InputGroup className="mb-3">
+              <Form.Control
+                type="file"
+                accept=".phar"
+                onChange={this.handleChange}
+              />
+            </InputGroup>
+            <Form.Group className="mb-3">
+              <Form.Label>API version</Form.Label>
+              <Form.Control
+                type="text"
+                value={apiVersion}
+                onChange={(event) =>
+                  this.setState({ apiVersion: event.target.value })
+                }
+              />
+            </Form.Group>
             <Button
               variant="primary"
-              onClick={this.handleSubmit}
-              disabled={!warningThreeWords || loading}
+              onClick={() =>
+                this.setState({
+                  warningModal: true
+                })
+              }
+              disabled={files.length < 1 || apiVersion.length < 1}
             >
-              {loading ? (
-                <>
-                  <span className="spinner-border spinner-border-sm mr-1" />{' '}
-                  Injecting
-                  <span className="dots" />
-                </>
-              ) : (
-                'Inject'
-              )}
+              Inject
             </Button>
-          </Modal.Footer>
-        </Modal>
-      </Layout>
+          </Form>
+          <Modal
+            show={warningModal}
+            onHide={() => this.setState({ warningModal: false })}
+            size="lg"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title className="text-danger">This is dangerous</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <ol>
+                <li>
+                  This tool only forces the plugin to say that it supports API
+                  version <code>{apiVersion}</code>. It will not fix the actual
+                  incompatibility issues.
+                </li>
+                <li>
+                  If errors happen after loading the downloaded plugin, uninstall
+                  it immediately and contact the plugin developer for support.
+                </li>
+                <li>
+                  Click{' '}
+                  <em onClick={() => this.setState({ warningThreeWords: true })}>
+                    these three words
+                  </em>{' '}
+                  if you have read the above.
+                </li>
+              </ol>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="primary"
+                onClick={this.handleSubmit}
+                disabled={!warningThreeWords || loading}
+              >
+                {loading ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm mr-1" />{' '}
+                    Injecting
+                    <span className="dots" />
+                  </>
+                ) : (
+                  'Inject'
+                )}
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </Layout>
+      </>
     );
   };
 }

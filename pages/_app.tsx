@@ -8,14 +8,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <meta
-          name="description"
-          content="Convert PocketMine-MP plugins online."
-        />
-        <meta
-          name="keywords"
-          content="PocketMine,PocketMine Tools,PMT,pmt.mcpe.fun,pmt,mcpe.fun"
-        />
+        <meta name="keywords" content="PocketMine,PocketMine Tools,PMT,pmt.mcpe.fun,pmt,mcpe.fun" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
         <script defer data-domain="pmt.nathfreder.dev" src="https://analytics.mcpe.fun/js/script.js"></script>
