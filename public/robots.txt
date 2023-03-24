@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://pmt.mcpe.fun/sitemap.xml
+Sitemap: https://pmt.mcpe.fun/sitemap.txt
