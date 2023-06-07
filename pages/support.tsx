@@ -75,13 +75,6 @@ export default class Support extends Component {
             </li>
           </ul>
         </p>
-        <h3 id="preview-not-avail-error">Sorry, your crashdump could not be previewed. Raw JSON is still available.</h3>
-        <p>
-          This error occurs when we cannot validate your crashdump&apos;s body. You can still view and download the Raw
-          JSON.
-          Crashdump Parser may not be able to preview your crashdump if it was produced by an unsupported version of
-          PocketMine-MP or a spoon/fork.
-        </p>
         <h3 id="convert-error">An error occurred while converting your plugin.</h3>
         <p>
           This error occurs when your plugin cannot be converted. Often this error is caused by uploading the wrong file
