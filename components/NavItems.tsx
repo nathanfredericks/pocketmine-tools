@@ -13,7 +13,6 @@ import HeartFill from 'bootstrap-icons/icons/heart-fill.svg';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import getConfig from 'next/config';
-
 export default function NavItems({ open }: any) {
   const router = useRouter();
   const isActive = (routes: string[]) => routes.includes(router.pathname);
