@@ -1,6 +1,7 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
+const { version } = require('./package.json');
 module.exports = withBundleAnalyzer({
   webpack(config) {
     config.module.rules.push({
@@ -19,5 +20,8 @@ module.exports = withBundleAnalyzer({
     PMF_DECODER_PORT: 443,
     PMF_DECODER_PROTOCOL: 'https',
     CONTACT_EMAIL: 'nathan@nathfreder.dev'
-  }
+  },
+  publicRuntimeConfig: {
+    version,
+  },
 });
