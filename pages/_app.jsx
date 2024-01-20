@@ -20,7 +20,6 @@ function MyApp({ Component, pageProps }) {
         <meta name="theme-color" content="#eeeeee" />
         <meta property="og:image" content="/static/logo.png" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <script defer data-domain="pmt.nathfreder.dev" src="https://analytics.mcpe.fun/js/script.js" />
       </Head>
       <Component {...pageProps} />
     </>

@@ -37,14 +37,6 @@ const Layout = ({ title, children }) => {
           <Navbar.Brand>
             PocketMine Tools
           </Navbar.Brand>
-          <Navbar.Toggle />
-          <Navbar.Collapse>
-            <Nav>
-              <Nav.Link href="https://discord.gg/qPqrKAF" target="_blank">
-                Discord
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
         </Container>
       </Navbar>
 
