@@ -1,6 +1,6 @@
 {
   "name": "pocketmine-tools",
-  "version": "2.0.0-rc.2",
+  "version": "2.0.1",
   "private": true,
   "description": "",
   "homepage": "https://pmt.mcpe.fun",
@@ -15,11 +15,11 @@
   "author": "Nathaniel Fredericks <me@nathfreder.tech> (https://nathfreder.tech)",
   "main": "pages/index.js",
   "scripts": {
-    "build": "next build",
-    "dev": "next",
-    "start": "next start",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider next build",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider next",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider next start",
     "now-build": "npm run build && npm run export -- -o dist",
-    "export": "next export"
+    "export": "NODE_OPTIONS=--openssl-legacy-provider next export"
   },
   "dependencies": {
     "@brunorb/semverjs": "^1.0.4",
