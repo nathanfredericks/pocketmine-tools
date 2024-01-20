@@ -12,6 +12,6 @@ module.exports = {
     POGGIT_SEARCH_HOST: 'poggit-search.mcpe.fun',
     POGGIT_SEARCH_PORT: 443,
     POGGIT_SEARCH_PROTOCOL: 'https',
-    POGGIT_SEARCH_API_KEY: 'xpjQapQFX5qnnEifV1a3hxD8E8e60aoh',
+    POGGIT_SEARCH_API_KEY: 'xPdb48VLlQajh2sSxCNcwYUBv8uMo7CQ',
   },
 };
