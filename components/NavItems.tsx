@@ -12,12 +12,12 @@ import InfoCircleFill from 'bootstrap-icons/icons/info-circle-fill.svg';
 import HeartFill from 'bootstrap-icons/icons/heart-fill.svg';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import getConfig from 'next/config';
+
 export default function NavItems({ open }: any) {
   const router = useRouter();
   const isActive = (routes: string[]) => routes.includes(router.pathname);
-  const { publicRuntimeConfig } = getConfig();
-  const version = publicRuntimeConfig.version
+  const date = new Date();
+  const year = date.getFullYear();
   return (
     <Collapse in={open}>
       <div>
@@ -93,8 +93,8 @@ export default function NavItems({ open }: any) {
         </Link>
       </ListGroup>
         <footer className="pt-3 text-body-secondary">
-          Made with <HeartFill className="text-danger" /> in Canada by <a href="https://nathfreder.dev">Nathan Fredericks</a><br />
-          <code className="text-body-secondary">v{version}</code>
+          &copy; {year} Nathan Fredericks<br />
+          Made with <HeartFill className="text-danger"/> in Canada
         </footer>
       </div>
     </Collapse>

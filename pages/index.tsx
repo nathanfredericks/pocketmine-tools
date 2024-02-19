@@ -10,7 +10,7 @@ export default class Home extends Component {
       <Layout title={null} showNav={true}>
         <h1>Welcome to PocketMine Tools!</h1>
         <p>
-          Convert PocketMine-MP plugins online
+          PocketMine Tools is a website built for Minecraft server administrators and plugin developers. The website offers nine responsive utilities for efficient server administration and plugin development.
         </p>
       </Layout>
     </>
