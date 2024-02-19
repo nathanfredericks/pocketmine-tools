@@ -36,7 +36,7 @@ export default class PMFDecoder extends Component {
       formData.append('fileToUpload', files[0]);
       // @ts-ignore
       const response = await fetch(
-        `${process.env.PMF_DECODER_PROTOCOL}://${process.env.PMF_DECODER_HOST}:${process.env.PMF_DECODER_PORT}/`,
+        `${process.env.NEXT_PUBLIC_PMF_DECODER_PROTOCOL}://${process.env.NEXT_PUBLIC_PMF_DECODER_HOST}:${process.env.NEXT_PUBLIC_PMF_DECODER_PORT}/`,
         {
           method: 'POST',
           body: formData,
@@ -149,7 +149,7 @@ export default class PMFDecoder extends Component {
             <small className="text-muted">
               <br />
               Your plugin will be sent to{' '}
-              <a>{process.env.PMF_DECODER_HOST}</a> for decoding.
+              <a>{process.env.NEXT_PUBLIC_PMF_DECODER_HOST}</a> for decoding.
             </small>
           </Form>
         </Layout>

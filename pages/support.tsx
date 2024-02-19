@@ -148,7 +148,7 @@ export default class Support extends Component {
             the affected hostname and port.</p>
           <h2>Contact us</h2>
           <p>Please send an email to <a
-            href={`mailto:${process.env.CONTACT_EMAIL}`}>{process.env.CONTACT_EMAIL}</a>.</p>
+            href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`}>{process.env.NEXT_PUBLIC_CONTACT_EMAIL}</a>.</p>
           <h2>Build Information</h2>
           <Table bordered>
             <tbody>
