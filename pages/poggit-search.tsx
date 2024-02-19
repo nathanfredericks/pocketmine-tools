@@ -17,15 +17,15 @@ export default class PoggitSearch extends Component {
     const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
       server: {
         // @ts-ignore
-        apiKey: process.env.POGGIT_SEARCH_API_KEY,
+        apiKey: process.env.NEXT_PUBLIC_POGGIT_SEARCH_API_KEY,
         nodes: [
           {
             // @ts-ignore
-            host: process.env.POGGIT_SEARCH_HOST,
+            host: process.env.NEXT_PUBLIC_POGGIT_SEARCH_HOST,
             // @ts-ignore
-            port: process.env.POGGIT_SEARCH_PORT,
+            port: process.env.NEXT_PUBLIC_POGGIT_SEARCH_PORT,
             // @ts-ignore
-            protocol: process.env.POGGIT_SEARCH_PROTOCOL,
+            protocol: process.env.NEXT_PUBLIC_POGGIT_SEARCH_PROTOCOL,
           },
         ],
       },

@@ -11,16 +11,6 @@ module.exports = withBundleAnalyzer({
     return config;
   },
   trailingSlash: true,
-  env: {
-    POGGIT_SEARCH_HOST: 'poggit-search.mcpe.fun',
-    POGGIT_SEARCH_PORT: 443,
-    POGGIT_SEARCH_PROTOCOL: 'https',
-    POGGIT_SEARCH_API_KEY: 'xPdb48VLlQajh2sSxCNcwYUBv8uMo7CQ',
-    PMF_DECODER_HOST: 'pmf-decoder.mcpe.fun',
-    PMF_DECODER_PORT: 443,
-    PMF_DECODER_PROTOCOL: 'https',
-    CONTACT_EMAIL: 'support@mcpe.fun'
-  },
   publicRuntimeConfig: {
     version,
   },
