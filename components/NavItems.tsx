@@ -12,7 +12,6 @@ import InfoCircleFill from 'bootstrap-icons/icons/info-circle-fill.svg';
 import HeartFill from 'bootstrap-icons/icons/heart-fill.svg';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-
 export default function NavItems({ open }: any) {
   const router = useRouter();
   const isActive = (routes: string[]) => routes.includes(router.pathname);
