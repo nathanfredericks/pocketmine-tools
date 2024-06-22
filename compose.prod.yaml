@@ -1,8 +1,12 @@
 services:
   pocketmine-tools:
-    build:
-      context: .
-      dockerfile: prod.Dockerfile
+    image: ghcr.io/nathanfredericks/pocketmine-tools:main
+    environment:
+      - NEXT_PUBLIC_SITE_HOST=
+      - NEXT_PUBLIC_SITE_PORT=
+      - NEXT_PUBLIC_SITE_PROTOCOL=
+      - NEXT_PUBLIC_POGGIT_SEARCH_API_KEY=
+      - NEXT_PUBLIC_CONTACT_EMAIL=
     restart: unless-stopped
     ports:
       - 3000:3000
