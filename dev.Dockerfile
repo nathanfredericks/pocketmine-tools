@@ -9,4 +9,4 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD ["npm", "run", "dev"]
+CMD npm run dev
