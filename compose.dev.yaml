@@ -37,8 +37,6 @@ services:
       typesense:
         condition: service_healthy
     restart: on-failure
-    volumes:
-      - ./.env.development:/app/shared/.env.local
   typesense:
     image: typesense/typesense:26.0
     environment:
