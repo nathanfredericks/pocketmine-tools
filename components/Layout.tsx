@@ -7,7 +7,6 @@ import {
   Tab,
   Button,
   Nav,
-  NavDropdown, Badge
 } from 'react-bootstrap';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -50,14 +49,6 @@ export default function Layout({
             <Nav className="me-auto">
               <Nav.Link href="/" as={Link} className={isActive(['/']) ? 'active' : ''}>Home</Nav.Link>
               <Nav.Link href="/support" as={Link} className={isActive(['/support']) ? 'active' : ''}>Support</Nav.Link>
-            </Nav>
-            <Nav className="ms-auto">
-            <NavDropdown title="Versions">
-              <NavDropdown.Item href="https://mcpeme.mcpe.fun" target="_blank">mcpe.me</NavDropdown.Item>
-              <NavDropdown.Item href="https://v1.mcpe.fun" target="_blank">v1 (Old PMT)</NavDropdown.Item>
-              <NavDropdown.Item href="https://v2.mcpe.fun" target="_blank">v2</NavDropdown.Item>
-              <NavDropdown.Item href="https://v3.mcpe.fun" target="_blank">v3 <Badge bg="primary">Current</Badge></NavDropdown.Item>
-            </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>

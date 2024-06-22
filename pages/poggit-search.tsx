@@ -21,11 +21,12 @@ export default class PoggitSearch extends Component {
         nodes: [
           {
             // @ts-ignore
-            host: process.env.NEXT_PUBLIC_POGGIT_SEARCH_HOST,
+            host: process.env.NEXT_PUBLIC_SITE_HOST,
             // @ts-ignore
-            port: process.env.NEXT_PUBLIC_POGGIT_SEARCH_PORT,
+            port: process.env.NEXT_PUBLIC_SITE_PORT,
             // @ts-ignore
-            protocol: process.env.NEXT_PUBLIC_POGGIT_SEARCH_PROTOCOL,
+            protocol: process.env.NEXT_PUBLIC_SITE_PROTOCOL,
+            path: '/api/poggit-search'
           },
         ],
       },

@@ -1,0 +1,54 @@
+services:
+  pocketmine-tools:
+    build:
+      context: .
+      dockerfile: prod.Dockerfile
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    links:
+      - typesense:typesense
+      - pmf-decoder:pmf-decoder
+    depends_on:
+      pmf-decoder:
+        condition: service_started
+      typesense:
+        condition: service_started
+      update-poggit-search:
+        condition: service_completed_successfully
+  pmf-decoder:
+    image: ghcr.io/nathanfredericks/pmf-decoder:main
+    restart: unless-stopped
+  update-poggit-search:
+    image: ghcr.io/nathanfredericks/update-poggit-search:main
+    environment:
+      TYPESENSE_HOST: typesense
+      TYPESENSE_PORT: 8108
+      TYPESENSE_PROTOCOL: http
+      TYPESENSE_API_KEY: insecure
+      POGGIT_PROTOCOL: https
+      POGGIT_HOST: poggit.pmmp.io
+      POGGIT_PORT: 443
+    links:
+      - typesense:typesense
+    depends_on:
+      typesense:
+        condition: service_healthy
+    restart: on-failure
+    volumes:
+      - ./.env.production:/app/shared/.env.local
+  typesense:
+    image: typesense/typesense:26.0
+    environment:
+      TYPESENSE_DATA_DIR: /data
+      TYPESENSE_API_KEY: insecure
+    volumes:
+      - typesense:/data
+    ports:
+      - 8108:8108
+    restart: unless-stopped
+    healthcheck:
+      test: exit 0
+volumes:
+  typesense:
+    driver: local
