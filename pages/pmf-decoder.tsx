@@ -28,80 +28,56 @@ export default class PMFDecoder extends Component {
     event.preventDefault();
     const { files, beautifyOutput } = this.state;
     this.setState({
-      loading: true,
       error: null,
     });
     if (files) {
       const formData = new FormData();
-      formData.append('fileToUpload', files[0]);
+      formData.append('plugin', files[0]);
+      this.setState({
+        loading: true,
+      });
       // @ts-ignore
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_PMF_DECODER_PROTOCOL}://${process.env.NEXT_PUBLIC_PMF_DECODER_HOST}:${process.env.NEXT_PUBLIC_PMF_DECODER_PORT}/`,
+        '/api/decode-pmf',
         {
           method: 'POST',
           body: formData,
         },
       );
+      this.setState({
+        loading: false,
+      });
       if (response.headers.get('Content-Type') !== 'application/json') {
-        const error: string = await response.text();
-        switch (error) {
-          case 'Sorry, your file is too large.':
-            this.setState({
-              error: 'Sorry, your .pmf plugin is too large. The maximum size is 5 megabytes.',
-              errorLink: '/support#pmf-size-error'
-            });
-            break;
-          case 'Sorry, only PMF files are allowed.':
-            this.setState({
-              error: 'Sorry, only .pmf plugins are allowed.',
-              errorLink: '/support#pmf-ext-error'
-            });
-            break;
-          case 'Sorry, there was an error uploading your file.':
-            this.setState({
-              error: 'Sorry, there was an error decoding your file.',
-              errorLink: '/support#pmf-decode-error'
-            });
-            break;
-        }
-        return this.setState({
-          loading: false,
+          this.setState({
+          error: 'internal server error'
         });
       }
-      const json = await response.json();
-      if (!json.code) {
-        return this.setState({
-          loading: false,
-          error: 'Sorry, there was an error decoding your file.',
-          errorLink: '/support#pmf-decode-error'
+      const json = await response.json()
+      if (!response.ok) {
+        this.setState({
+          error: json.message
         });
       }
-      const plugin = { ...json };
-      plugin.code = `<?php ${plugin.code}`;
+      let { plugin } = json;
+      plugin = `<?php ${plugin}`;
       if (beautifyOutput) {
         try {
           const prettier = (await import('prettier')).default;
           // @ts-ignore
           const PhpPlugin = (await import('@prettier/plugin-php/standalone'))
             .default;
-          plugin.code = prettier.format(plugin.code, {
+          plugin = prettier.format(plugin, {
             plugins: [PhpPlugin],
             parser: 'php',
           });
         } catch {
           return this.setState({
-            loading: false,
-            error:
-              'Sorry, there was an error beautifying your code. Try turning off beautify output.',
-            errorLink: '/support#pmf-beautify-error'
+            error: 'error beautifying code',
           });
         }
       }
-      this.setState({
-        loading: false,
-      });
       saveAs(
-        new Blob([plugin.code]),
+        new Blob([plugin]),
         `${files[0].name.split('.').slice(0, -1).join('.')}.php`,
       );
     }
