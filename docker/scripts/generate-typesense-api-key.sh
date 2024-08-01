@@ -4,7 +4,7 @@ keys=$(curl -s "http://typesense:8108/keys" \
 
 keys_length=$(echo "$keys" | jq ".keys | length")
 
-if [ "$keys_length" -gt 1 ]; then
+if [ "$keys_length" -gt 0 ]; then
     exit 0
 else
     curl "http://typesense:8108/keys" \
@@ -15,6 +15,6 @@ else
             "description": "Search-only plugins key.",
             "actions": ["documents:search"],
             "collections": ["plugins"],
-            "value": "'"${TYPESENSE_SEARCH_API_KEY}"'"
+            "value": "'"${NEXT_PUBLIC_TYPESENSE_API_KEY}"'"
         }'
 fi
