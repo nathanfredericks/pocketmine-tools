@@ -1,0 +1,77 @@
+services:
+  pocketmine-tools:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    container_name: pocketmine-tools
+    env_file:
+      - .env
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    links:
+      - typesense:typesense
+      - pmf-decoder:pmf-decoder
+    volumes:
+      - .:/app
+    depends_on:
+      pmf-decoder:
+        condition: service_started
+      typesense:
+        condition: service_healthy
+      generate-typesense-api-key:
+        condition: service_completed_successfully
+      update-poggit-search:
+        condition: service_completed_successfully
+
+  pmf-decoder:
+    image: ghcr.io/nathanfredericks/pmf-decoder:main
+    container_name: pmf-decoder
+    restart: unless-stopped
+
+  update-poggit-search:
+    image: ghcr.io/nathanfredericks/update-poggit-search:main
+    container_name: update-poggit-search
+    env_file:
+      - .env
+    links:
+      - typesense:typesense
+    depends_on:
+      typesense:
+        condition: service_healthy
+    restart: on-failure
+
+  typesense:
+    build:
+      context: docker
+      dockerfile: typesense.Dockerfile
+    container_name: typesense
+    env_file:
+      - .env
+    environment:
+      TYPESENSE_DATA_DIR: /data
+    volumes:
+      - typesense:/data
+    restart: unless-stopped
+    healthcheck:
+      test: curl http://typesense:8108/health || exit 1
+      interval: 0s
+
+  generate-typesense-api-key:
+    build:
+      context: docker
+      dockerfile: curl.Dockerfile
+    container_name: generate-typesense-api-key
+    env_file:
+      - .env
+    volumes:
+      - ./docker/scripts/generate-typesense-api-key.sh:/app/generate-typesense-api-key.sh
+    command: sh /app/generate-typesense-api-key.sh
+    links:
+      - typesense:typesense
+    depends_on:
+      typesense:
+        condition: service_healthy
+
+volumes:
+  typesense:
