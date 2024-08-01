@@ -26,7 +26,4 @@ module.exports = withBundleAnalyzer({
   publicRuntimeConfig: {
     version,
   },
-  env: {
-    NEXT_PUBLIC_TYPESENSE_API_KEY: process.env.TYPESENSE_SEARCH_API_KEY
-  }
 });

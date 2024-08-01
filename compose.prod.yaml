@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: prod.Dockerfile
+    container_name: pocketmine-tools
     env_file:
       - .env
     restart: unless-stopped
@@ -23,10 +24,12 @@ services:
 
   pmf-decoder:
     image: ghcr.io/nathanfredericks/pmf-decoder:main
+    container_name: pmf-decoder
     restart: unless-stopped
 
   update-poggit-search:
     image: ghcr.io/nathanfredericks/update-poggit-search:main
+    container_name: update-poggit-search
     env_file:
       - .env
     links:
