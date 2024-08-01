@@ -9,4 +9,6 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD npm run build && npm start
+RUN npm run build
+
+CMD npm start

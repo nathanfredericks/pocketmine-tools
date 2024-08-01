@@ -2,4 +2,4 @@
 /out
 .idea
 node_modules
-.env.development
+.env

@@ -17,7 +17,7 @@ export default class PoggitSearch extends Component {
     const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
       server: {
         // @ts-ignore
-        apiKey: process.env.NEXT_PUBLIC_POGGIT_SEARCH_API_KEY,
+        apiKey: process.env.NEXT_PUBLIC_TYPESENSE_API_KEY,
         nodes: [
           {
             // @ts-ignore
