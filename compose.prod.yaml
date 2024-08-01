@@ -1,12 +1,10 @@
 services:
   pocketmine-tools:
-    image: ghcr.io/nathanfredericks/pocketmine-tools:main
-    environment:
-      - NEXT_PUBLIC_SITE_HOST=
-      - NEXT_PUBLIC_SITE_PORT=
-      - NEXT_PUBLIC_SITE_PROTOCOL=
-      - NEXT_PUBLIC_POGGIT_SEARCH_API_KEY=
-      - NEXT_PUBLIC_CONTACT_EMAIL=
+    build:
+      context: .
+      dockerfile: prod.Dockerfile
+    env_file:
+      - .env
     restart: unless-stopped
     ports:
       - 3000:3000
@@ -17,40 +15,58 @@ services:
       pmf-decoder:
         condition: service_started
       typesense:
-        condition: service_started
+        condition: service_healthy
+      generate-typesense-api-key:
+        condition: service_completed_successfully
       update-poggit-search:
         condition: service_completed_successfully
+
   pmf-decoder:
     image: ghcr.io/nathanfredericks/pmf-decoder:main
     restart: unless-stopped
+
   update-poggit-search:
     image: ghcr.io/nathanfredericks/update-poggit-search:main
-    environment:
-      TYPESENSE_HOST: typesense
-      TYPESENSE_PORT: 8108
-      TYPESENSE_PROTOCOL: http
-      TYPESENSE_API_KEY: insecure
-      POGGIT_PROTOCOL: https
-      POGGIT_HOST: poggit.pmmp.io
-      POGGIT_PORT: 443
+    env_file:
+      - .env
     links:
       - typesense:typesense
     depends_on:
       typesense:
         condition: service_healthy
     restart: on-failure
+
   typesense:
-    image: typesense/typesense:26.0
+    build:
+      context: docker
+      dockerfile: typesense.Dockerfile
+    container_name: typesense
+    env_file:
+      - .env
     environment:
       TYPESENSE_DATA_DIR: /data
-      TYPESENSE_API_KEY: insecure
     volumes:
       - typesense:/data
-    ports:
-      - 8108:8108
     restart: unless-stopped
     healthcheck:
-      test: exit 0
+      test: curl http://typesense:8108/health || exit 1
+      interval: 0s
+
+  generate-typesense-api-key:
+    build:
+      context: docker
+      dockerfile: curl.Dockerfile
+    container_name: generate-typesense-api-key
+    env_file:
+      - .env
+    volumes:
+      - ./docker/scripts/generate-typesense-api-key.sh:/app/generate-typesense-api-key.sh
+    command: sh /app/generate-typesense-api-key.sh
+    links:
+      - typesense:typesense
+    depends_on:
+      typesense:
+        condition: service_healthy
+
 volumes:
   typesense:
-    driver: local
