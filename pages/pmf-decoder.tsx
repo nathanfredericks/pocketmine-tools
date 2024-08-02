@@ -37,8 +37,7 @@ export default class PMFDecoder extends Component {
         loading: true,
       });
       // @ts-ignore
-      const response = await fetch(
-        '/api/decode-pmf',
+      const response = await fetch(process.env.NEXT_PUBLIC_PMF_DECODER_ENDPOINT,
         {
           method: 'POST',
           body: formData,
