@@ -16,10 +16,10 @@ ENV NEXT_PUBLIC_TYPESENSE_API_KEY=$NEXT_PUBLIC_TYPESENSE_API_KEY
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
 RUN npm install
 
-COPY . .
+COPY ./ ./
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
