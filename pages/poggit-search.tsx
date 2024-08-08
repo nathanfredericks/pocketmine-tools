@@ -24,7 +24,6 @@ export default class PoggitSearch extends Component {
         <Layout title="Poggit Search" showNav={true}>
           <InstantSearch searchClient={searchClient} indexName="plugins">
             <Configure
-              // @ts-expect-error
               hitsPerPage={5}
             />
             <CustomSearchBox />
