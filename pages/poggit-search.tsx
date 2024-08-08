@@ -8,6 +8,7 @@ import {
   useInstantSearch,
   useSearchBox
 } from 'react-instantsearch-hooks-web';
+import AlgoliaLogoBlue from '../public/static/Algolia-logo-blue.svg';
 import algoliasearch from 'algoliasearch/lite';
 import Layout from '../components/Layout';
 import useDebounce from '../lib/useDebounce';
@@ -31,6 +32,7 @@ export default class PoggitSearch extends Component {
               <Hits hitComponent={Hit} />
             </NoResultsBoundary>
           </InstantSearch>
+          Powered by <AlgoliaLogoBlue height="15" />
         </Layout>
       </>
     );
