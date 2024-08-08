@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
-import { Badge, Card, Form } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 import {
   Configure,
   Highlight,
@@ -8,32 +8,13 @@ import {
   useInstantSearch,
   useSearchBox
 } from 'react-instantsearch-hooks-web';
-import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
+import algoliasearch from 'algoliasearch/lite';
 import Layout from '../components/Layout';
 import useDebounce from '../lib/useDebounce';
 import Head from 'next/head';
 export default class PoggitSearch extends Component {
   render() {
-    const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
-      server: {
-        // @ts-ignore
-        apiKey: process.env.NEXT_PUBLIC_TYPESENSE_API_KEY,
-        nodes: [
-          {
-            // @ts-ignore
-            host: process.env.NEXT_PUBLIC_TYPESENSE_HOST,
-            // @ts-ignore
-            port: process.env.NEXT_PUBLIC_TYPESENSE_PORT,
-            // @ts-ignore
-            protocol: process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL,
-          },
-        ],
-      },
-      additionalSearchParameters: {
-        query_by: 'name,tagline,keywords',
-      },
-    });
-    const searchClient = typesenseInstantsearchAdapter.searchClient;
+    const searchClient = algoliasearch(process.env.ALGOLIA_APP_ID || "", process.env.ALGOLIA_API_KEY || "");
     return (
       <>
         <Head>
@@ -41,7 +22,10 @@ export default class PoggitSearch extends Component {
         </Head>
         <Layout title="Poggit Search" showNav={true}>
           <InstantSearch searchClient={searchClient} indexName="plugins">
-            <Configure hitsPerPage={5} />
+            <Configure
+              // @ts-expect-error
+              hitsPerPage={5}
+            />
             <CustomSearchBox />
             <NoResultsBoundary fallback={<NoResults />}>
               <Hits hitComponent={Hit} />
@@ -79,14 +63,11 @@ const CustomSearchBox = ({ ...props }) => {
 function Hit({ hit }) {
   return (
     <Card className="w-100 mb-2">
-      <Card.Body>
+      <Card.Body> 
         <Card.Title>
           <a href={hit.html_url} target="_blank" rel="noreferrer">
             <Highlight attribute="name" hit={hit} />
-          </a>{' '}
-          <Badge bg="primary" pill>
-            v{hit.version}
-          </Badge>
+          </a>
         </Card.Title>
         <Card.Text>
           <Highlight attribute="tagline" hit={hit} />
