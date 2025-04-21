@@ -11,7 +11,7 @@ export function secondsToDHMS(seconds: number) {
   const sDisplay = s > 0 ? s + (s === 1 ? ' second' : ' seconds') : '';
   return dDisplay + hDisplay + mDisplay + sDisplay;
 }
-export function parseCode(code: {[key: number]: string }) {
+export function parseCode(code: { [key: number]: string }) {
   const dataArray = [];
   for (const key in code) {
     dataArray.push(code[key]);
@@ -39,9 +39,13 @@ export function formatOS(os: string): string {
   }
 }
 export function cleanUnparsedCrashdump(crashdump: string): string {
-  return crashdump.replace('----------------------REPORT THE DATA BELOW THIS LINE-----------------------', '')
-                  .replace('===BEGIN CRASH DUMP===', '')
-                  .replace('===END CRASH DUMP===', '');
+  return crashdump
+    .replace(
+      '----------------------REPORT THE DATA BELOW THIS LINE-----------------------',
+      ''
+    )
+    .replace('===BEGIN CRASH DUMP===', '')
+    .replace('===END CRASH DUMP===', '');
 }
 export function capitalize(s: string) {
   return s && s[0].toUpperCase() + s.slice(1);
@@ -52,5 +56,5 @@ export function correctNamespacePart(part: string): string {
   if (!isNaN(part.charAt(0))) {
     part = '_' + part;
   }
-  return part.replace('-', '_')
+  return part.replace('-', '_');
 }

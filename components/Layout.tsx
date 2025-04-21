@@ -1,13 +1,5 @@
 import React, { PropsWithChildren, useState } from 'react';
-import {
-  Col,
-  Container,
-  Navbar,
-  Row,
-  Tab,
-  Button,
-  Nav,
-} from 'react-bootstrap';
+import { Col, Container, Navbar, Row, Tab, Button, Nav } from 'react-bootstrap';
 import Link from 'next/link';
 import Head from 'next/head';
 import PMTLogo from '../public/static/logo-white.svg';
@@ -20,7 +12,7 @@ type LayoutProps = {
 export default function Layout({
   title,
   children,
-  showNav = true
+  showNav = true,
 }: PropsWithChildren<LayoutProps>) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -47,8 +39,20 @@ export default function Layout({
           <Navbar.Toggle />
           <Navbar.Collapse>
             <Nav className="me-auto">
-              <Nav.Link href="/" as={Link} className={isActive(['/']) ? 'active' : ''}>Home</Nav.Link>
-              <Nav.Link href="/support" as={Link} className={isActive(['/support']) ? 'active' : ''}>Support</Nav.Link>
+              <Nav.Link
+                href="/"
+                as={Link}
+                className={isActive(['/']) ? 'active' : ''}
+              >
+                Home
+              </Nav.Link>
+              <Nav.Link
+                href="/support"
+                as={Link}
+                className={isActive(['/support']) ? 'active' : ''}
+              >
+                Support
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -58,10 +62,7 @@ export default function Layout({
           <Row>
             <Col lg={3} className="mb-3">
               <div className="d-lg-none">
-                <Button
-                  onClick={() => setOpen(!open)}
-                  className="w-100"
-                >
+                <Button onClick={() => setOpen(!open)} className="w-100">
                   {open ? 'Hide navigation' : 'Show navigation'}
                 </Button>
                 <NavItems open={open} />
@@ -74,7 +75,9 @@ export default function Layout({
               <Tab.Content>{children}</Tab.Content>
             </Col>
           </Row>
-        ): children}
+        ) : (
+          children
+        )}
       </Container>
     </>
   );

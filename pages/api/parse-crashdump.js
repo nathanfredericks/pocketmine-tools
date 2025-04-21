@@ -1,5 +1,5 @@
 import pako from 'pako';
-import {cleanUnparsedCrashdump} from '../../lib/utils';
+import { cleanUnparsedCrashdump } from '../../lib/utils';
 export default function handler(req, res) {
   if (req.method === 'POST') {
     const crashdump = req.body.crashdump;
@@ -7,24 +7,24 @@ export default function handler(req, res) {
       try {
         const parsedCrashdump = parseCrashdump(crashdump);
         res.status(200).json({
-          'crashdump': JSON.stringify(parsedCrashdump, null, 2)
+          crashdump: JSON.stringify(parsedCrashdump, null, 2),
         });
       } catch {
         res.status(400).json({
           code: 'PARSE_ERROR',
-          message: 'Error parsing crashdump.'
+          message: 'Error parsing crashdump.',
         });
       }
     } else {
       res.status(400).json({
         code: 'MISSING_CRASHDUMP',
-        message: 'Missing crashdump.'
+        message: 'Missing crashdump.',
       });
     }
   } else {
     res.status(405).json({
       code: 'METHOD_NOT_ALLOWED',
-      message: 'Method not allowed.'
+      message: 'Method not allowed.',
     });
   }
 }

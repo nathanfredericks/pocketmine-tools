@@ -10,7 +10,7 @@ export default class CrashdumpParser extends Component {
     host: null,
     port: null,
     loading: false,
-    data: null
+    data: null,
   };
   handleHostChange = (event) => {
     this.setState({
@@ -33,58 +33,64 @@ export default class CrashdumpParser extends Component {
     const { host, port } = this.state;
     const response = await fetch(`/api/ping/?host=${host}&port=${port}`);
     const json = await response.json();
-    if (response.status === 200){
+    if (response.status === 200) {
       this.setState({
         data: json,
-        loading: false
+        loading: false,
       });
     } else if (response.status === 400) {
       if (json.code === 'DNS_LOOKUP_FAILED') {
         this.setState({
-          pingError: 'Sorry, an error occurred pinging your server. Ensure you have the correct hostname.',
+          pingError:
+            'Sorry, an error occurred pinging your server. Ensure you have the correct hostname.',
           pingErrorLink: '/support#ping-error-host',
-          loading: false
+          loading: false,
         });
       } else {
         this.setState({
           pingError: 'Sorry, an error occurred pinging your server.',
           pingErrorLink: '/support#ping-error',
-          loading: false
+          loading: false,
         });
       }
     } else {
       this.setState({
         pingError: 'Sorry, an error occurred pinging your server.',
         pingErrorLink: '/support#ping-error',
-        loading: false
+        loading: false,
       });
     }
   };
   render() {
-    const {
-      pingError,
-      pingErrorLink,
-      host,
-      port,
-      loading,
-      data
-    } = this.state;
+    const { pingError, pingErrorLink, host, port, loading, data } = this.state;
     return (
       <>
         <Head>
           <meta name="description" content="Ping Minecraft servers" />
         </Head>
         <Layout title="Ping server" showNav={true}>
-          {pingError ? <Alert variant="danger">{pingError} <Link href={pingErrorLink}>More info.</Link></Alert> : null}
+          {pingError ? (
+            <Alert variant="danger">
+              {pingError} <Link href={pingErrorLink}>More info.</Link>
+            </Alert>
+          ) : null}
           <Form onSubmit={this.handleSubmit}>
             <Row className="mb-3 align-items-center mt">
               <Col xs="auto">
                 <Form.Label>Host</Form.Label>
-                <Form.Control type="text" placeholder="play.lbsg.net" onChange={this.handleHostChange} />
+                <Form.Control
+                  type="text"
+                  placeholder="play.lbsg.net"
+                  onChange={this.handleHostChange}
+                />
               </Col>
               <Col xs="auto">
                 <Form.Label className="mt-3 mt-md-0">Port</Form.Label>
-                <Form.Control type="number" placeholder="19132" onChange={this.handlePortChange} />
+                <Form.Control
+                  type="number"
+                  placeholder="19132"
+                  onChange={this.handlePortChange}
+                />
               </Col>
             </Row>
             <Button
@@ -107,23 +113,30 @@ export default class CrashdumpParser extends Component {
           {data ? (
             <Table responsive>
               <tbody>
-              <tr>
-                <td>MOTD</td>
-                <td>{data.name} <a href={`/motd-generator/?motd=${data.name}`} target="_blank">Open in MOTD
-                  Generator</a></td>
-              </tr>
-              <tr>
-                <td>MCPE Version</td>
-                <td>v{data.mcpeVersion}</td>
-              </tr>
-              <tr>
-                <td>Current players</td>
-                <td>{data.currentPlayers}</td>
-              </tr>
-              <tr>
-                <td>Max players</td>
-                <td>{data.maxPlayers}</td>
-              </tr>
+                <tr>
+                  <td>MOTD</td>
+                  <td>
+                    {data.name}{' '}
+                    <a
+                      href={`/motd-generator/?motd=${data.name}`}
+                      target="_blank"
+                    >
+                      Open in MOTD Generator
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>MCPE Version</td>
+                  <td>v{data.mcpeVersion}</td>
+                </tr>
+                <tr>
+                  <td>Current players</td>
+                  <td>{data.currentPlayers}</td>
+                </tr>
+                <tr>
+                  <td>Max players</td>
+                  <td>{data.maxPlayers}</td>
+                </tr>
               </tbody>
             </Table>
           ) : null}

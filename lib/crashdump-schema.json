@@ -12,11 +12,11 @@
         },
         "time": {
           "type": "number",
-          "exclusiveMinimum" : 0
+          "exclusiveMinimum": 0
         },
         "uptime": {
           "type": "number",
-          "exclusiveMinimum" : 0
+          "exclusiveMinimum": 0
         },
         "lastError": {
           "$ref": "#/definitions/LastError"
@@ -25,11 +25,7 @@
           "$ref": "#/definitions/Error"
         },
         "plugin_involvement": {
-          "enum": [
-            "none",
-            "direct",
-            "indirect"
-          ]
+          "enum": ["none", "direct", "indirect"]
         },
         "plugin": {
           "type": "string"
@@ -69,7 +65,7 @@
             {
               "type": "integer"
             }
-         ]
+          ]
         },
         "phpinfo": {
           "type": "string"
@@ -120,12 +116,7 @@
           "exclusiveMinimum": 0
         }
       },
-      "required": [
-        "file",
-        "line",
-        "message",
-        "type"
-      ],
+      "required": ["file", "line", "message", "type"],
       "title": "Error"
     },
     "General": {
@@ -206,7 +197,7 @@
         },
         "line": {
           "type": "integer",
-          "exclusiveMinimum" : 0
+          "exclusiveMinimum": 0
         },
         "trace": {
           "type": "array",
@@ -215,14 +206,7 @@
           }
         }
       },
-      "required": [
-        "file",
-        "fullFile",
-        "line",
-        "message",
-        "trace",
-        "type"
-      ],
+      "required": ["file", "fullFile", "line", "message", "trace", "type"],
       "title": "LastError"
     },
     "Plugin": {
@@ -266,23 +250,13 @@
           "type": "string"
         },
         "load": {
-          "enum": [
-            "STARTUP",
-            "POSTWORLD"
-          ]
+          "enum": ["STARTUP", "POSTWORLD"]
         },
         "website": {
           "type": "string"
         }
       },
-      "required": [
-        "api",
-        "authors",
-        "enabled",
-        "load",
-        "name",
-        "version"
-      ],
+      "required": ["api", "authors", "enabled", "load", "name", "version"],
       "title": "Plugin"
     }
   }

@@ -44,7 +44,7 @@ export default class CrashdumpParser extends Component {
       return this.setState({
         loading: false,
         parseError: 'Sorry, an error occurred decoding your crashdump.',
-        parseErrorLink: '/support#decode-crashdump-error'
+        parseErrorLink: '/support#decode-crashdump-error',
       });
     }
     this.setState({
@@ -71,7 +71,12 @@ export default class CrashdumpParser extends Component {
     let CrashdumpPreview = null;
     if (parsedCrashdumpStr) {
       CrashdumpPreview = dynamic(import('../components/CrashdumpPreview'), {
-        loading: () => <p>Loading preview<span className="dots" /></p>,
+        loading: () => (
+          <p>
+            Loading preview
+            <span className="dots" />
+          </p>
+        ),
       });
     }
     return (
@@ -80,8 +85,11 @@ export default class CrashdumpParser extends Component {
           <meta name="description" content="Decode and preview crashdumps" />
         </Head>
         <Layout title="Crashdump Parser" showNav={true}>
-          {parseError ?
-            <Alert variant="danger">{parseError} <Link href={parseErrorLink}>More info.</Link></Alert> : null}
+          {parseError ? (
+            <Alert variant="danger">
+              {parseError} <Link href={parseErrorLink}>More info.</Link>
+            </Alert>
+          ) : null}
           <Form onSubmit={this.handleSubmit}>
             <Form.Group>
               <Form.Label>Crashdump</Form.Label>

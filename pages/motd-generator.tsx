@@ -8,7 +8,7 @@ const colourCodes = {
   0: {
     colour: '#000000',
     css: 'color:#000000;',
-    textIsBlack: false
+    textIsBlack: false,
   },
   1: {
     colour: '#0000AA',
@@ -160,7 +160,7 @@ export default class MOTDGenerator extends Component {
             {val.buttonName}
           </Button>
         );
-      },
+      }
     );
     if (this.props.motd) {
       const newMotd = this.props.motd;
@@ -224,17 +224,17 @@ export default class MOTDGenerator extends Component {
       if (format) {
         if (match[1] === 'm') {
           currentFormatting = currentFormatting.filter(
-            (e) => e !== 'text-decoration:underline;',
+            (e) => e !== 'text-decoration:underline;'
           );
         }
         if (match[1] === 'n') {
           currentFormatting = currentFormatting.filter(
-            (e) => e !== 'text-decoration:line-through;',
+            (e) => e !== 'text-decoration:line-through;'
           );
         }
         if (currentColour) {
           htmlMotd += `<span style="${currentColour}${currentFormatting.join(
-            '',
+            ''
           )}${format.css}">${match[2]}</span>`;
           currentFormatting.push(format.css);
         } else {
@@ -319,6 +319,6 @@ export default class MOTDGenerator extends Component {
   );
 }
 MOTDGenerator.getInitialProps = async ({ query }) => {
-  const {motd} = query
-  return {motd}
-}
+  const { motd } = query;
+  return { motd };
+};
