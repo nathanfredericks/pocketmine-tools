@@ -231,7 +231,7 @@ export default function CrashdumpPreview({ crashdump }: CrashdumpPreviewProps) {
                       </td>
                       <td>{crashdump.general.composer_libraries[key]}</td>
                     </tr>
-                  ),
+                  )
                 )}
               </tbody>
             </Table>

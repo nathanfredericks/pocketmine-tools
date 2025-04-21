@@ -40,7 +40,7 @@ export default class Inject extends Component {
           return this.setState({
             error:
               'An error occurred while injecting your plugin. Ensure that the plugin is in the root directory of the zip.',
-            errorLink: '/support#inject-directory-error'
+            errorLink: '/support#inject-directory-error',
           });
         }
         const pluginYml = yaml.load(originalPluginYml.getContents());
@@ -58,12 +58,12 @@ export default class Inject extends Component {
           `${files[0].name
             .split('.')
             .slice(0, -1)
-            .join('.')}-${apiVersion}.phar`,
+            .join('.')}-${apiVersion}.phar`
         );
       } catch {
         this.setState({
           error: 'An error occurred while injecting your plugin.',
-          errorLink: '/support#inject-error'
+          errorLink: '/support#inject-error',
         });
       } finally {
         this.setState({
@@ -92,9 +92,15 @@ export default class Inject extends Component {
           <meta name="description" content="Inject new API versions" />
         </Head>
         <Layout title="API Injector" showNav={true}>
-          {error ? <Alert variant="danger">{error} <Link href={errorLink}>More info.</Link></Alert> : null}
+          {error ? (
+            <Alert variant="danger">
+              {error} <Link href={errorLink}>More info.</Link>
+            </Alert>
+          ) : null}
           <Form>
-            <Form.Label>Plugin (<code>.phar</code> file)</Form.Label>
+            <Form.Label>
+              Plugin (<code>.phar</code> file)
+            </Form.Label>
             <InputGroup className="mb-3">
               <Form.Control
                 type="file"
@@ -116,7 +122,7 @@ export default class Inject extends Component {
               variant="primary"
               onClick={() =>
                 this.setState({
-                  warningModal: true
+                  warningModal: true,
                 })
               }
               disabled={files.length < 1 || apiVersion.length < 1}
@@ -130,7 +136,9 @@ export default class Inject extends Component {
             size="lg"
           >
             <Modal.Header closeButton>
-              <Modal.Title className="text-danger">This is dangerous</Modal.Title>
+              <Modal.Title className="text-danger">
+                This is dangerous
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <ol>
@@ -140,12 +148,15 @@ export default class Inject extends Component {
                   incompatibility issues.
                 </li>
                 <li>
-                  If errors happen after loading the downloaded plugin, uninstall
-                  it immediately and contact the plugin developer for support.
+                  If errors happen after loading the downloaded plugin,
+                  uninstall it immediately and contact the plugin developer for
+                  support.
                 </li>
                 <li>
                   Click{' '}
-                  <em onClick={() => this.setState({ warningThreeWords: true })}>
+                  <em
+                    onClick={() => this.setState({ warningThreeWords: true })}
+                  >
                     these three words
                   </em>{' '}
                   if you have read the above.

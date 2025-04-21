@@ -46,12 +46,12 @@ export default class Extract extends Component<{}, ExtractState> {
             new Blob([zip], {
               type: 'application/zip',
             }),
-            `${files[0].name.split('.').slice(0, -1).join('.')}.zip`,
+            `${files[0].name.split('.').slice(0, -1).join('.')}.zip`
           );
         } catch {
           this.setState({
             error: 'An error occurred while converting your plugin.',
-            errorLink: '/support#convert-error'
+            errorLink: '/support#convert-error',
           });
         } finally {
           this.setState({
@@ -77,9 +77,15 @@ export default class Extract extends Component<{}, ExtractState> {
           <meta name="description" content="Convert .phar to .zip" />
         </Head>
         <Layout title="Extract .phar" showNav={true}>
-          {error ? <Alert variant="danger">{error} <Link href={errorLink!}>More info.</Link></Alert> : null}
+          {error ? (
+            <Alert variant="danger">
+              {error} <Link href={errorLink!}>More info.</Link>
+            </Alert>
+          ) : null}
           <Form onSubmit={this.handleSubmit}>
-            <Form.Label>Plugin (<code>.phar</code> file)</Form.Label>
+            <Form.Label>
+              Plugin (<code>.phar</code> file)
+            </Form.Label>
             <InputGroup className="mb-3">
               <Form.Control
                 type="file"
@@ -87,7 +93,11 @@ export default class Extract extends Component<{}, ExtractState> {
                 onChange={this.handleChange}
               />
             </InputGroup>
-            <Button variant="primary" type="submit" disabled={loading || !files}>
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={loading || !files}
+            >
               {loading ? (
                 <>
                   <span className="spinner-border spinner-border-sm mr-1" />{' '}

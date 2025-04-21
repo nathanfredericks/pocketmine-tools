@@ -9,7 +9,7 @@ code {
 
 .dots:before {
   animation: dots 2s linear infinite;
-  content: '';
+  content: "";
 }
 
 .card {
@@ -23,17 +23,17 @@ code {
 @keyframes dots {
   0%,
   20% {
-    content: '.';
+    content: ".";
   }
   40% {
-    content: '..';
+    content: "..";
   }
   60% {
-    content: '...';
+    content: "...";
   }
   90%,
   100% {
-    content: '';
+    content: "";
   }
 }
 
@@ -74,14 +74,14 @@ code {
   font-style: normal;
   font-weight: 400;
   src: url("/static/fonts/minecraft_font.woff") format("woff"),
-  url("/static/fonts/minecraft_font.eot") format("eot"),
-  url("/static/fonts/minecraft_font.ttf") format("truetype"),
-  url("/static/fonts/minecraft_font.svg#Minecraft") format("svg");
+    url("/static/fonts/minecraft_font.eot") format("eot"),
+    url("/static/fonts/minecraft_font.ttf") format("truetype"),
+    url("/static/fonts/minecraft_font.svg#Minecraft") format("svg");
   unicode-range: U+0000-FFFD, U+0080-00FF, U+2000-206F;
 }
 
 .preview {
-  font-family: 'Minecraft', monospace;
+  font-family: "Minecraft", monospace;
   padding: 10px;
   background-color: rgb(51, 51, 51);
   color: #ffffff;

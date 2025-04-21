@@ -76,7 +76,7 @@ use pocketmine\\plugin\\PluginBase;
 
 class Main extends PluginBase{
 
-}`,
+}`
       );
       const zip = await plugin.generateAsync({
         type: 'uint8array',
@@ -85,12 +85,12 @@ class Main extends PluginBase{
         new Blob([zip], {
           type: 'application/zip',
         }),
-        `${name}.zip`,
+        `${name}.zip`
       );
     } catch {
       this.setState({
         error: 'An error occurred while generating your plugin.',
-        errorLink: '/support#generate-error'
+        errorLink: '/support#generate-error',
       });
     } finally {
       this.setState({
@@ -106,7 +106,11 @@ class Main extends PluginBase{
           <meta name="description" content="Generate a skeleton plugin" />
         </Head>
         <Layout title="Generate plugin" showNav={true}>
-          {error ? <Alert variant="danger">{error} <Link href={errorLink!}>More info.</Link></Alert> : null}
+          {error ? (
+            <Alert variant="danger">
+              {error} <Link href={errorLink!}>More info.</Link>
+            </Alert>
+          ) : null}
           <Form onSubmit={this.handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Plugin name</Form.Label>
@@ -121,10 +125,7 @@ class Main extends PluginBase{
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Plugin API version</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={this.handleAPIChange}
-              />
+              <Form.Control type="text" onChange={this.handleAPIChange} />
             </Form.Group>
             <Button
               variant="primary"

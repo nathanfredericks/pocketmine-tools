@@ -10,7 +10,7 @@ export default class Create extends Component {
     stub: '<?php __HALT_COMPILER();',
     loading: false,
     error: null,
-    errorLink: null
+    errorLink: null,
   };
   handleFileChange = (event) => {
     this.setState({
@@ -44,20 +44,21 @@ export default class Create extends Component {
         }
         const ZipConverter = (await import('phar')).ZipConverter;
         const phar = await ZipConverter.toPhar(
-          await zip.generateAsync({ type: 'uint8array' }),
+          await zip.generateAsync({ type: 'uint8array' })
         );
         phar.setStub(stub);
         saveAs(
           new Blob([phar.savePharData()], {
             type: 'application/octet-stream',
           }),
-          `${files[0].name.split('.').slice(0, -1).join('.')}.phar`,
+          `${files[0].name.split('.').slice(0, -1).join('.')}.phar`
         );
       } catch (err) {
-          this.setState({
-            error: 'An error occurred while converting your plugin. Please check your network connection and try again.',
-            errorLink: '/support#convert-error'
-          });
+        this.setState({
+          error:
+            'An error occurred while converting your plugin. Please check your network connection and try again.',
+          errorLink: '/support#convert-error',
+        });
       } finally {
         this.setState({
           loading: false,
@@ -82,9 +83,15 @@ export default class Create extends Component {
           <meta name="description" content="Convert .zip to .phar" />
         </Head>
         <Layout title="Create .phar" showNav={true}>
-          {error ? <Alert variant="danger">{error} <Link href={errorLink}>More info.</Link></Alert> : null}
+          {error ? (
+            <Alert variant="danger">
+              {error} <Link href={errorLink}>More info.</Link>
+            </Alert>
+          ) : null}
           <Form onSubmit={this.handleSubmit}>
-            <Form.Label>Plugin (<code>.zip</code> file)</Form.Label>
+            <Form.Label>
+              Plugin (<code>.zip</code> file)
+            </Form.Label>
             <InputGroup className="mb-3">
               <Form.Control
                 type="file"

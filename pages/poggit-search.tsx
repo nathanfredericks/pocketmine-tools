@@ -6,7 +6,7 @@ import {
   Hits,
   InstantSearch,
   useInstantSearch,
-  useSearchBox
+  useSearchBox,
 } from 'react-instantsearch-hooks-web';
 import AlgoliaLogoBlue from '../public/static/Algolia-logo-blue.svg';
 import algoliasearch from 'algoliasearch/lite';
@@ -15,7 +15,10 @@ import useDebounce from '../lib/useDebounce';
 import Head from 'next/head';
 export default class PoggitSearch extends Component {
   render() {
-    const searchClient = algoliasearch(process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || '', process.env.NEXT_PUBLIC_ALGOLIA_API_KEY || '');
+    const searchClient = algoliasearch(
+      process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || '',
+      process.env.NEXT_PUBLIC_ALGOLIA_API_KEY || ''
+    );
     return (
       <>
         <Head>
@@ -23,9 +26,7 @@ export default class PoggitSearch extends Component {
         </Head>
         <Layout title="Poggit Search" showNav={true}>
           <InstantSearch searchClient={searchClient} indexName="plugins">
-            <Configure
-              hitsPerPage={5}
-            />
+            <Configure hitsPerPage={5} />
             <CustomSearchBox />
             <NoResultsBoundary fallback={<NoResults />}>
               <Hits hitComponent={Hit} />
@@ -64,7 +65,7 @@ const CustomSearchBox = ({ ...props }) => {
 function Hit({ hit }) {
   return (
     <Card className="w-100 mb-2">
-      <Card.Body> 
+      <Card.Body>
         <Card.Title>
           <a href={hit.html_url} target="_blank" rel="noreferrer">
             <Highlight attribute="name" hit={hit} />
