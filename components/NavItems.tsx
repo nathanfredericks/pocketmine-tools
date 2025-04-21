@@ -52,6 +52,7 @@ export default function NavItems({ open }: any) {
           <ListGroup.Item
             as="li"
             active={isActive(['/pmf-decoder'])}
+            disabled
           >
             <BracesAsterisk width="1.25em" height="1.25em" /> Decode{' '}
             <code>.pmf</code>
