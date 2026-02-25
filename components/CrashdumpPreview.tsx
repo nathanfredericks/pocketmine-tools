@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { Accordion, Table } from 'react-bootstrap';
 import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';

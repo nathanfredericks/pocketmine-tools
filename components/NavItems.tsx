@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { ListGroup, Collapse } from 'react-bootstrap';
 import FolderFill from 'bootstrap-icons/icons/folder-fill.svg';
@@ -11,10 +12,10 @@ import BracesAsterisk from 'bootstrap-icons/icons/braces-asterisk.svg';
 import InfoCircleFill from 'bootstrap-icons/icons/info-circle-fill.svg';
 import HeartFill from 'bootstrap-icons/icons/heart-fill.svg';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-export default function NavItems({ open }: any) {
-  const router = useRouter();
-  const isActive = (routes: string[]) => routes.includes(router.pathname);
+import { usePathname } from 'next/navigation';
+export default function NavItems({ open }: { open: boolean }) {
+  const pathname = usePathname();
+  const isActive = (routes: string[]) => routes.includes(pathname);
   const date = new Date();
   const year = date.getFullYear();
   return (
@@ -22,62 +23,40 @@ export default function NavItems({ open }: any) {
       <div>
         <small className="text-muted">Plugin Developers</small>
         <ListGroup as="ul" className="mb-3">
-          <Link href="/create" legacyBehavior>
-            <ListGroup.Item as="li" active={isActive(['/create'])}>
-              <BoxSeamFill width="1.25em" height="1.25em" /> Create{' '}
-              <code>.phar</code>
-            </ListGroup.Item>
-          </Link>
-          <Link href="/extract" legacyBehavior>
-            <ListGroup.Item as="li" active={isActive(['/extract'])}>
-              <FolderFill width="1.25em" height="1.25em" /> Extract{' '}
-              <code className="code-text">.phar</code>
-            </ListGroup.Item>
-          </Link>
-          <Link href="/inject" legacyBehavior>
-            <ListGroup.Item as="li" active={isActive(['/inject'])}>
-              <GearFill width="1.25em" height="1.25em" /> API Injector
-            </ListGroup.Item>
-          </Link>
-          <Link href="/crashdump-parser" legacyBehavior>
-            <ListGroup.Item as="li" active={isActive(['/crashdump-parser'])}>
-              <BugFill width="1.25em" height="1.25em" /> Crashdump Parser
-            </ListGroup.Item>
-          </Link>
-          <Link href="/pmf-decoder" legacyBehavior>
-            <ListGroup.Item
-              as="li"
-              active={isActive(['/pmf-decoder'])}
-              disabled
-            >
-              <BracesAsterisk width="1.25em" height="1.25em" /> Decode{' '}
-              <code>.pmf</code>
-            </ListGroup.Item>
-          </Link>
-          <Link href="/generate" legacyBehavior>
-            <ListGroup.Item as="li" active={isActive(['/generate'])}>
-              <PlusSquareFill width="1.25em" height="1.25em" /> Generate
-              skeleton plugin
-            </ListGroup.Item>
-          </Link>
+          <ListGroup.Item as={Link} href="/create" active={isActive(['/create'])} action>
+            <BoxSeamFill width="1.25em" height="1.25em" /> Create{' '}
+            <code>.phar</code>
+          </ListGroup.Item>
+          <ListGroup.Item as={Link} href="/extract" active={isActive(['/extract'])} action>
+            <FolderFill width="1.25em" height="1.25em" /> Extract{' '}
+            <code className="code-text">.phar</code>
+          </ListGroup.Item>
+          <ListGroup.Item as={Link} href="/inject" active={isActive(['/inject'])} action>
+            <GearFill width="1.25em" height="1.25em" /> API Injector
+          </ListGroup.Item>
+          <ListGroup.Item as={Link} href="/crashdump-parser" active={isActive(['/crashdump-parser'])} action>
+            <BugFill width="1.25em" height="1.25em" /> Crashdump Parser
+          </ListGroup.Item>
+          <ListGroup.Item as={Link} href="/pmf-decoder" active={isActive(['/pmf-decoder'])} disabled action>
+            <BracesAsterisk width="1.25em" height="1.25em" /> Decode{' '}
+            <code>.pmf</code>
+          </ListGroup.Item>
+          <ListGroup.Item as={Link} href="/generate" active={isActive(['/generate'])} action>
+            <PlusSquareFill width="1.25em" height="1.25em" /> Generate
+            skeleton plugin
+          </ListGroup.Item>
         </ListGroup>
         <small className="text-muted">Server Admins</small>
         <ListGroup as="ul">
-          <Link href="/poggit-search" legacyBehavior>
-            <ListGroup.Item as="li" active={isActive(['/poggit-search'])}>
-              <Search width="1.25em" height="1.25em" /> Poggit Search
-            </ListGroup.Item>
-          </Link>
-          <Link href="/motd-generator" legacyBehavior>
-            <ListGroup.Item as="li" active={isActive(['/motd-generator'])}>
-              <Pencil width="1.25em" height="1.25em" /> MOTD Generator
-            </ListGroup.Item>
-          </Link>
-          <Link href="/ping" legacyBehavior>
-            <ListGroup.Item as="li" active={isActive(['/ping'])}>
-              <InfoCircleFill width="1.25em" height="1.25em" /> Ping server
-            </ListGroup.Item>
-          </Link>
+          <ListGroup.Item as={Link} href="/poggit-search" active={isActive(['/poggit-search'])} action>
+            <Search width="1.25em" height="1.25em" /> Poggit Search
+          </ListGroup.Item>
+          <ListGroup.Item as={Link} href="/motd-generator" active={isActive(['/motd-generator'])} action>
+            <Pencil width="1.25em" height="1.25em" /> MOTD Generator
+          </ListGroup.Item>
+          <ListGroup.Item as={Link} href="/ping" active={isActive(['/ping'])} action>
+            <InfoCircleFill width="1.25em" height="1.25em" /> Ping server
+          </ListGroup.Item>
         </ListGroup>
         <footer className="pt-3 text-body-secondary">
           &copy; {year} Nathan Fredericks

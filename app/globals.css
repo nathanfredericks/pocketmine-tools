@@ -1,3 +1,5 @@
+@import 'bootstrap/dist/css/bootstrap.min.css' layer(bootstrap);
+
 /* GLOBALS */
 code {
   color: var(--bs-body-color);

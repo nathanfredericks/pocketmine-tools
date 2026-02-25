@@ -51,9 +51,7 @@ export function capitalize(s: string) {
   return s && s[0].toUpperCase() + s.slice(1);
 }
 export function correctNamespacePart(part: string): string {
-  // Check if first character is a number, if yes replace it with an underscore
-  // @ts-ignore
-  if (!isNaN(part.charAt(0))) {
+  if (/^\d/.test(part.charAt(0))) {
     part = '_' + part;
   }
   return part.replace('-', '_');

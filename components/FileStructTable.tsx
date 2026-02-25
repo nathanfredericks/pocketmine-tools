@@ -1,8 +1,12 @@
+'use client';
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import Check from 'bootstrap-icons/icons/check.svg';
 import X from 'bootstrap-icons/icons/x.svg';
-export default function FileStructTable({ exTitles }) {
+type FileStructTableProps = {
+  exTitles: boolean;
+};
+export default function FileStructTable({ exTitles }: FileStructTableProps) {
   return (
     <Table responsive bordered>
       {exTitles ? (
@@ -20,40 +24,40 @@ export default function FileStructTable({ exTitles }) {
           <td>
             DevTools-master.zip
             <br />
-            &nbsp;&nbsp;ⳑ src
+            &nbsp;&nbsp;&#11377; src
             <br />
-            &nbsp;&nbsp;ⳑ plugin.yml
+            &nbsp;&nbsp;&#11377; plugin.yml
           </td>
           <td>
             DevTools-master.zip
             <br />
-            &nbsp;&nbsp;ⳑ DevTools-master
+            &nbsp;&nbsp;&#11377; DevTools-master
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;ⳑ src
+            &nbsp;&nbsp;&nbsp;&nbsp;&#11377; src
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;ⳑ plugin.yml
+            &nbsp;&nbsp;&nbsp;&nbsp;&#11377; plugin.yml
           </td>
           <td>
             DevTools-master.zip
             <br />
-            &nbsp;&nbsp;ⳑ DevTools-master
+            &nbsp;&nbsp;&#11377; DevTools-master
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;ⳑ{' '}
+            &nbsp;&nbsp;&nbsp;&nbsp;&#11377;{' '}
             <span className="text-bg-danger text-white">OtherFolder</span>
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ⳑ src
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#11377; src
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ⳑ plugin.yml
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#11377; plugin.yml
           </td>
           <td>
             DevTools-master.zip
             <br />
-            &nbsp;&nbsp;ⳑ DevTools-
+            &nbsp;&nbsp;&#11377; DevTools-
             <span className="text-bg-danger text-white">other</span>
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;ⳑ src
+            &nbsp;&nbsp;&nbsp;&nbsp;&#11377; src
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;ⳑ plugin.yml
+            &nbsp;&nbsp;&nbsp;&nbsp;&#11377; plugin.yml
           </td>
         </tr>
         <tr>

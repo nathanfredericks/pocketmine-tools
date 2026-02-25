@@ -1,10 +1,10 @@
+'use client';
 import React, { PropsWithChildren, useState } from 'react';
 import { Col, Container, Navbar, Row, Tab, Button, Nav } from 'react-bootstrap';
 import Link from 'next/link';
-import Head from 'next/head';
 import PMTLogo from '../public/static/logo-white.svg';
 import NavItems from './NavItems';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 type LayoutProps = {
   title: string | null;
   showNav: boolean;
@@ -15,27 +15,23 @@ export default function Layout({
   showNav = true,
 }: PropsWithChildren<LayoutProps>) {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const isActive = (routes: string[]) => routes.includes(router.pathname);
+  const pathname = usePathname();
+  const isActive = (routes: string[]) => routes.includes(pathname);
   return (
     <>
-      <Head>
-        <title>
-          {title ? `${title} - PocketMine Tools` : 'PocketMine Tools'}
-        </title>
-      </Head>
+      <title>
+        {title ? `${title} - PocketMine Tools` : 'PocketMine Tools'}
+      </title>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Link href="/" passHref legacyBehavior>
-            <Navbar.Brand>
-              <PMTLogo
-                width="30"
-                height="30"
-                className="d-inline-block align-top me-2"
-              />
-              PocketMine Tools
-            </Navbar.Brand>
-          </Link>
+          <Navbar.Brand as={Link} href="/">
+            <PMTLogo
+              width="30"
+              height="30"
+              className="d-inline-block align-top me-2"
+            />
+            PocketMine Tools
+          </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse>
             <Nav className="me-auto">
