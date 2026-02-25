@@ -8,7 +8,7 @@ export default class CrashdumpParser extends Component {
     pingError: null,
     pingErrorLink: null,
     host: null,
-    port: "19132",
+    port: '19132',
     loading: false,
     data: null,
   };
