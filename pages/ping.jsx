@@ -8,7 +8,7 @@ export default class CrashdumpParser extends Component {
     pingError: null,
     pingErrorLink: null,
     host: null,
-    port: null,
+    port: "19132",
     loading: false,
     data: null,
   };
@@ -89,6 +89,7 @@ export default class CrashdumpParser extends Component {
                 <Form.Control
                   type="number"
                   placeholder="19132"
+                  value="19132"
                   onChange={this.handlePortChange}
                 />
               </Col>
