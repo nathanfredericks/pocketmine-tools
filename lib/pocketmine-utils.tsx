@@ -5,47 +5,52 @@ export function secondsToDHMS(seconds: number) {
   const h = Math.floor((seconds % (3600 * 24)) / 3600);
   const m = Math.floor((seconds % 3600) / 60);
   const s = Math.floor(seconds % 60);
-  const dDisplay = d > 0 ? d + (d === 1 ? ' day, ' : ' days, ') : '';
-  const hDisplay = h > 0 ? h + (h === 1 ? ' hour, ' : ' hours, ') : '';
-  const mDisplay = m > 0 ? m + (m === 1 ? ' minute, ' : ' minutes, ') : '';
-  const sDisplay = s > 0 ? s + (s === 1 ? ' second' : ' seconds') : '';
+  const dDisplay = d > 0 ? d + (d === 1 ? " day, " : " days, ") : "";
+  const hDisplay = h > 0 ? h + (h === 1 ? " hour, " : " hours, ") : "";
+  const mDisplay = m > 0 ? m + (m === 1 ? " minute, " : " minutes, ") : "";
+  const sDisplay = s > 0 ? s + (s === 1 ? " second" : " seconds") : "";
+
   return dDisplay + hDisplay + mDisplay + sDisplay;
 }
 export function parseCode(code: { [key: string]: string }) {
   const dataArray = [];
+
   for (const key in code) {
     dataArray.push(code[key]);
   }
-  return dataArray.join('\n');
+
+  return dataArray.join("\n");
 }
 export function formatOS(os: string): string {
   switch (os) {
-    case 'win':
-      return 'Windows';
-    case 'mac':
-      return 'macOS';
-    case 'ios':
-      return 'iOS';
-    case 'android':
-      return 'Android';
-    case 'linux':
-      return 'Linux';
-    case 'bsd':
-      return 'BSD';
-    case 'other':
-      return 'Unknown';
+    case "win":
+      return "Windows";
+    case "mac":
+      return "macOS";
+    case "ios":
+      return "iOS";
+    case "android":
+      return "Android";
+    case "linux":
+      return "Linux";
+    case "bsd":
+      return "BSD";
+    case "other":
+      return "Unknown";
     default:
-      return 'Unknown';
+      return "Unknown";
   }
 }
 export function cleanUnparsedCrashdump(crashdump: string): string {
-  const beginMarker = '===BEGIN CRASH DUMP===';
-  const endMarker = '===END CRASH DUMP===';
+  const beginMarker = "===BEGIN CRASH DUMP===";
+  const endMarker = "===END CRASH DUMP===";
   const beginIndex = crashdump.indexOf(beginMarker);
   const endIndex = crashdump.indexOf(endMarker);
+
   if (beginIndex !== -1 && endIndex !== -1) {
     return crashdump.substring(beginIndex + beginMarker.length, endIndex).trim();
   }
+
   return crashdump.trim();
 }
 export function capitalize(s: string) {
@@ -53,7 +58,8 @@ export function capitalize(s: string) {
 }
 export function correctNamespacePart(part: string): string {
   if (/^\d/.test(part.charAt(0))) {
-    part = '_' + part;
+    part = "_" + part;
   }
-  return part.replace('-', '_');
+
+  return part.replace("-", "_");
 }

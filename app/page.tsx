@@ -1,5 +1,6 @@
-'use client';
-import Layout from '../components/Layout';
+"use client";
+import Layout from "../components/Layout";
+
 export default function Home() {
   return (
     <Layout title={null} showNav={true}>

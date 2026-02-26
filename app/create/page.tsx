@@ -1,10 +1,10 @@
-'use client';
-import { useState } from 'react';
-import { AlertCircle, CloudUpload, Loader2, X } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+"use client";
+import { useState } from "react";
+import { AlertCircle, CloudUpload, Loader2, X } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   FileUpload,
   FileUploadDropzone,
@@ -13,12 +13,13 @@ import {
   FileUploadItemMetadata,
   FileUploadList,
   FileUploadTrigger,
-} from '@/components/ui/file-upload';
-import Layout from '../../components/Layout';
-import { saveAs } from 'file-saver';
+} from "@/components/ui/file-upload";
+import Layout from "../../components/Layout";
+import { saveAs } from "file-saver";
+
 export default function Create() {
   const [files, setFiles] = useState<File[]>([]);
-  const [stub, setStub] = useState('<?php __HALT_COMPILER();');
+  const [stub, setStub] = useState("<?php __HALT_COMPILER();");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const handleStubChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,43 +31,47 @@ export default function Create() {
     setLoading(true);
     if (files.length < 1) return;
     const reader = new FileReader();
+
     reader.onload = async () => {
       try {
-        const JSZip = (await import('jszip')).default;
+        const JSZip = (await import("jszip")).default;
         const zip = await JSZip.loadAsync(new Uint8Array(reader.result as ArrayBuffer));
-        const originalName = files[0].name.split('.').slice(0, -1).join('.');
+        const originalName = files[0].name.split(".").slice(0, -1).join(".");
+
         if (
           zip.files[`${originalName}/`] &&
           zip.files[`${originalName}/`].dir
         ) {
           (zip as any).root = zip.files[`${originalName}/`].name;
         }
-        const ZipConverter = (await import('phar')).ZipConverter;
+        const ZipConverter = (await import("phar")).ZipConverter;
         const phar = await ZipConverter.toPhar(
-          await zip.generateAsync({ type: 'uint8array' })
+          await zip.generateAsync({ type: "uint8array" })
         );
+
         phar.setStub(stub);
         saveAs(
           new Blob([phar.savePharData() as unknown as BlobPart], {
-            type: 'application/octet-stream',
+            type: "application/octet-stream",
           }),
-          `${files[0].name.split('.').slice(0, -1).join('.')}.phar`
+          `${files[0].name.split(".").slice(0, -1).join(".")}.phar`
         );
-      } catch (err) {
+      } catch {
         setError(
-          'An error occurred while converting your plugin. Please check your network connection and try again.'
+          "An error occurred while converting your plugin. Please check your network connection and try again."
         );
       } finally {
         setLoading(false);
       }
     };
     reader.onerror = () => {
-      console.log('net err');
-      setError('An error occurred while converting your plugin.');
+      console.log("net err");
+      setError("An error occurred while converting your plugin.");
       setLoading(false);
     };
     reader.readAsArrayBuffer(files[0]);
   };
+
   return (
     <Layout title="Create .phar" showNav={true}>
       {error ? (
@@ -132,7 +137,7 @@ export default function Create() {
               <span className="dots" />
             </>
           ) : (
-            'Create'
+            "Create"
           )}
         </Button>
       </form>

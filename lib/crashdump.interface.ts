@@ -13,8 +13,8 @@ export default interface Crashdump {
   plugin?: string;
   plugin_involvement?: PluginInvolvement;
   plugins?: { [key: string]: Plugin };
-  'pocketmine.yml'?: string;
-  'server.properties'?: string;
+  "pocketmine.yml"?: string;
+  "server.properties"?: string;
   time?: number;
   trace?: string[];
   uptime?: number;
@@ -25,6 +25,7 @@ interface Error {
   message?: string;
   type?: string;
 }
+
 interface General {
   base_version?: string;
   build?: number;
@@ -39,6 +40,7 @@ interface General {
   uname?: string;
   zend?: string;
 }
+
 interface LastError {
   file?: string;
   fullFile?: string;
@@ -47,10 +49,11 @@ interface LastError {
   trace?: string[];
   type?: string;
 }
+
 enum PluginInvolvement {
-  Direct = 'direct',
-  Indirect = 'indirect',
-  None = 'none',
+  Direct = "direct",
+  Indirect = "indirect",
+  None = "none",
 }
 interface Plugin {
   api?: string[];
@@ -64,7 +67,8 @@ interface Plugin {
   version?: string;
   website?: string;
 }
+
 enum Load {
-  Postworld = 'POSTWORLD',
-  Startup = 'STARTUP',
+  Postworld = "POSTWORLD",
+  Startup = "STARTUP",
 }

@@ -1,20 +1,22 @@
-import type { Metadata, Viewport } from 'next';
-import Script from 'next/script';
-import './globals.css';
-import { Inter } from 'next/font/google';
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+import type { Metadata, Viewport } from "next";
+import Script from "next/script";
+import "./globals.css";
+import { Inter } from "next/font/google";
+
+const inter = Inter({subsets:["latin"],variable:"--font-sans"});
+
 export const metadata: Metadata = {
   title: {
-    default: 'PocketMine Tools',
-    template: '%s - PocketMine Tools',
+    default: "PocketMine Tools",
+    template: "%s - PocketMine Tools",
   },
-  keywords: 'PocketMine,PocketMine Tools,PMT,pmt.mcpe.fun,pmt,mcpe.fun',
+  keywords: "PocketMine,PocketMine Tools,PMT,pmt.mcpe.fun,pmt,mcpe.fun",
   icons: {
-    icon: '/static/favicon.ico',
+    icon: "/static/favicon.ico",
   },
 };
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
 };
 export default function RootLayout({

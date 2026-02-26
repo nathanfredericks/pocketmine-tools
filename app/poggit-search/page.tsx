@@ -1,12 +1,12 @@
-'use client';
-import { useEffect, useState } from 'react';
+"use client";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
   CardDescription,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
   Configure,
   Highlight,
@@ -14,16 +14,18 @@ import {
   InstantSearch,
   useInstantSearch,
   useSearchBox,
-} from 'react-instantsearch';
-import Image from 'next/image';
-import { liteClient as algoliasearch } from 'algoliasearch/lite';
-import Layout from '../../components/Layout';
-import useDebounce from '../../lib/useDebounce';
-import type { Hit as AlgoliaHit } from 'instantsearch.js';
+} from "react-instantsearch";
+import Image from "next/image";
+import { liteClient as algoliasearch } from "algoliasearch/lite";
+import Layout from "../../components/Layout";
+import useDebounce from "../../lib/useDebounce";
+import type { Hit as AlgoliaHit } from "instantsearch.js";
+
 const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || '',
-  process.env.NEXT_PUBLIC_ALGOLIA_API_KEY || ''
+  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || "",
+  process.env.NEXT_PUBLIC_ALGOLIA_API_KEY || ""
 );
+
 export default function PoggitSearch() {
   return (
     <Layout title="Search Poggit" showNav={true}>
@@ -40,11 +42,13 @@ export default function PoggitSearch() {
 }
 function CustomSearchBox() {
   const { refine } = useSearchBox();
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
+
   useEffect(() => {
     refine(debouncedSearchTerm);
   }, [debouncedSearchTerm, refine]);
+
   return (
     <div>
       <Input
@@ -74,6 +78,7 @@ function Hit({ hit }: { hit: AlgoliaHit<{ name: string; tagline: string; html_ur
 }
 function NoResultsBoundary({ children, fallback }: { children: React.ReactNode; fallback: React.ReactNode }): React.ReactElement {
   const { results } = useInstantSearch();
+
   if (!results.__isArtificial && results.nbHits === 0) {
     return (
       <>
@@ -82,10 +87,12 @@ function NoResultsBoundary({ children, fallback }: { children: React.ReactNode; 
       </>
     );
   }
+
   return <>{children}</>;
 }
 function NoResults() {
   const { indexUiState } = useInstantSearch();
+
   return (
     <div>
       <p>

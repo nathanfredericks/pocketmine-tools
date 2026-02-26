@@ -1,26 +1,29 @@
-'use client';
-import React from 'react';
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
-import { Table, TableBody, TableRow, TableCell, TableHeader, TableHead } from '@/components/ui/table';
-import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
-import php from 'react-syntax-highlighter/dist/cjs/languages/hljs/php';
-import properties from 'react-syntax-highlighter/dist/cjs/languages/hljs/properties';
-import yml from 'react-syntax-highlighter/dist/cjs/languages/hljs/yaml';
-import defaultStyle from 'react-syntax-highlighter/dist/cjs/styles/hljs/default-style';
-import vs2015 from 'react-syntax-highlighter/dist/cjs/styles/hljs/vs2015';
-import { capitalize, formatOS, parseCode, secondsToDHMS } from '../lib/pocketmine-utils';
-import { Server, OctagonX, Plug, SlidersHorizontal, Settings, Box, FileCode2 } from 'lucide-react';
-import { useDarkMode } from '@/hooks/use-dark-mode';
-import Crashdump from '../lib/crashdump.interface';
-SyntaxHighlighter.registerLanguage('php', php);
-SyntaxHighlighter.registerLanguage('properties', properties);
-SyntaxHighlighter.registerLanguage('yml', yml);
+"use client";
+import React from "react";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { Table, TableBody, TableRow, TableCell, TableHeader, TableHead } from "@/components/ui/table";
+import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter";
+import php from "react-syntax-highlighter/dist/cjs/languages/hljs/php";
+import properties from "react-syntax-highlighter/dist/cjs/languages/hljs/properties";
+import yml from "react-syntax-highlighter/dist/cjs/languages/hljs/yaml";
+import defaultStyle from "react-syntax-highlighter/dist/cjs/styles/hljs/default-style";
+import vs2015 from "react-syntax-highlighter/dist/cjs/styles/hljs/vs2015";
+import { capitalize, formatOS, parseCode, secondsToDHMS } from "../lib/pocketmine-utils";
+import { Server, OctagonX, Plug, SlidersHorizontal, Settings, Box, FileCode2 } from "lucide-react";
+import { useDarkMode } from "@/hooks/use-dark-mode";
+import Crashdump from "../lib/crashdump.interface";
+
+SyntaxHighlighter.registerLanguage("php", php);
+SyntaxHighlighter.registerLanguage("properties", properties);
+SyntaxHighlighter.registerLanguage("yml", yml);
 type CrashdumpPreviewProps = {
   crashdump: Crashdump;
 };
+
 export default function CrashdumpPreview({ crashdump }: CrashdumpPreviewProps) {
   const isDark = useDarkMode();
   const codeStyle = isDark ? vs2015 : defaultStyle;
+
   return (
     <>
       <h4>{crashdump.error?.message}</h4>
@@ -70,7 +73,7 @@ export default function CrashdumpPreview({ crashdump }: CrashdumpPreviewProps) {
                 {crashdump.jit_mode !== undefined && crashdump.jit_mode !== null ? (
                   <TableRow>
                     <TableCell>JIT status</TableCell>
-                    <TableCell>{crashdump.jit_mode ? 'Enabled' : 'Disabled'}</TableCell>
+                    <TableCell>{crashdump.jit_mode ? "Enabled" : "Disabled"}</TableCell>
                   </TableRow>
                 ) : null}
                 <TableRow>
@@ -84,7 +87,7 @@ export default function CrashdumpPreview({ crashdump }: CrashdumpPreviewProps) {
                 <TableRow>
                   <TableCell>Startup arguments</TableCell>
                   <TableCell>
-                    <code>{crashdump.parameters?.join(' ')}</code>
+                    <code>{crashdump.parameters?.join(" ")}</code>
                   </TableCell>
                 </TableRow>
               </TableBody>
@@ -142,12 +145,12 @@ export default function CrashdumpPreview({ crashdump }: CrashdumpPreviewProps) {
             ) : null}
             {crashdump.trace?.length ? (
               <SyntaxHighlighter className="code-block" style={codeStyle}>
-                {crashdump.trace.join('\n')}
+                {crashdump.trace.join("\n")}
               </SyntaxHighlighter>
             ) : null}
           </AccordionContent>
         </AccordionItem>
-        {crashdump.lastError && typeof crashdump.lastError === 'object' && !Array.isArray(crashdump.lastError) ? (
+        {crashdump.lastError && typeof crashdump.lastError === "object" && !Array.isArray(crashdump.lastError) ? (
           <AccordionItem value="item-last-error">
             <AccordionTrigger>
               <OctagonX className="mr-2 size-4" />
@@ -176,7 +179,7 @@ export default function CrashdumpPreview({ crashdump }: CrashdumpPreviewProps) {
               </Table>
               {crashdump.lastError.trace?.length ? (
                 <SyntaxHighlighter className="code-block" style={codeStyle}>
-                  {crashdump.lastError.trace.join('\n')}
+                  {crashdump.lastError.trace.join("\n")}
                 </SyntaxHighlighter>
               ) : null}
             </AccordionContent>
@@ -206,12 +209,12 @@ export default function CrashdumpPreview({ crashdump }: CrashdumpPreviewProps) {
                     <TableRow key={key}>
                       <TableCell>{crashdump.plugins![key].name}</TableCell>
                       <TableCell>{crashdump.plugins![key].version}</TableCell>
-                      <TableCell>{crashdump.plugins![key].api?.join(', ')}</TableCell>
+                      <TableCell>{crashdump.plugins![key].api?.join(", ")}</TableCell>
                       <TableCell>{crashdump.plugins![key].load}</TableCell>
                       <TableCell>
-                        {crashdump.plugins![key].enabled ? 'Enabled' : 'Disabled'}
+                        {crashdump.plugins![key].enabled ? "Enabled" : "Disabled"}
                       </TableCell>
-                      <TableCell>{crashdump.plugins![key].authors?.join(', ')}</TableCell>
+                      <TableCell>{crashdump.plugins![key].authors?.join(", ")}</TableCell>
                       <TableCell>
                         {crashdump.plugins![key].website ? (
                           <a href={crashdump.plugins![key].website}>Visit</a>
@@ -224,7 +227,7 @@ export default function CrashdumpPreview({ crashdump }: CrashdumpPreviewProps) {
             </AccordionContent>
           </AccordionItem>
         ) : null}
-        {crashdump['server.properties'] ? (
+        {crashdump["server.properties"] ? (
           <AccordionItem value="item-3">
             <AccordionTrigger>
               <SlidersHorizontal className="mr-2 size-4" />
@@ -237,12 +240,12 @@ export default function CrashdumpPreview({ crashdump }: CrashdumpPreviewProps) {
                 style={codeStyle}
                 showLineNumbers
               >
-                {crashdump['server.properties']}
+                {crashdump["server.properties"]}
               </SyntaxHighlighter>
             </AccordionContent>
           </AccordionItem>
         ) : null}
-        {crashdump['pocketmine.yml'] ? (
+        {crashdump["pocketmine.yml"] ? (
           <AccordionItem value="item-4">
             <AccordionTrigger>
               <Settings className="mr-2 size-4" />
@@ -255,7 +258,7 @@ export default function CrashdumpPreview({ crashdump }: CrashdumpPreviewProps) {
                 style={codeStyle}
                 showLineNumbers
               >
-                {crashdump['pocketmine.yml']}
+                {crashdump["pocketmine.yml"]}
               </SyntaxHighlighter>
             </AccordionContent>
           </AccordionItem>

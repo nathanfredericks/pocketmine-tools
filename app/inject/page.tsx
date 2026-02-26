@@ -1,11 +1,11 @@
-'use client';
-import { useState } from 'react';
-import { AlertCircle, CloudUpload, Loader2, X } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+"use client";
+import { useState } from "react";
+import { AlertCircle, CloudUpload, Loader2, X } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import {
   FileUpload,
   FileUploadDropzone,
@@ -14,12 +14,13 @@ import {
   FileUploadItemMetadata,
   FileUploadList,
   FileUploadTrigger,
-} from '@/components/ui/file-upload';
-import { saveAs } from 'file-saver';
-import Layout from '../../components/Layout';
+} from "@/components/ui/file-upload";
+import { saveAs } from "file-saver";
+import Layout from "../../components/Layout";
+
 export default function Inject() {
   const [files, setFiles] = useState<File[]>([]);
-  const [apiVersion, setApiVersion] = useState('');
+  const [apiVersion, setApiVersion] = useState("");
   const [warningModal, setWarningModal] = useState(false);
   const [warningThreeWords, setWarningThreeWords] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -30,35 +31,41 @@ export default function Inject() {
     setLoading(true);
     if (files.length < 1) return;
     const reader = new FileReader();
+
     reader.onload = async () => {
       try {
-        const Archive = (await import('phar')).Archive;
+        const Archive = (await import("phar")).Archive;
         const phar = new Archive();
+
         phar.loadPharData(new Uint8Array(reader.result as ArrayBuffer));
-        const yaml = (await import('js-yaml')).default;
-        const originalPluginYml = phar.getFile('plugin.yml');
+        const yaml = (await import("js-yaml")).default;
+        const originalPluginYml = phar.getFile("plugin.yml");
+
         if (!originalPluginYml) {
           setError(
-            'An error occurred while injecting your plugin. Ensure that the plugin is in the root directory of the zip.'
+            "An error occurred while injecting your plugin. Ensure that the plugin is in the root directory of the zip."
           );
+
           return;
         }
         const pluginYml = yaml.load(originalPluginYml.getContents()) as Record<string, unknown>;
+
         pluginYml.api = apiVersion;
-        phar.removeFile('plugin.yml');
-        const File = (await import('phar')).File;
-        phar.addFile(new File('plugin.yml', yaml.dump(pluginYml)));
+        phar.removeFile("plugin.yml");
+        const File = (await import("phar")).File;
+
+        phar.addFile(new File("plugin.yml", yaml.dump(pluginYml)));
         saveAs(
           new Blob([phar.savePharData() as unknown as BlobPart], {
-            type: 'application/octet-stream',
+            type: "application/octet-stream",
           }),
           `${files[0].name
-            .split('.')
+            .split(".")
             .slice(0, -1)
-            .join('.')}-${apiVersion}.phar`
+            .join(".")}-${apiVersion}.phar`
         );
       } catch {
-        setError('An error occurred while injecting your plugin.');
+        setError("An error occurred while injecting your plugin.");
       } finally {
         setWarningModal(false);
         setWarningThreeWords(false);
@@ -67,6 +74,7 @@ export default function Inject() {
     };
     reader.readAsArrayBuffer(files[0]);
   };
+
   return (
     <Layout title="Inject API Version" showNav={true}>
       {error ? (
@@ -144,12 +152,12 @@ export default function Inject() {
               support.
             </li>
             <li>
-              Click{' '}
+              Click{" "}
               <em
                 onClick={() => setWarningThreeWords(true)}
               >
                 these three words
-              </em>{' '}
+              </em>{" "}
               if you have read the above.
             </li>
           </ol>
@@ -165,7 +173,7 @@ export default function Inject() {
                   <span className="dots" />
                 </>
               ) : (
-                'Inject'
+                "Inject"
               )}
             </Button>
           </DialogFooter>

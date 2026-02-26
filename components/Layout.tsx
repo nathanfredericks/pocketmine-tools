@@ -1,14 +1,13 @@
-'use client';
-import React, { PropsWithChildren } from 'react';
-import Link from 'next/link';
-import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
-import { Separator } from '@/components/ui/separator';
-import { Button } from '@/components/ui/button';
-import AppSidebar from './AppSidebar';
+"use client";
+import React, { PropsWithChildren } from "react";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import AppSidebar from "./AppSidebar";
+
 type LayoutProps = {
   title: string | null;
   showNav: boolean;
 };
+
 export default function Layout({
   title,
   children,
@@ -17,11 +16,11 @@ export default function Layout({
   return (
     <>
       <title>
-        {title ? `${title} - PocketMine Tools` : 'PocketMine Tools'}
+        {title ? `${title} - PocketMine Tools` : "PocketMine Tools"}
       </title>
       {showNav ? (
         <SidebarProvider
-          style={{ '--header-height': 'calc(var(--spacing) * 12)' } as React.CSSProperties}
+          style={{ "--header-height": "calc(var(--spacing) * 12)" } as React.CSSProperties}
         >
           <AppSidebar />
           <SidebarInset>

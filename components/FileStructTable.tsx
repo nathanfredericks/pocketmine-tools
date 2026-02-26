@@ -1,10 +1,12 @@
-'use client';
-import React from 'react';
-import { Table, TableBody, TableRow, TableCell, TableHeader, TableHead } from '@/components/ui/table';
-import { Check, X } from 'lucide-react';
+"use client";
+import React from "react";
+import { Table, TableBody, TableRow, TableCell, TableHeader, TableHead } from "@/components/ui/table";
+import { Check, X } from "lucide-react";
+
 type FileStructTableProps = {
   exTitles: boolean;
 };
+
 export default function FileStructTable({ exTitles }: FileStructTableProps) {
   return (
     <div className="overflow-x-auto">
@@ -42,7 +44,7 @@ export default function FileStructTable({ exTitles }: FileStructTableProps) {
               <br />
               &nbsp;&nbsp;&#11377; DevTools-master
               <br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&#11377;{' '}
+              &nbsp;&nbsp;&nbsp;&nbsp;&#11377;{" "}
               <span className="bg-destructive text-destructive-foreground">OtherFolder</span>
               <br />
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#11377; src

@@ -1,10 +1,11 @@
-declare module 'mcpe-ping' {
+declare module "mcpe-ping" {
   interface PingResponse {
     name: string;
     version: string;
     currentPlayers: string;
     maxPlayers: string;
   }
+
   function mcpePing(
     host: string,
     port: number,

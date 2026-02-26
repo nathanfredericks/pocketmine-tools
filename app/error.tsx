@@ -1,8 +1,9 @@
-'use client';
-import Layout from '../components/Layout';
+"use client";
+import Layout from "../components/Layout";
+
 export default function Error({
-  error,
-  reset,
+  error: _error,
+  reset: _reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;

@@ -1,16 +1,17 @@
-'use client';
-import { useState } from 'react';
-import { AlertCircle, Loader2 } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Table, TableBody, TableRow, TableCell } from '@/components/ui/table';
-import Layout from '../../components/Layout';
+"use client";
+import { useState } from "react";
+import { AlertCircle, Loader2 } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Table, TableBody, TableRow, TableCell } from "@/components/ui/table";
+import Layout from "../../components/Layout";
+
 export default function Ping() {
   const [pingError, setPingError] = useState<string | null>(null);
   const [host, setHost] = useState<string | null>(null);
-  const [port, setPort] = useState('19132');
+  const [port, setPort] = useState("19132");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<{
     name: string;
@@ -31,23 +32,25 @@ export default function Ping() {
     setData(null);
     const response = await fetch(`/api/ping/?host=${host}&port=${port}`);
     const json = await response.json();
+
     if (response.status === 200) {
       setData(json);
       setLoading(false);
     } else if (response.status === 400) {
-      if (json.code === 'DNS_LOOKUP_FAILED') {
+      if (json.code === "DNS_LOOKUP_FAILED") {
         setPingError(
-          'Sorry, an error occurred pinging your server. Ensure you have the correct hostname.'
+          "Sorry, an error occurred pinging your server. Ensure you have the correct hostname."
         );
       } else {
-        setPingError('Sorry, an error occurred pinging your server.');
+        setPingError("Sorry, an error occurred pinging your server.");
       }
       setLoading(false);
     } else {
-      setPingError('Sorry, an error occurred pinging your server.');
+      setPingError("Sorry, an error occurred pinging your server.");
       setLoading(false);
     }
   };
+
   return (
     <Layout title="Ping Server" showNav={true}>
       {pingError ? (
@@ -85,11 +88,11 @@ export default function Ping() {
         >
           {loading ? (
             <>
-              <Loader2 className="size-4 animate-spin" />{' '}
+              <Loader2 className="size-4 animate-spin" />{" "}
               Pinging
             </>
           ) : (
-            'Ping'
+            "Ping"
           )}
         </Button>
       </form>
@@ -99,7 +102,7 @@ export default function Ping() {
             <TableRow>
               <TableCell>MOTD</TableCell>
               <TableCell>
-                {data.name}{' '}
+                {data.name}{" "}
                 <a
                   href={`/motd-generator/?motd=${data.name}`}
                   target="_blank"

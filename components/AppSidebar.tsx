@@ -1,8 +1,8 @@
-'use client';
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+"use client";
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
   Package,
   FolderOpen,
@@ -13,7 +13,7 @@ import {
   Pencil,
   Info,
   Heart,
-} from 'lucide-react';
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -24,23 +24,26 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from '@/components/ui/sidebar';
-import { Button } from '@/components/ui/button';
+} from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
+
 const pluginDevItems = [
-  { href: '/create/', label: 'Create .phar', icon: Package },
-  { href: '/extract/', label: 'Extract .phar', icon: FolderOpen },
-  { href: '/inject/', label: 'Inject API Version', icon: Settings },
-  { href: '/crashdump-parser/', label: 'Parse Crashdump', icon: Bug },
-  { href: '/generate/', label: 'Generate Plugin Template', icon: SquarePlus },
+  { href: "/create/", label: "Create .phar", icon: Package },
+  { href: "/extract/", label: "Extract .phar", icon: FolderOpen },
+  { href: "/inject/", label: "Inject API Version", icon: Settings },
+  { href: "/crashdump-parser/", label: "Parse Crashdump", icon: Bug },
+  { href: "/generate/", label: "Generate Plugin Template", icon: SquarePlus },
 ];
 const serverAdminItems = [
-  { href: '/poggit-search/', label: 'Search Poggit', icon: Search },
-  { href: '/motd-generator/', label: 'Generate MOTD', icon: Pencil },
-  { href: '/ping/', label: 'Ping Server', icon: Info },
+  { href: "/poggit-search/", label: "Search Poggit", icon: Search },
+  { href: "/motd-generator/", label: "Generate MOTD", icon: Pencil },
+  { href: "/ping/", label: "Ping Server", icon: Info },
 ];
+
 export default function AppSidebar() {
   const pathname = usePathname();
   const year = new Date().getFullYear();
+
   return (
     <Sidebar collapsible="offcanvas">
       <SidebarHeader>
