@@ -23,7 +23,9 @@
       "mcp__shadcn__search_items_in_registries",
       "Bash(bunx shadcn@latest:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(grep:*)",
+      "Bash(npm run:*)"
     ]
   }
 }
