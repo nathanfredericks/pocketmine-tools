@@ -1,25 +1,34 @@
 'use client';
 import { useState } from 'react';
-import { Alert, Button, Form, InputGroup, Modal } from 'react-bootstrap';
+import { AlertCircle, CloudUpload, Loader2, X } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import {
+  FileUpload,
+  FileUploadDropzone,
+  FileUploadItem,
+  FileUploadItemDelete,
+  FileUploadItemMetadata,
+  FileUploadList,
+  FileUploadTrigger,
+} from '@/components/ui/file-upload';
 import { saveAs } from 'file-saver';
 import Layout from '../../components/Layout';
-import Link from 'next/link';
 export default function Inject() {
-  const [files, setFiles] = useState<FileList | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
   const [apiVersion, setApiVersion] = useState('');
   const [warningModal, setWarningModal] = useState(false);
   const [warningThreeWords, setWarningThreeWords] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [errorLink, setErrorLink] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFiles(event.target.files);
-  };
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
     setError(null);
     setLoading(true);
-    if (!files || files.length < 1) return;
+    if (files.length < 1) return;
     const reader = new FileReader();
     reader.onload = async () => {
       try {
@@ -32,7 +41,6 @@ export default function Inject() {
           setError(
             'An error occurred while injecting your plugin. Ensure that the plugin is in the root directory of the zip.'
           );
-          setErrorLink('/support#inject-directory-error');
           return;
         }
         const pluginYml = yaml.load(originalPluginYml.getContents()) as Record<string, unknown>;
@@ -51,7 +59,6 @@ export default function Inject() {
         );
       } catch {
         setError('An error occurred while injecting your plugin.');
-        setErrorLink('/support#inject-error');
       } finally {
         setWarningModal(false);
         setWarningThreeWords(false);
@@ -61,50 +68,70 @@ export default function Inject() {
     reader.readAsArrayBuffer(files[0]);
   };
   return (
-    <Layout title="API Injector" showNav={true}>
+    <Layout title="Inject API Version" showNav={true}>
       {error ? (
-        <Alert variant="danger">
-          {error} <Link href={errorLink!}>More info.</Link>
+        <Alert variant="destructive">
+          <AlertCircle className="size-4" />
+          <AlertDescription>
+            {error}
+          </AlertDescription>
         </Alert>
       ) : null}
-      <Form>
-        <Form.Label>
-          Plugin (<code>.phar</code> file)
-        </Form.Label>
-        <InputGroup className="mb-3">
-          <Form.Control
-            type="file"
+      <form>
+        <div className="grid gap-2 mb-3">
+          <Label>Plugin (<code>.phar</code> file)</Label>
+          <FileUpload
+            value={files}
+            onValueChange={setFiles}
             accept=".phar"
-            onChange={handleChange}
-          />
-        </InputGroup>
-        <Form.Group className="mb-3">
-          <Form.Label>API version</Form.Label>
-          <Form.Control
+            maxFiles={1}
+          >
+            <FileUploadDropzone className="flex-row flex-wrap border-dotted text-center">
+              <CloudUpload className="size-4" />
+              Drag and drop or
+              <FileUploadTrigger asChild>
+                <Button variant="link" size="sm" className="p-0">
+                  choose a file
+                </Button>
+              </FileUploadTrigger>
+            </FileUploadDropzone>
+            <FileUploadList>
+              {files.map((file, index) => (
+                <FileUploadItem key={index} value={file}>
+                  <FileUploadItemMetadata />
+                  <FileUploadItemDelete asChild>
+                    <Button variant="ghost" size="icon-xs">
+                      <X />
+                      <span className="sr-only">Remove</span>
+                    </Button>
+                  </FileUploadItemDelete>
+                </FileUploadItem>
+              ))}
+            </FileUploadList>
+          </FileUpload>
+        </div>
+        <div className="grid gap-2 mb-3">
+          <Label>API version</Label>
+          <Input
             type="text"
             value={apiVersion}
             onChange={(event) => setApiVersion(event.target.value)}
           />
-        </Form.Group>
+        </div>
         <Button
-          variant="primary"
           onClick={() => setWarningModal(true)}
-          disabled={!files || files.length < 1 || apiVersion.length < 1}
+          disabled={files.length < 1 || apiVersion.length < 1}
         >
           Inject
         </Button>
-      </Form>
-      <Modal
-        show={warningModal}
-        onHide={() => setWarningModal(false)}
-        size="lg"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title className="text-danger">
-            This is dangerous
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+      </form>
+      <Dialog open={warningModal} onOpenChange={setWarningModal}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="text-destructive">
+              This is dangerous
+            </DialogTitle>
+          </DialogHeader>
           <ol>
             <li>
               This tool only forces the plugin to say that it supports API
@@ -126,25 +153,24 @@ export default function Inject() {
               if you have read the above.
             </li>
           </ol>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="primary"
-            onClick={handleSubmit}
-            disabled={!warningThreeWords || loading}
-          >
-            {loading ? (
-              <>
-                <span className="spinner-border spinner-border-sm mr-1" />{' '}
-                Injecting
-                <span className="dots" />
-              </>
-            ) : (
-              'Inject'
-            )}
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          <DialogFooter>
+            <Button
+              onClick={handleSubmit}
+              disabled={!warningThreeWords || loading}
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 size-4 animate-spin" />
+                  Injecting
+                  <span className="dots" />
+                </>
+              ) : (
+                'Inject'
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 }

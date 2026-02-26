@@ -1,6 +1,12 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import {
   Configure,
   Highlight,
@@ -9,7 +15,7 @@ import {
   useInstantSearch,
   useSearchBox,
 } from 'react-instantsearch';
-import AlgoliaLogoBlue from '../../public/static/Algolia-logo-blue.svg';
+import Image from 'next/image';
 import { liteClient as algoliasearch } from 'algoliasearch/lite';
 import Layout from '../../components/Layout';
 import useDebounce from '../../lib/useDebounce';
@@ -20,7 +26,7 @@ const searchClient = algoliasearch(
 );
 export default function PoggitSearch() {
   return (
-    <Layout title="Poggit Search" showNav={true}>
+    <Layout title="Search Poggit" showNav={true}>
       <InstantSearch searchClient={searchClient} indexName="plugins">
         <Configure hitsPerPage={5} />
         <CustomSearchBox />
@@ -28,7 +34,7 @@ export default function PoggitSearch() {
           <Hits hitComponent={Hit} />
         </NoResultsBoundary>
       </InstantSearch>
-      Powered by <AlgoliaLogoBlue height="15" />
+      Powered by <Image src="/static/Algolia-logo-blue.svg" alt="Algolia" height={15} width={60} className="dark:brightness-0 dark:invert inline-block" />
     </Layout>
   );
 }
@@ -40,29 +46,29 @@ function CustomSearchBox() {
     refine(debouncedSearchTerm);
   }, [debouncedSearchTerm, refine]);
   return (
-    <Form>
-      <Form.Control
+    <div>
+      <Input
         type="search"
         className="mb-3"
         placeholder="Search for plugins on Poggit"
         onChange={(event) => setSearchTerm(event.currentTarget.value)}
       />
-    </Form>
+    </div>
   );
 }
 function Hit({ hit }: { hit: AlgoliaHit<{ name: string; tagline: string; html_url: string }> }) {
   return (
-    <Card className="w-100 mb-2">
-      <Card.Body>
-        <Card.Title>
+    <Card className="w-full mb-4">
+      <CardContent>
+        <CardTitle>
           <a href={hit.html_url} target="_blank" rel="noreferrer">
             <Highlight attribute="name" hit={hit} />
           </a>
-        </Card.Title>
-        <Card.Text>
+        </CardTitle>
+        <CardDescription>
           <Highlight attribute="tagline" hit={hit} />
-        </Card.Text>
-      </Card.Body>
+        </CardDescription>
+      </CardContent>
     </Card>
   );
 }
@@ -72,7 +78,7 @@ function NoResultsBoundary({ children, fallback }: { children: React.ReactNode; 
     return (
       <>
         {fallback}
-        <div className="d-none">{children}</div>
+        <div className="hidden">{children}</div>
       </>
     );
   }

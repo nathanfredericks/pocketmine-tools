@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import pako from 'pako';
-import { cleanUnparsedCrashdump } from '../../../lib/utils';
+import { cleanUnparsedCrashdump } from '../../../lib/pocketmine-utils';
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const crashdump = body.crashdump;

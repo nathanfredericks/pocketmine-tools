@@ -19,7 +19,15 @@
           "exclusiveMinimum": 0
         },
         "lastError": {
-          "$ref": "#/definitions/LastError"
+          "anyOf": [
+            {
+              "$ref": "#/definitions/LastError"
+            },
+            {
+              "type": "array",
+              "maxItems": 0
+            }
+          ]
         },
         "error": {
           "$ref": "#/definitions/Error"
@@ -64,6 +72,9 @@
           "anyOf": [
             {
               "type": "integer"
+            },
+            {
+              "type": "null"
             }
           ]
         },
@@ -77,6 +88,9 @@
           "type": "string"
         },
         "server.properties": {
+          "type": "string"
+        },
+        "thread": {
           "type": "string"
         }
       },
@@ -92,6 +106,7 @@
         "plugin",
         "plugin_involvement",
         "plugins",
+        "thread",
         "time",
         "trace",
         "uptime"
@@ -256,7 +271,7 @@
           "type": "string"
         }
       },
-      "required": ["api", "authors", "enabled", "load", "name", "version"],
+      "required": ["api", "authors", "depends", "enabled", "load", "main", "name", "softDepends", "version", "website"],
       "title": "Plugin"
     }
   }

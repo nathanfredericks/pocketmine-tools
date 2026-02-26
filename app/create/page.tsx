@@ -1,27 +1,34 @@
 'use client';
 import { useState } from 'react';
-import { Alert, Button, Form, InputGroup } from 'react-bootstrap';
+import { AlertCircle, CloudUpload, Loader2, X } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  FileUpload,
+  FileUploadDropzone,
+  FileUploadItem,
+  FileUploadItemDelete,
+  FileUploadItemMetadata,
+  FileUploadList,
+  FileUploadTrigger,
+} from '@/components/ui/file-upload';
 import Layout from '../../components/Layout';
 import { saveAs } from 'file-saver';
-import Link from 'next/link';
 export default function Create() {
-  const [files, setFiles] = useState<FileList | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
   const [stub, setStub] = useState('<?php __HALT_COMPILER();');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [errorLink, setErrorLink] = useState<string | null>(null);
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFiles(event.target.files);
-  };
   const handleStubChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setStub(event.target.value);
   };
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setError(null);
-    setErrorLink(null);
     setLoading(true);
-    if (!files || files.length < 1) return;
+    if (files.length < 1) return;
     const reader = new FileReader();
     reader.onload = async () => {
       try {
@@ -49,7 +56,6 @@ export default function Create() {
         setError(
           'An error occurred while converting your plugin. Please check your network connection and try again.'
         );
-        setErrorLink('/support#convert-error');
       } finally {
         setLoading(false);
       }
@@ -57,7 +63,6 @@ export default function Create() {
     reader.onerror = () => {
       console.log('net err');
       setError('An error occurred while converting your plugin.');
-      setErrorLink('/support#convert-error');
       setLoading(false);
     };
     reader.readAsArrayBuffer(files[0]);
@@ -65,40 +70,64 @@ export default function Create() {
   return (
     <Layout title="Create .phar" showNav={true}>
       {error ? (
-        <Alert variant="danger">
-          {error} <Link href={errorLink!}>More info.</Link>
+        <Alert variant="destructive">
+          <AlertCircle className="size-4" />
+          <AlertDescription>
+            {error}
+          </AlertDescription>
         </Alert>
       ) : null}
-      <Form onSubmit={handleSubmit}>
-        <Form.Label>
-          Plugin (<code>.zip</code> file)
-        </Form.Label>
-        <InputGroup className="mb-3">
-          <Form.Control
-            type="file"
+      <form onSubmit={handleSubmit}>
+        <div className="grid gap-2 mb-3">
+          <Label>Plugin (<code>.zip</code> file)</Label>
+          <FileUpload
+            value={files}
+            onValueChange={setFiles}
             accept=".zip,application/zip"
-            onChange={handleFileChange}
-          />
-        </InputGroup>
-        <Form.Group className="mb-3">
-          <Form.Label>Stub</Form.Label>
-          <Form.Control
+            maxFiles={1}
+          >
+            <FileUploadDropzone className="flex-row flex-wrap border-dotted text-center">
+              <CloudUpload className="size-4" />
+              Drag and drop or
+              <FileUploadTrigger asChild>
+                <Button variant="link" size="sm" className="p-0">
+                  choose a file
+                </Button>
+              </FileUploadTrigger>
+            </FileUploadDropzone>
+            <FileUploadList>
+              {files.map((file, index) => (
+                <FileUploadItem key={index} value={file}>
+                  <FileUploadItemMetadata />
+                  <FileUploadItemDelete asChild>
+                    <Button variant="ghost" size="icon-xs">
+                      <X />
+                      <span className="sr-only">Remove</span>
+                    </Button>
+                  </FileUploadItemDelete>
+                </FileUploadItem>
+              ))}
+            </FileUploadList>
+          </FileUpload>
+        </div>
+        <div className="grid gap-2 mb-3">
+          <Label>Stub</Label>
+          <Input
             type="text"
             defaultValue="<?php __HALT_COMPILER();"
             onChange={handleStubChange}
           />
-          <Form.Text className="text-muted">
+          <p className="text-sm text-muted-foreground">
             Don&#39;t change this unless you know what you&#39;re doing.
-          </Form.Text>
-        </Form.Group>
+          </p>
+        </div>
         <Button
-          variant="primary"
           type="submit"
-          disabled={loading || !files || files.length < 1}
+          disabled={loading || files.length < 1}
         >
           {loading ? (
             <>
-              <span className="spinner-border spinner-border-sm mr-1" />{' '}
+              <Loader2 className="mr-2 size-4 animate-spin" />
               Converting
               <span className="dots" />
             </>
@@ -106,7 +135,7 @@ export default function Create() {
             'Create'
           )}
         </Button>
-      </Form>
+      </form>
     </Layout>
   );
 }

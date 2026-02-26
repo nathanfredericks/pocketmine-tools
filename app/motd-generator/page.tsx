@@ -3,7 +3,8 @@ import { Suspense, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import DOMPurify from 'dompurify';
 import Layout from '../../components/Layout';
-import { Button, Form } from 'react-bootstrap';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 const SELECTION_SIGN = '\u00A7';
 const colourCodes: Record<string, { colour: string; css: string; textIsBlack: boolean }> = {
   0: { colour: '#000000', css: 'color:#000000;', textIsBlack: false },
@@ -121,7 +122,7 @@ function MOTDGeneratorInner() {
   const colourButtons = Object.entries(colourCodes).map(([key, val]) => (
     <Button
       key={key}
-      className="colour-btn"
+      className="mx-0.5"
       style={{
         backgroundColor: val.colour,
         borderColor: val.colour,
@@ -135,42 +136,45 @@ function MOTDGeneratorInner() {
   const formattingButtons = Object.entries(formattingCodes).map(([key, val]) => (
     <Button
       key={key}
-      className="format-btn"
+      className="ml-0.5"
       style={{ ...val.buttonStyle }}
       onClick={() => insertCode(key)}
-      variant="primary"
     >
       {val.buttonName}
     </Button>
   ));
   return (
-    <Layout title="MOTD Generator" showNav={true}>
-      {colourButtons}
-      <br />
-      {formattingButtons}
-      <Button
-        className="format-btn"
-        onClick={() => insertCode('r')}
-        variant="primary"
-      >
-        Reset
-      </Button>
-      <Form.Group className="mt-3">
-        <Form.Control
-          as="textarea"
+    <Layout title="Generate MOTD" showNav={true}>
+      <div className="space-y-2">
+        <div className="flex flex-wrap">
+          {colourButtons}
+        </div>
+        <div className="flex flex-wrap">
+          {formattingButtons}
+          <Button
+            className="ml-0.5"
+            onClick={() => insertCode('r')}
+          >
+            Reset
+          </Button>
+        </div>
+      </div>
+      <div>
+        <Textarea
           ref={textareaRef}
           autoFocus
-          style={{ marginTop: 8, resize: 'none' }}
+          style={{ resize: 'none' }}
           placeholder={`${SELECTION_SIGN}cMy awesome MOTD`}
           value={motd}
-          className="motd-textarea mt-3"
+          className={`motd-textarea${kError ? ' border-destructive' : ''}`}
           onChange={handleChange}
-          isInvalid={kError}
         />
-        <Form.Control.Feedback type="invalid">
-          The {`${SELECTION_SIGN}k`} format code is not supported.
-        </Form.Control.Feedback>
-      </Form.Group>
+        {kError && (
+          <p className="text-sm text-destructive">
+            The {`${SELECTION_SIGN}k`} format code is not supported.
+          </p>
+        )}
+      </div>
       {!kError && charsInMotd ? (
         <div
           className="preview mt-3"
