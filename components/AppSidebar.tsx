@@ -25,7 +25,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 
 const pluginDevItems = [
   { href: "/create/", label: "Create .phar", icon: Package },
@@ -90,12 +90,12 @@ export default function AppSidebar() {
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
-      <div className="mx-2 mb-2 flex aspect-[2/1] md:aspect-square flex-col items-center justify-center gap-3 rounded-md border border-dashed p-4 text-center text-sm text-muted-foreground">
+      {/* <div className="mx-2 mb-2 flex aspect-[2/1] md:aspect-square flex-col items-center justify-center gap-3 rounded-md border border-dashed p-4 text-center text-sm text-muted-foreground">
         Reach thousands of server owners and developers. Starting at $1/day.
         <Button variant="outline" size="sm" asChild>
           <a href="mailto:nathan@fredericks.dev">Get in touch</a>
         </Button>
-      </div>
+      </div> */}
       <SidebarFooter>
         <p className="px-2 text-xs text-muted-foreground">
           &copy; {year} Nathan Fredericks
