@@ -91,7 +91,7 @@ export default function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <div className="mx-2 mb-2 flex aspect-[2/1] md:aspect-square flex-col items-center justify-center gap-3 rounded-md border border-dashed p-4 text-center text-sm text-muted-foreground">
-        Get your plugin in front of thousands of server owners. Starting at $1/day.
+        Reach thousands of server owners and developers. Starting at $1/day.
         <Button variant="outline" size="sm" asChild>
           <a href="mailto:nathan@fredericks.dev">Get in touch</a>
         </Button>
